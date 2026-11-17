@@ -213,7 +213,7 @@ sequenceDiagram
     participant Gate as Intelligent Gatekeeper
     participant RAG as Hybrid RAG System
     participant Coder as Code Dev Agent (LangGraph)
-    participant Box as AST Sandbox & Pytest
+    participant Sandbox as AST Sandbox & Pytest
     participant Trace as LangSmith Telemetry
 
     Dev->>CLI: Task Input ("Build resilient async scraper")
@@ -223,12 +223,12 @@ sequenceDiagram
     Pipe->>RAG: Query vector index & BM25
     RAG-->>Pipe: Return relevant snippets & signatures
     Pipe->>Coder: Initiate code generation state machine
-    Coder->>Box: Compile & run sandboxed tests
+    Coder->>Sandbox: Compile & run sandboxed tests
     alt Runtime Exception
-        Box-->>Coder: Failure feedback & AST traceback
+        Sandbox-->>Coder: Failure feedback & AST traceback
         Coder->>Coder: Self-healing repair iteration
     else All Tests Green
-        Box-->>Pipe: Success confirmation
+        Sandbox-->>Pipe: Success confirmation
     end
     Pipe->>Trace: Log run trace & execution spans
     Pipe->>Dev: Deliver verified codebase in output/
