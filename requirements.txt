@@ -1,0 +1,59 @@
+# ============================================================
+# Ultimate Coding Agent — Clean Dependencies
+# ============================================================
+
+# Core LLM client
+requests>=2.31.0
+
+# Agent Orchestration & State Graphs
+langgraph>=0.2.0
+langchain-core>=0.3.0
+langchain-community>=0.3.0
+langchain-openai>=0.2.0
+
+# Vector Database & Embeddings (RAG)
+chromadb>=0.5.0
+langchain-chroma>=0.1.0
+langchain-huggingface>=0.1.0
+sentence-transformers>=3.0.0
+rank-bm25>=0.2.2
+
+# Lightweight embeddings (used by rag/__init__.py)
+fastembed>=0.3.0
+numpy>=1.26.0
+
+# Document Processing & Ingestion
+pymupdf>=1.24.0
+
+# Web Search
+ddgs
+
+# Code Linting & Testing (tester & CI)
+ruff>=0.4.0
+pytest>=8.0.0
+
+# Model Downloads
+huggingface_hub
+
+# Environment
+python-dotenv>=1.0.0
+
+# Research Agent tools (reaserch/)
+langchain-classic>=0.1.0
+beautifulsoup4>=4.12.0
+trafilatura>=1.6.0
+
+# Document generation (research agent)
+reportlab>=4.0.0
+python-docx>=1.1.0
+
+# Optional: web scraping for research
+feedparser>=6.0.10
+
+# Optional: used in generated code (not import-required by agent)
+# streamlit
+# fastapi
+# uvicorn
+# pandas
+# flask
+# matplotlib

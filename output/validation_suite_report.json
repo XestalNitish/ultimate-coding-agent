@@ -1,0 +1,78 @@
+{
+  "timestamp": "2026-11-14 08:36:24",
+  "total_projects": 5,
+  "passed": 5,
+  "status": "ALL_PASSED",
+  "results": [
+    {
+      "id": 1,
+      "project": "Project 1: Sales Data Analyzer (CLI + SQLite + CSV)",
+      "file_path": "output/sales_analyzer.py",
+      "status": "PASS",
+      "selftest_result": "SELFTEST OK",
+      "lines_of_code": 199,
+      "capabilities": [
+        "In-memory SQLite schema creation",
+        "CSV parsing & row insertion",
+        "Revenue, product, and regional aggregations",
+        "Deterministic standalone self-test"
+      ]
+    },
+    {
+      "id": 2,
+      "project": "Project 2: Resilient API Client & TTL Cache Manager",
+      "file_path": "output/api_cache_manager.py",
+      "status": "PASS",
+      "selftest_result": "SELFTEST OK",
+      "lines_of_code": 182,
+      "capabilities": [
+        "In-memory TTL cache with capacity eviction",
+        "Exponential backoff retry decorator",
+        "Mock endpoint testing with timeout handling",
+        "Deterministic standalone self-test"
+      ]
+    },
+    {
+      "id": 3,
+      "project": "Project 3: Concurrent Link Scraper & Markdown Auditor",
+      "file_path": "output/concurrent_scraper.py",
+      "status": "PASS",
+      "selftest_result": "SELFTEST OK",
+      "lines_of_code": 165,
+      "capabilities": [
+        "Concurrent ThreadPoolExecutor web crawling",
+        "HTML anchor tag parser & domain validator",
+        "Auditing status codes & broken link detection",
+        "Deterministic standalone self-test"
+      ]
+    },
+    {
+      "id": 4,
+      "project": "Project 4: Loan Amortization & DTI Risk Engine",
+      "file_path": "output/loan_engine.py",
+      "status": "PASS",
+      "selftest_result": "SELFTEST OK",
+      "lines_of_code": 139,
+      "capabilities": [
+        "Fixed-rate EMI amortization table generation",
+        "Monthly breakdown of principal vs interest",
+        "Debt-to-Income (DTI) ratio risk assessment",
+        "Deterministic standalone self-test"
+      ]
+    },
+    {
+      "id": 5,
+      "project": "Project 5: Async DAG Task Workflow Scheduler",
+      "file_path": "output/dag_task_runner.py",
+      "status": "PASS",
+      "selftest_result": "SELFTEST OK",
+      "lines_of_code": 137,
+      "capabilities": [
+        "Kahn's topological sorting algorithm",
+        "Cycle detection with CycleDetectedError",
+        "Asyncio task execution with retry limits",
+        "Deterministic standalone self-test"
+      ]
+    }
+  ]
+}

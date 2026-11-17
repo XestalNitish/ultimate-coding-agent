@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# Model Weights & Binaries (Large Files)
+models/
+*.gguf
+*.bin
+*.pt
+*.safetensors
+llama.cpp/
+
+# Environment Variables & Secrets
+.env
+!.env.example
+
+# Vector Database & Embeddings Storage
+vectordb/
+test_db_store/
+
+# Cache & Local Checkpoints
+.checkpoints/
+.pytest_cache/
+.ruff_cache/
+logs/
+*.log
+
+# Temp & Scratch Files
+scratch/
+workspace/
+workspace_docs/

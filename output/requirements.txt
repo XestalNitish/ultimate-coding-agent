@@ -1,0 +1,11 @@
+pydantic
+sqlalchemy
+aiosqlite
+chromadb
+langgraph
+pandas
+fastapi
+uvicorn
+streamlit
+plotly
+requests
