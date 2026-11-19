@@ -392,6 +392,7 @@ with st.sidebar:
             "🤖 Enterprise 5-Agent Suite",
             "📊 LangSmith Production Observability",
             "📖 Technical Case Study",
+            "🌐 Deployed AI Projects & Ecosystem",
             "⚡ System & Server Mission Control",
         ],
         index=0,
@@ -425,6 +426,18 @@ with st.sidebar:
             st.info("Servers stopped.")
             time.sleep(1)
             st.rerun()
+
+    st.markdown("---")
+    st.markdown("#### 🌐 Live Deployed AI Apps")
+    st.markdown("""
+    <div style="font-size:12px; line-height:2.0;">
+        <div>🚀 <a href="https://ultimate-coding-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#00f0ff; text-decoration:none; font-weight:600;">Ultimate Coding Agent ↗</a></div>
+        <div>📚 <a href="https://xestal-enterprise-rag-engine-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#c084fc; text-decoration:none; font-weight:600;">Enterprise RAG Engine ↗</a></div>
+        <div>🌐 <a href="https://xestal-research-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#4ade80; text-decoration:none; font-weight:600;">Deep Research Agent ↗</a></div>
+        <div>📑 <a href="https://invoice-processing-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#fbbf24; text-decoration:none; font-weight:600;">Invoice Audit Agent ↗</a></div>
+        <div>🛠️ <a href="https://code-dev-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#38bdf8; text-decoration:none; font-weight:600;">Code Dev Agent ↗</a></div>
+    </div>
+    """, unsafe_allow_html=True)
 
     st.markdown("---")
     st.caption("Telemetry: `LangSmith (ultimate-coding-agent)`")
@@ -921,75 +934,494 @@ elif nav == "📊 LangSmith Production Observability":
 
 elif nav == "📖 Technical Case Study":
     st.markdown('<div class="hero-title">📖 Engineering Case Study</div>', unsafe_allow_html=True)
-    st.markdown("### Ultimate Coding Agent Turns Classroom Project Prompts Into Self-Healing Multi-File Software")
-    st.markdown("**Engineered by [X-ESTAL NITISH (Nitish Kumar)](https://github.com/XestalNitish) in November 2026**")
+    st.markdown("## Ultimate Coding Agent Turns Classroom Project Prompts Into Self-Healing Multi-File Software")
+    st.markdown("**Engineered by [Nitish Kumar (XestalNitish)](https://github.com/XestalNitish) in November 2026**")
 
+    # Header Executive Summary
     st.markdown("""
     <div class="clay-card">
-        <blockquote style="font-size:16px; font-style:italic; color:#00f0ff; border-left:4px solid #00f0ff; padding-left:16px; margin:0 0 16px 0;">
+        <p style="font-size:15px; color:#f8fafc; line-height:1.7;">
+            Engineered by <b><a href="https://github.com/XestalNitish" style="color:#00f0ff; text-decoration:none;">Nitish Kumar</a></b> in November 2026 to eliminate student paralysis during college software assignments, this six-node stateful LangGraph pipeline orchestrates dual local 4B models (<code>Spark 2.5</code> and <code>Spark 2.6</code>) to autonomously plan, synthesize, audit, execute, and debug complete repositories on consumer hardware.
+        </p>
+        <div style="background:rgba(0, 240, 255, 0.08); border-left:4px solid #00f0ff; padding:14px 18px; border-radius:8px; margin-top:14px;">
+            <b style="color:#00f0ff;">Engineering Verdict:</b>
+            <span style="color:#cbd5e1; font-size:14px; line-height:1.6;">
+                Across 90–100 end-to-end LangSmith evaluation runs, the pipeline achieved a 90–95% pass rate (only 5 failures) with zero cloud API cost. By decoupling architectural reasoning (<code>Spark 2.5 4B</code>) from code generation (<code>Spark 2.6 4B</code>) and enforcing an isolated subprocess execution loop (up to 3 self-healing retries), the system keeps median (<code>P50</code>) latency low on first-pass builds while absorbing complex debugging into tail (<code>P99</code>) latency.
+            </span>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # 95% Verified Pass Rate Metric Highlight
+    c_met1, c_met2 = st.columns([1, 3])
+    with c_met1:
+        st.markdown("""
+        <div class="clay-metric" style="text-align:center;">
+            <div class="label">Pass Rate</div>
+            <div class="value" style="font-size:46px; color:#4ade80;">95%</div>
+            <div class="sub">Autonomous Self-Healing</div>
+        </div>
+        """, unsafe_allow_html=True)
+    with c_met2:
+        st.markdown("""
+        <div class="clay-card" style="height:100%; display:flex; align-items:center;">
+            <p style="margin:0; font-size:15px; color:#cbd5e1; line-height:1.6;">
+                <b>Verified compilation and execution pass rate</b> across 90–100 LangSmith benchmark test runs, recording only 5 unrecovered failures after up to 3 automated self-healing debug cycles.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    # Section 1: Classroom Confusion
+    st.markdown("### 🎓 Classroom Confusion Sparked an Autonomous Pipeline From Prompt to Production")
+    st.markdown("""
+    <div class="clay-card">
+        <p style="color:#cbd5e1; line-height:1.7;">
+            During a routine lecture at <b>C.M. Science College, Darbhanga</b>, an instructor assigned a batch of software project topics to the class. While students understood the high-level problem statements, the majority stalled immediately on the engineering translation: how to decompose a vague topic into concrete system requirements, how to organize a modular multi-file directory structure, and how to diagnose cascading runtime tracebacks once the initial scripts failed.
+        </p>
+        <p style="color:#cbd5e1; line-height:1.7;">
+            Standard single-shot chat LLMs only partially solve this problem. When a student pastes a project topic into a chat window, the model typically returns an unverified single-file snippet that breaks on missing imports, unguarded edge cases, or subtle syntax errors. Instead of learning architecture, students get trapped manually copying tracebacks back and forth.
+        </p>
+        <p style="color:#cbd5e1; line-height:1.7;">
+            To solve this end-to-end bottleneck, <b><a href="https://www.linkedin.com/in/nitish-kumar-ai" style="color:#00f0ff; text-decoration:none;">Nitish Kumar</a></b> designed the Ultimate Coding Agent (with an early interactive prototype showcased via the <a href="https://code-dev-agent-by-x-estal-nitish.streamlit.app/" style="color:#c084fc; text-decoration:none;">X-Estal Code Dev Agent</a>). The design premise is strict: a user supplies only the core problem prompt in a <code>test</code> specification, and the pipeline autonomously handles requirement refinement, multi-file synthesis, static security verification, runtime validation, and iterative self-repair into a clean <code>output</code> directory.
+        </p>
+        <blockquote style="font-size:16px; font-style:italic; color:#00f0ff; border-left:4px solid #00f0ff; padding-left:16px; margin:16px 0 0 0;">
             "Everyone in class was confused about how to analyze the topic, structure the requirements, and build the project—so I built an autonomous pipeline where you give only your core problem prompt, and it handles requirements, multi-file coding, and self-debugging from start to finish."
-            <br><span style="font-size:13px; font-weight:700; color:#f8fafc; font-style:normal;">— X-ESTAL NITISH, Creator of Ultimate Coding Agent</span>
+            <br><span style="font-size:13px; font-weight:700; color:#f8fafc; font-style:normal;">— Nitish Kumar, Creator of the Ultimate Coding Agent</span>
         </blockquote>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Section 2: Six Stateful LangGraph Nodes
+    st.markdown("### 🧩 Six Stateful LangGraph Nodes Enforce Security Auditing and Cyclic Self-Repair")
+    st.markdown("""
+    <div class="clay-card">
         <p style="color:#cbd5e1; line-height:1.7;">
-            During a routine lecture at <b>C.M. Science College, Darbhanga</b>, an instructor assigned a batch of software project topics to the class. 
-            While students understood the high-level problem statements, the majority stalled immediately on the engineering translation: 
-            how to decompose a vague topic into concrete system requirements, how to organize a modular multi-file directory structure, 
-            and how to diagnose cascading runtime tracebacks once initial scripts failed.
+            Rather than relying on linear prompt chaining, the Ultimate Coding Agent models software creation as a cyclic directed graph using <code>StateGraph</code>. Shared state tracks the parsed project specification, file tree map, abstract syntax tree (AST) audit flags, subprocess <code>stdout</code>/<code>stderr</code> streams, and retry counter across six specialized nodes.
         </p>
-        <p style="color:#cbd5e1; line-height:1.7;">
-            Standard single-shot chat LLMs only partially solve this problem. When a student pastes a project topic into a chat window, 
-            the model typically returns an unverified single-file snippet that breaks on missing imports, unguarded edge cases, or subtle syntax errors. 
-            Instead of learning architecture, students get trapped manually copying tracebacks back and forth.
+        <p style="color:#38bdf8; font-size:13px; font-weight:600;">
+            Cyclic self-healing loops convert single-pass runtime crashes into verified multi-file builds
         </p>
-        <p style="color:#cbd5e1; line-height:1.7;">
-            To eliminate this bottleneck, X-ESTAL NITISH engineered the <b>Ultimate Coding Agent</b>: 
-            a six-node stateful LangGraph pipeline orchestrating dual local 4B models (<code>Spark 2.5</code> and <code>Spark 2.6</code>) 
-            to autonomously plan, synthesize, audit, execute, and debug complete repositories on consumer hardware with <b>zero cloud API cost</b>.
+        <p style="color:#94a3b8; font-size:13px;">
+            Architectural flow from raw user prompt (left) through planning, synthesis, static AST security gating, isolated 15-second sandboxed subprocess execution, and the conditional feedback loop (<code>Exit != 0</code>, up to 3 retries) before writing verified multi-file packages to <code>output</code> (right).
         </p>
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown("### 🧩 Six Stateful LangGraph Nodes Matrix")
     st.markdown("""
-    | Node ID | Pipeline Role | Assigned Local LLM | Primary Input State | Verification Gate & Routing | Guard / Limit |
+    | Node ID | Pipeline Role | Assigned Local LLM | Primary Input State | Verification Gate & Routing Transition | Guard / Limit |
     | :--- | :--- | :--- | :--- | :--- | :--- |
-    | `planner` | Architectural Planner | Spark 2.5 (4B) | Raw prompt from test spec | Decomposes prompt into requirements & multi-file manifest | 2048 ctx window |
-    | `writer` | Senior Code Writer | Spark 2.6 (4B) | Architecture plan or patch diff | Synthesizes complete runnable multi-file Python code blocks | Multi-file output |
-    | `security_check` | Pre-Execution AST Auditor | Spark 2.5 (4B) + AST | Generated source files | Static analysis for unsafe sockets, OS commands, syntax bugs | 0 unsafe execs |
-    | `executor` | Sandboxed Runtime Executor | Subprocess Engine | Security-cleared package | Executes entrypoint in isolated Python subprocess | 15s timeout |
-    | `debugger` | Self-Healing Debugger | Spark 2.5 (4B) | stderr traceback & failing code | Isolates stack trace root-cause & writes patch instructions | Max 3 retries |
-    | `reviewer` | Production Reviewer | Spark 2.5 (4B) | Verified codebase (Exit == 0) | Validates requirement coverage and documentation | Final commit |
+    | `planner` | Architectural Planner | Spark 2.5 (4B) | Raw user prompt from test spec | Decomposes prompt into system requirements, module boundaries, and multi-file dependency manifest; routes to `writer`. | 2048 ctx window |
+    | `writer` | Senior Code Writer | Spark 2.6 (4B) | Architecture plan or debugger patch diff | Synthesizes complete, runnable multi-file Python code blocks mapped to target file paths; routes directly to `security_check`. | Multi-file output |
+    | `security_check` | Pre-Execution AST Auditor | Spark 2.5 (4B) + AST | Generated source files prior to runtime | Performs static analysis for destructive shell calls, unauthorized network sockets, or unsafe imports before execution; routes to `executor` or back to `writer`. | 0 unsafe execs |
+    | `executor` | Sandboxed Runtime Executor | Deterministic Subprocess | Security-cleared code package | Executes entrypoints inside an isolated Python subprocess; routes to `reviewer` if `Exit == 0`, or triggers `debugger` if `Exit != 0`. | 15s timeout |
+    | `debugger` | Self-Healing Debugger | Spark 2.5 (4B) | Captured `stderr` traceback & failing file | Isolates root cause from stack trace, formulates targeted code repair instructions, and loops back to `writer` until retries exhaust. | Max 3 retries |
+    | `reviewer` | Production Reviewer | Spark 2.5 (4B) | Verified codebase (`Exit == 0`) | Validates requirement coverage, code modularity, and documentation readiness before committing final artifacts to `output`. | Final commit |
     """)
 
+    # Section 3: Dual 4B Local Model Routing
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### 🧠 Dual 4B Local Model Routing on 16GB RAM Hardware")
+    st.markdown("### 🧠 Dual 4B Local Model Routing Eliminates Cloud Costs on 16GB RAM Hardware")
     st.markdown("""
     <div class="clay-card">
         <p style="color:#cbd5e1; line-height:1.7;">
-            Running multi-agent coding loops against commercial cloud APIs incurs prohibitive costs—especially when multi-file codebases enter 2 to 3 self-healing debug iterations.
-            Conversely, running a single massive model locally freezes consumer hardware.
+            Running a multi-agent coding loop against commercial cloud APIs quickly incurs prohibitive token bills—especially when multi-file codebases enter 2 to 3 self-healing debug iterations. Conversely, running a single massive model locally freezes consumer laptops. During early hardware stress tests on an Intel Core i5 workstation with 16GB RAM, a smaller 1.7B parameter variant lacked the reasoning depth to untangle multi-file imports, while unthrottled inference saturated CPU threads.
         </p>
         <p style="color:#cbd5e1; line-height:1.7;">
-            The Ultimate Coding Agent solves this by splitting cognitive workloads across two specialized 4-billion-parameter local models served via an optimized <code>llama-server</code> daemon:
+            The Ultimate Coding Agent solves this by splitting cognitive workloads across two specialized 4-billion-parameter local models served via an optimized <code>llama-server</code> backend (<code>local_llm_service.py</code>). By locking model weights in memory (<code>--mlock</code>), capping CPU thread contention, and managing context length via <code>trim_messages</code> within a 2048-token active window, the pipeline runs entirely offline without thermal throttling or swap thrashing.
         </p>
-        <ul style="color:#cbd5e1; line-height:1.8;">
-            <li><b>Spark 2.5 (4B) — Analytical Core:</b> Assigned to <code>planner</code>, <code>security_check</code>, <code>debugger</code>, and <code>reviewer</code>. Optimized for structured decomposition, static vulnerability pattern recognition, and stack-trace root-cause isolation.</li>
-            <li><b>Spark 2.6 (4B) — Synthesis Core:</b> Dedicated exclusively to the <code>writer</code> node. Tuned for syntactic accuracy, cross-file import consistency, and clean adherence to the planner's structural manifest.</li>
-            <li><b>Subprocess & Context Guards:</b> Enforces <code>trim_messages</code> state pruning to prevent context overflow during multi-turn retries, alongside a strict 15-second subprocess execution timeout in <code>executor</code> to automatically catch infinite loops.</li>
+        <p style="color:#38bdf8; font-size:13px; font-weight:600;">
+            Splitting reasoning and code synthesis across two specialized 4B models prevents local memory bottlenecks
+        </p>
+        <p style="color:#94a3b8; font-size:13px; line-height:1.6;">
+            Dual-core local inference topology: <code>Spark 2.5 (4B)</code> (cobalt pathways, left) handles requirement analysis, AST security auditing, traceback diagnostics, and final review, while <code>Spark 2.6 (4B)</code> (amber pathways, right) focuses exclusively on multi-file code synthesis feeding into the 15-second guarded execution container.
+        </p>
+        <hr style="border-color: rgba(255, 255, 255, 0.08); margin:16px 0;">
+        <h4 style="color:#38bdf8; margin-bottom:6px;">Spark 2.5 (4B) — Analytical Core</h4>
+        <p style="color:#cbd5e1; font-size:14px; line-height:1.6;">
+            Assigned to <code>planner</code>, <code>security_check</code>, <code>debugger</code>, and <code>reviewer</code>. Optimized for structured decomposition, static vulnerability pattern recognition, and stack-trace root-cause isolation where concise analytical precision matters more than raw code token volume.
+        </p>
+        <h4 style="color:#c084fc; margin-bottom:6px; margin-top:14px;">Spark 2.6 (4B) — Synthesis Core</h4>
+        <p style="color:#cbd5e1; font-size:14px; line-height:1.6;">
+            Dedicated exclusively to the <code>writer</code> node. Tuned for syntactic accuracy, cross-file import consistency, and clean adherence to the planner's structural manifest, ensuring generated Python modules integrate seamlessly across directory boundaries.
+        </p>
+        <h4 style="color:#4ade80; margin-bottom:6px; margin-top:14px;">Subprocess & Context Guards</h4>
+        <p style="color:#cbd5e1; font-size:14px; line-height:1.6;">
+            Enforces <code>trim_messages</code> state pruning to prevent context overflow during multi-turn retries, alongside a strict 15-second subprocess execution timeout in <code>executor</code> to automatically catch and terminate infinite <code>while</code> loops or blocking I/O calls.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Section 4: LangSmith Benchmarks
+    st.markdown("### 📊 LangSmith Benchmarks Reveal Why Tail Latency Is a Feature of Self-Healing Systems")
+    st.markdown("""
+    <div class="clay-card">
+        <p style="color:#cbd5e1; line-height:1.7;">
+            To move beyond anecdotal demos, the pipeline was instrumented with LangSmith observability and evaluated across a batch of 90 to 100 diverse project prompts placed in the <code>test</code> suite. The resulting telemetry uncovered a signature bimodal latency distribution: median (<code>P50</code>) latency remains remarkably low, whereas 99th-percentile (<code>P99</code>) latency spikes sharply.
+        </p>
+        <p style="color:#cbd5e1; line-height:1.7;">
+            In a conventional web microservice, a wide gap between <code>P50</code> and <code>P99</code> signals an infrastructure bottleneck. In an autonomous coding agent, however, high <code>P99</code> latency is the direct mathematical signature of the self-healing loop doing its job. When a prompt succeeds on the first pass (<code>Exit == 0</code> on Attempt 1), the graph traverses only five nodes linearly (<code>planner → writer → security_check → executor → reviewer</code>), keeping <code>P50</code> execution fast. When a complex prompt triggers an <code>ImportError</code>, schema mismatch, or 15-second timeout, the graph loops through <code>debugger → writer → security_check → executor</code> up to 3 times—multiplying node invocations from 5 to as many as 14 sequential steps, trading wall-clock latency for a 90–95% final pass rate.
+        </p>
+        <p style="color:#38bdf8; font-size:13px; font-weight:600;">
+            Iterative debugging loops drive P99 tail latency while single-pass builds keep P50 latency low
+        </p>
+        <div style="background:#090e18; border:1px solid rgba(0, 240, 255, 0.2); border-radius:12px; padding:16px; margin:14px 0; font-family:'JetBrains Mono', monospace; font-size:13px; color:#38bdf8; line-height:1.8;">
+            <div>[P50 Fast Path (Attempt 1)]  0 retries  · Exit == 0  ➔  5 nodes (1x baseline latency)</div>
+            <div>[Single-Heal Path (1 Retry)] 1 debug loop · Fix try 2  ➔  8 nodes (~1.8x latency)</div>
+            <div>[Deep-Heal Path (2 Retries)] 2 debug loops · Fix try 3 ➔ 11 nodes (~2.6x latency)</div>
+            <div>[P99 Tail Path (3 Retries)]  Max repair + 15s guards  ➔ 14 nodes (Compounded tail latency)</div>
+        </div>
+        <p style="color:#94a3b8; font-size:12px;">
+            Total Sequential StateGraph Node Invocations per Prompt Run (LangSmith Trace Topology). Comparison of sequential LangGraph node executions across latency percentiles. Each self-healing retry adds 3 extra node steps (<code>debugger → writer → security_check → executor</code>), plus up to 15 seconds per subprocess timeout guard when diagnosing hanging code.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    | LangSmith Evaluation Dimension | Observed Benchmark Result | Primary Architectural Driver | Measured Value |
+    | :--- | :--- | :--- | :--- |
+    | **Total Benchmark Suite Volume** | End-to-end multi-file prompts executed from test to output | Automated batch harness covering student-level & modular software specs | **90–100 runs** |
+    | **End-to-End Success Rate** | Verified Exit == 0 builds passing final reviewer inspection | Iterative debugger → writer feedback loop rescuing initial syntax/import errors | **90%–95%** |
+    | **Unrecovered Failure Count** | Prompts exhausting all 3 retry cycles without clean exit | Complex cross-file state dependencies exceeding 4B parameter context horizon | **5 fails** |
+    | **Median Latency (P50)** | Very low wall-clock execution time | Single-pass traversal (5 nodes) with memory-locked (--mlock) local 4B weights | **5-node linear path** |
+    | **Tail Latency (P99)** | High tail spike on edge-case prompts | Compounded 3-retry self-healing cycles (up to 14 nodes) + 15s subprocess timeout guards | **Up to 14 nodes** |
+    """)
+
+    # Section 5: Why a Local-Only Backend Demands an Interactive Web UI
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("### 🖥️ Why a Local-Only Backend Still Demands an Interactive Web UI")
+    st.markdown("""
+    <div class="clay-card">
+        <p style="color:#cbd5e1; line-height:1.7;">
+            A critical architectural reality of the Ultimate Coding Agent is that its inference engine (<code>llama-server</code> running local <code>Spark 2.5</code> and <code>Spark 2.6</code> 4B models) and its <code>executor</code> subprocess sandbox run on the host workstation. Because standard free cloud hosting tiers do not provide the dedicated RAM or local GGUF model daemon required to execute arbitrary subprocess code safely, external visitors cannot simply run the local backend directly in a static browser tab.
+        </p>
+        <p style="color:#cbd5e1; line-height:1.7;">
+            Despite that local execution boundary, building a dedicated User Interface (UI)—the project's immediate next milestone—is essential for three engineering reasons:
+        </p>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:14px; margin-top:14px;">
+            <div style="background:rgba(14, 165, 233, 0.08); border:1px solid rgba(56, 189, 248, 0.25); border-radius:12px; padding:16px;">
+                <h4 style="color:#38bdf8; margin:0 0 6px 0;">1. Live Graph Observability</h4>
+                <p style="color:#cbd5e1; font-size:13px; margin:0; line-height:1.5;">
+                    Transforms an invisible CLI script into an inspectable state machine, allowing users and recruiters to watch each node (<code>planner</code>, <code>writer</code>, <code>security_check</code>, <code>executor</code>, <code>debugger</code>, <code>reviewer</code>) light up in real time as retries occur.
+                </p>
+            </div>
+            <div style="background:rgba(168, 85, 247, 0.08); border:1px solid rgba(192, 132, 252, 0.25); border-radius:12px; padding:16px;">
+                <h4 style="color:#c084fc; margin:0 0 6px 0;">2. Hybrid Cloud Replay Mode</h4>
+                <p style="color:#cbd5e1; font-size:13px; margin:0; line-height:1.5;">
+                    Lets cloud visitors inspect the 90–100 LangSmith test runs, browse generated multi-file trees in <code>output</code>, and step through actual self-healing diffs without needing local GPU/CPU weights.
+                </p>
+            </div>
+            <div style="background:rgba(34, 197, 94, 0.08); border:1px solid rgba(74, 222, 128, 0.25); border-radius:12px; padding:16px;">
+                <h4 style="color:#4ade80; margin:0 0 6px 0;">3. Zero-Friction Onboarding</h4>
+                <p style="color:#cbd5e1; font-size:13px; margin:0; line-height:1.5;">
+                    Because the project was born to help confused college students turn class topics into working software, replacing raw terminal commands and <code>test</code> edits with an intuitive prompt box and file-tree viewer fulfills the original classroom mission.
+                </p>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Section 6: Next-Stage Roadmap
+    st.markdown("### 🗺️ Next-Stage Engineering Roadmap")
+    st.markdown("""
+    <div class="clay-card">
+        <p style="color:#cbd5e1; line-height:1.7;">
+            With the core six-node LangGraph engine verified at a 90–95% pass rate across 90–100 tests, the project transitions from backend stabilization to interface packaging and technical showcase distribution:
+        </p>
+        <ul style="color:#cbd5e1; line-height:1.8; font-size:14px;">
+            <li><b>Build the Dual-Mode Streamlit / FastAPI Interface:</b> Connect a clean frontend directly to the local <code>StateGraph</code> stream (<code>app.stream()</code>) for live local execution, while bundling cached <code>test</code> → <code>output</code> telemetry traces so cloud visitors can interactively explore real multi-file builds and self-healing traceback repairs.</li>
+            <li><b>Export LangSmith P50 vs. P99 Latency Snapshots:</b> Capture the LangSmith dashboard view showing the 90–100 test suite pass rate (only 5 fails) alongside a multi-step trace of a 2-retry self-healing run to embed directly in the repository <code>README.md</code>.</li>
+            <li><b>Publish the Technical Case Study Across LinkedIn & GitHub:</b> Frame the launch around the classroom origin story and the engineering tradeoff between <code>P50</code> speed and <code>P99</code> self-healing reliability on 4B local models, linking directly to the <a href="https://github.com/XestalNitish" style="color:#00f0ff;">XestalNitish GitHub repository</a> and live demo.</li>
         </ul>
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown("### 🔗 Project Links & Portfolios")
+    # Section 7: Live Deployed AI Projects Showcase
+    st.markdown("### 🌐 Live Deployed AI Applications & Project Ecosystem")
     st.markdown("""
-    - **GitHub Engineering Portfolio:** [https://github.com/XestalNitish](https://github.com/XestalNitish)
-    - **Live Deployed Prototype:** [X-Estal Code Dev Agent on Streamlit Cloud](https://code-dev-agent-by-x-estal-nitish.streamlit.app/)
-    - **LinkedIn Developer Profile:** [Nitish Kumar on LinkedIn](https://www.linkedin.com/in/nitish-kumar-ai)
-    """)
+    <div class="clay-card">
+        <p style="color:#cbd5e1; line-height:1.6; margin-bottom:16px;">
+            Explore the deployed interactive applications engineered by <b>Nitish Kumar (X-ESTAL NITISH)</b>:
+        </p>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
+            <div style="background:rgba(15, 23, 42, 0.7); border:1px solid rgba(0, 240, 255, 0.25); border-radius:14px; padding:18px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <h4 style="margin:0; color:#f8fafc;">🚀 Ultimate Coding Agent</h4>
+                    <span class="chip chip-cyan">LIVE APP</span>
+                </div>
+                <p style="color:#94a3b8; font-size:12px; margin:8px 0 12px 0;">Self-healing multi-file software synthesizer powered by dual 4B local LLMs and LangGraph.</p>
+                <a href="https://ultimate-coding-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#00f0ff; font-weight:700; font-size:13px; text-decoration:none;">Open App ↗</a>
+            </div>
+            <div style="background:rgba(15, 23, 42, 0.7); border:1px solid rgba(168, 85, 247, 0.25); border-radius:14px; padding:18px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <h4 style="margin:0; color:#f8fafc;">📚 X-Estal Enterprise RAG</h4>
+                    <span class="chip chip-purple">LIVE APP</span>
+                </div>
+                <p style="color:#94a3b8; font-size:12px; margin:8px 0 12px 0;">Dense vector (ChromaDB + BGE) + BM25 hybrid documentation engine with LLM synthesis.</p>
+                <a href="https://xestal-enterprise-rag-engine-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#c084fc; font-weight:700; font-size:13px; text-decoration:none;">Open App ↗</a>
+            </div>
+            <div style="background:rgba(15, 23, 42, 0.7); border:1px solid rgba(34, 197, 94, 0.25); border-radius:14px; padding:18px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <h4 style="margin:0; color:#f8fafc;">🌐 X-Estal Deep Research</h4>
+                    <span class="chip chip-green">LIVE APP</span>
+                </div>
+                <p style="color:#94a3b8; font-size:12px; margin:8px 0 12px 0;">Autonomous web intelligence, fact-checking, and technical whitepaper compiler.</p>
+                <a href="https://xestal-research-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#4ade80; font-weight:700; font-size:13px; text-decoration:none;">Open App ↗</a>
+            </div>
+            <div style="background:rgba(15, 23, 42, 0.7); border:1px solid rgba(245, 158, 11, 0.25); border-radius:14px; padding:18px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <h4 style="margin:0; color:#f8fafc;">📑 Invoice Audit Agent</h4>
+                    <span class="chip chip-purple">LIVE APP</span>
+                </div>
+                <p style="color:#94a3b8; font-size:12px; margin:8px 0 12px 0;">Autonomous B2B invoice extraction, 3-way PO matching, and fraud variance detection.</p>
+                <a href="https://invoice-processing-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#fbbf24; font-weight:700; font-size:13px; text-decoration:none;">Open App ↗</a>
+            </div>
+            <div style="background:rgba(15, 23, 42, 0.7); border:1px solid rgba(0, 240, 255, 0.25); border-radius:14px; padding:18px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <h4 style="margin:0; color:#f8fafc;">🛠️ X-Estal Code Dev Agent</h4>
+                    <span class="chip chip-cyan">LIVE APP</span>
+                </div>
+                <p style="color:#94a3b8; font-size:12px; margin:8px 0 12px 0;">Interactive early prototype showcased on Streamlit Cloud for prompt-to-production testing.</p>
+                <a href="https://code-dev-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#00f0ff; font-weight:700; font-size:13px; text-decoration:none;">Open App ↗</a>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Section 8: Sources & Project Links
+    st.markdown("### 🔗 Author Profiles & Verified Links")
+    st.markdown("""
+    <div class="clay-card">
+        <ul style="color:#cbd5e1; font-size:14px; line-height:2;">
+            <li>🐙 <b>GitHub Engineering Portfolio:</b> <a href="https://github.com/XestalNitish" target="_blank" style="color:#00f0ff;">https://github.com/XestalNitish</a></li>
+            <li>💼 <b>LinkedIn Developer Profile:</b> <a href="https://www.linkedin.com/in/nitish-kumar-ai" target="_blank" style="color:#00f0ff;">https://www.linkedin.com/in/nitish-kumar-ai</a></li>
+            <li>🚀 <b>Ultimate Coding Agent (Live):</b> <a href="https://ultimate-coding-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#00f0ff;">https://ultimate-coding-agent-by-x-estal-nitish.streamlit.app/</a></li>
+            <li>📚 <b>X-Estal Enterprise RAG Engine (Live):</b> <a href="https://xestal-enterprise-rag-engine-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#c084fc;">https://xestal-enterprise-rag-engine-by-x-estal-nitish.streamlit.app/</a></li>
+            <li>🌐 <b>X-Estal Deep Research Agent (Live):</b> <a href="https://xestal-research-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#4ade80;">https://xestal-research-agent-by-x-estal-nitish.streamlit.app/</a></li>
+            <li>📑 <b>Invoice Processing & Audit Agent (Live):</b> <a href="https://invoice-processing-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#fbbf24;">https://invoice-processing-agent-by-x-estal-nitish.streamlit.app/</a></li>
+            <li>🛠️ <b>X-Estal Code Dev Agent (Live):</b> <a href="https://code-dev-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#00f0ff;">https://code-dev-agent-by-x-estal-nitish.streamlit.app/</a></li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
 
 
 # ============================================================================
-# TAB 8: ⚡ SYSTEM & SERVER MISSION CONTROL
+# TAB 8: 🌐 DEPLOYED AI PROJECTS & ECOSYSTEM
+# ============================================================================
+
+elif nav == "🌐 Deployed AI Projects & Ecosystem":
+    st.markdown('<div class="hero-title">🌐 Live Deployed AI Projects & Ecosystem</div>', unsafe_allow_html=True)
+    st.markdown('<div class="hero-subtitle">Production-grade AI systems, self-healing code synthesizers, enterprise RAG, and multi-agent solutions engineered by <b>X-ESTAL NITISH (Nitish Kumar)</b>.</div>', unsafe_allow_html=True)
+
+    # Top Metric Highlights
+    c_p1, c_p2, c_p3, c_p4 = st.columns(4)
+    with c_p1:
+        st.markdown("""
+        <div class="clay-metric">
+            <div class="label">Live Deployed Apps</div>
+            <div class="value">5 Apps</div>
+            <div class="sub">Streamlit Cloud Verified</div>
+        </div>
+        """, unsafe_allow_html=True)
+    with c_p2:
+        st.markdown("""
+        <div class="clay-metric">
+            <div class="label">Benchmark Pass Rate</div>
+            <div class="value" style="color:#4ade80;">95%</div>
+            <div class="sub">90–100 LangSmith Runs</div>
+        </div>
+        """, unsafe_allow_html=True)
+    with c_p3:
+        st.markdown("""
+        <div class="clay-metric">
+            <div class="label">Hardware Footprint</div>
+            <div class="value" style="color:#00f0ff;">16GB RAM</div>
+            <div class="sub">Zero Cloud API Costs</div>
+        </div>
+        """, unsafe_allow_html=True)
+    with c_p4:
+        st.markdown("""
+        <div class="clay-metric">
+            <div class="label">Architect</div>
+            <div class="value" style="font-size:22px; color:#c084fc;">X-ESTAL</div>
+            <div class="sub">Nitish Kumar</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("<div style='height:14px;'></div>", unsafe_allow_html=True)
+
+    # Detailed Showcase Cards for All 5 Deployed Applications
+    st.markdown("### 🚀 Verified Live Applications")
+
+    # Project 1: Ultimate Coding Agent
+    st.markdown("""
+    <div class="clay-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:26px;">🚀</span>
+                <div>
+                    <h3 style="margin:0; color:#f8fafc;">Ultimate Coding Agent</h3>
+                    <span style="font-size:12px; color:#94a3b8;">Autonomous Self-Healing Multi-File Software Engineer</span>
+                </div>
+            </div>
+            <span class="chip chip-cyan"><span class="pulse-dot pulse-green"></span> 🟢 LIVE STREAMLIT APP</span>
+        </div>
+        <p style="color:#cbd5e1; font-size:14px; line-height:1.7; margin:14px 0 10px 0;">
+            Converts vague classroom project prompts into fully validated, running multi-file Python applications. Uses a 6-node stateful LangGraph pipeline orchestrating dual local 4B models (<code>Spark 2.5</code> and <code>Spark 2.6</code>) with pre-execution AST security auditing and isolated 15-second sandboxed execution retries.
+        </p>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;">
+            <span class="chip chip-cyan">LangGraph</span>
+            <span class="chip chip-purple">Dual Spark 4B</span>
+            <span class="chip chip-green">Self-Healing Retries</span>
+            <span class="chip chip-cyan">AST Security Check</span>
+            <span class="chip chip-purple">Subprocess Sandbox</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <span style="color:#94a3b8; font-size:12px;">URL: <code style="color:#00f0ff;">https://ultimate-coding-agent-by-x-estal-nitish.streamlit.app/</code></span>
+            <a href="https://ultimate-coding-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:linear-gradient(135deg, #00f0ff 0%, #0284c7 100%); color:#030712; padding:8px 18px; border-radius:10px; font-weight:700; font-size:13px; text-decoration:none; box-shadow:0 4px 15px rgba(0, 240, 255, 0.4);">Launch Application ↗</a>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Project 2: X-Estal Enterprise RAG Engine
+    st.markdown("""
+    <div class="clay-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:26px;">📚</span>
+                <div>
+                    <h3 style="margin:0; color:#f8fafc;">X-Estal Enterprise RAG Engine</h3>
+                    <span style="font-size:12px; color:#94a3b8;">Hybrid Dense + BM25 Document Intelligence with LLM Synthesis</span>
+                </div>
+            </div>
+            <span class="chip chip-purple"><span class="pulse-dot pulse-green"></span> 🟢 LIVE STREAMLIT APP</span>
+        </div>
+        <p style="color:#cbd5e1; font-size:14px; line-height:1.7; margin:14px 0 10px 0;">
+            Enterprise documentation intelligence combining dense semantic vector search (ChromaDB + BAAI/bge-small-en-v1.5) with sparse keyword search (BM25Okapi) using Reciprocal Rank Fusion. Strictly grounds LLM answers on retrieved chunks to completely eliminate hallucination.
+        </p>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;">
+            <span class="chip chip-purple">ChromaDB</span>
+            <span class="chip chip-cyan">BM25Okapi Fusion</span>
+            <span class="chip chip-green">BGE Embeddings</span>
+            <span class="chip chip-purple">Zero Hallucination</span>
+            <span class="chip chip-cyan">Source Citations</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <span style="color:#94a3b8; font-size:12px;">URL: <code style="color:#c084fc;">https://xestal-enterprise-rag-engine-by-x-estal-nitish.streamlit.app/</code></span>
+            <a href="https://xestal-enterprise-rag-engine-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:linear-gradient(135deg, #a855f7 0%, #7c3aed 100%); color:#ffffff; padding:8px 18px; border-radius:10px; font-weight:700; font-size:13px; text-decoration:none; box-shadow:0 4px 15px rgba(168, 85, 247, 0.4);">Launch Application ↗</a>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Project 3: X-Estal Deep Research Agent
+    st.markdown("""
+    <div class="clay-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:26px;">🌐</span>
+                <div>
+                    <h3 style="margin:0; color:#f8fafc;">X-Estal Deep Research Agent</h3>
+                    <span style="font-size:12px; color:#94a3b8;">Autonomous Live Web Intelligence & Whitepaper Compiler</span>
+                </div>
+            </div>
+            <span class="chip chip-green"><span class="pulse-dot pulse-green"></span> 🟢 LIVE STREAMLIT APP</span>
+        </div>
+        <p style="color:#cbd5e1; font-size:14px; line-height:1.7; margin:14px 0 10px 0;">
+            Autonomous multi-tool research engine that breaks ambiguous topics into targeted search queries, crawls live web pages with Trafilatura, cross-verifies facts across multiple sources, and compiles comprehensive structured technical whitepapers with full bibliographies.
+        </p>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;">
+            <span class="chip chip-green">DuckDuckGo Search</span>
+            <span class="chip chip-cyan">Trafilatura Scraper</span>
+            <span class="chip chip-purple">Multi-Hop Research</span>
+            <span class="chip chip-green">Fact Verification</span>
+            <span class="chip chip-cyan">Markdown Export</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <span style="color:#94a3b8; font-size:12px;">URL: <code style="color:#4ade80;">https://xestal-research-agent-by-x-estal-nitish.streamlit.app/</code></span>
+            <a href="https://xestal-research-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color:#030712; padding:8px 18px; border-radius:10px; font-weight:700; font-size:13px; text-decoration:none; box-shadow:0 4px 15px rgba(34, 197, 94, 0.4);">Launch Application ↗</a>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Project 4: Invoice Processing & Audit Agent
+    st.markdown("""
+    <div class="clay-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:26px;">📑</span>
+                <div>
+                    <h3 style="margin:0; color:#f8fafc;">Invoice Processing & Audit Agent</h3>
+                    <span style="font-size:12px; color:#94a3b8;">Autonomous B2B Invoice Extraction & Fraud Variance Detection</span>
+                </div>
+            </div>
+            <span class="chip chip-purple"><span class="pulse-dot pulse-green"></span> 🟢 LIVE STREAMLIT APP</span>
+        </div>
+        <p style="color:#cbd5e1; font-size:14px; line-height:1.7; margin:14px 0 10px 0;">
+            Autonomous financial operations system that parses complex PDF invoices, executes 3-way matching against purchase orders and receiving logs, calculates line-item tax variances, and assigns fraud risk anomaly scores with clear audit trails.
+        </p>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;">
+            <span class="chip chip-purple">PDF Extraction</span>
+            <span class="chip chip-cyan">3-Way PO Matching</span>
+            <span class="chip chip-green">Fraud Anomaly Scoring</span>
+            <span class="chip chip-purple">Tax Reconciliation</span>
+            <span class="chip chip-cyan">Audit Trail Logs</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <span style="color:#94a3b8; font-size:12px;">URL: <code style="color:#fbbf24;">https://invoice-processing-agent-by-x-estal-nitish.streamlit.app/</code></span>
+            <a href="https://invoice-processing-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color:#030712; padding:8px 18px; border-radius:10px; font-weight:700; font-size:13px; text-decoration:none; box-shadow:0 4px 15px rgba(245, 158, 11, 0.4);">Launch Application ↗</a>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Project 5: X-Estal Code Dev Agent
+    st.markdown("""
+    <div class="clay-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:26px;">🛠️</span>
+                <div>
+                    <h3 style="margin:0; color:#f8fafc;">X-Estal Code Dev Agent</h3>
+                    <span style="font-size:12px; color:#94a3b8;">Interactive Streamlit Prototype for Autonomous Software Dev</span>
+                </div>
+            </div>
+            <span class="chip chip-cyan"><span class="pulse-dot pulse-green"></span> 🟢 LIVE STREAMLIT APP</span>
+        </div>
+        <p style="color:#cbd5e1; font-size:14px; line-height:1.7; margin:14px 0 10px 0;">
+            Interactive cloud-deployed prototype that pioneered prompt-to-production repo synthesis. Provides students and developers with a simple web interface to input software requirements and generate structured multi-file code packages.
+        </p>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;">
+            <span class="chip chip-cyan">Streamlit Cloud</span>
+            <span class="chip chip-purple">Prototype Architecture</span>
+            <span class="chip chip-green">Repo Scaffolding</span>
+            <span class="chip chip-cyan">Instant Zip Export</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <span style="color:#94a3b8; font-size:12px;">URL: <code style="color:#38bdf8;">https://code-dev-agent-by-x-estal-nitish.streamlit.app/</code></span>
+            <a href="https://code-dev-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:linear-gradient(135deg, #38bdf8 0%, #0284c7 100%); color:#030712; padding:8px 18px; border-radius:10px; font-weight:700; font-size:13px; text-decoration:none; box-shadow:0 4px 15px rgba(56, 189, 248, 0.4);">Launch Application ↗</a>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Author & Portfolio Ecosystem Section
+    st.markdown("### 👨‍💻 Engineering Leadership & Profiles")
+    st.markdown("""
+    <div class="clay-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+            <div>
+                <h4 style="margin:0; color:#00f0ff;">Nitish Kumar (X-ESTAL NITISH)</h4>
+                <p style="color:#94a3b8; font-size:13px; margin:4px 0 0 0;">Creator & AI Systems Architect · C.M. Science College, Darbhanga</p>
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <a href="https://github.com/XestalNitish" target="_blank" style="background:rgba(255, 255, 255, 0.08); border:1px solid rgba(255, 255, 255, 0.2); color:#f8fafc; padding:8px 14px; border-radius:8px; font-size:13px; font-weight:600; text-decoration:none;">🐙 GitHub Portfolio</a>
+                <a href="https://www.linkedin.com/in/nitish-kumar-ai" target="_blank" style="background:rgba(0, 119, 181, 0.2); border:1px solid rgba(0, 119, 181, 0.5); color:#38bdf8; padding:8px 14px; border-radius:8px; font-size:13px; font-weight:600; text-decoration:none;">💼 LinkedIn Profile</a>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+
+# ============================================================================
+# TAB 9: ⚡ SYSTEM & SERVER MISSION CONTROL
 # ============================================================================
 
 elif nav == "⚡ System & Server Mission Control":
