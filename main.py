@@ -14,10 +14,10 @@ import subprocess
 import sys
 from pathlib import Path
 
-# Transparently bootstrap into .venv if executed from global Python lacking dependencies
+# Transparently bootstrap into .venv if executed directly from global Python lacking dependencies
 _ROOT = Path(__file__).resolve().parent
 _VENV_PY = _ROOT / ".venv" / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
-if _VENV_PY.exists() and Path(sys.executable).resolve() != _VENV_PY.resolve():
+if __name__ == "__main__" and _VENV_PY.exists() and Path(sys.executable).resolve() != _VENV_PY.resolve():
     try:
         import langgraph  # noqa: F401
     except ImportError:
@@ -43,6 +43,137 @@ def _p(t):
     print(t, end="", flush=True)
 
 
+def ensure_servers(roles: list[str] | None = None, progress_cb=None) -> bool:
+    """Ensure required llama-servers are running, auto-starting if necessary."""
+    import start_servers
+    return start_servers.ensure_servers(roles=roles, progress_cb=progress_cb)
+
+
+def chat_turn(query: str, history: list[tuple[str, str]] | None = None,
+              force_web: bool = False, on_token=None, progress_cb=None) -> dict:
+    """Execute a single chat turn with optional web search and streaming LLM generation."""
+    ensure_servers(["main"], progress_cb=progress_cb)
+    history = history or []
+    query_to_search = None
+    if force_web:
+        query_to_search = query
+    else:
+        try:
+            out = extract_json(chat("main", SYS_SEARCH, query, task="search_decision", max_tokens=60,
+                                    schema=SCHEMA_SEARCH), {}) or {}
+            s = out.get("search")
+            if isinstance(s, str) and s.strip():
+                query_to_search = s.strip()
+        except Exception:
+            query_to_search = None
+
+    web_content = ""
+    web_err = None
+    if query_to_search:
+        if progress_cb:
+            progress_cb(f"Web search: {query_to_search}...")
+        res, web_err = tools.web_search(query_to_search, 4)
+        web_content = tools.format_results(res, 3500) if res else ""
+
+    hist_text = "\n".join(f"{r}: {t}" for r, t in history[-6:])
+    prompt = (f"Conversation so far:\n{fit(hist_text, 2500)}\n\n" if hist_text else "") + \
+             (f"Web results:\n{web_content}\n\n" if web_content else "") + f"User: {query}"
+
+    ans = chat("main", SYS_CHAT, prompt, task="chat", temperature=0.5,
+               stream=bool(on_token), on_token=on_token)
+    return {
+        "answer": ans,
+        "search_query": query_to_search,
+        "web_results": web_content,
+        "web_error": web_err
+    }
+
+
+def rag_turn(query: str, library: str | None = None, k: int = 4,
+             on_token=None, progress_cb=None) -> dict:
+    """Execute RAG retrieval + LLM synthesis turn."""
+    ensure_servers(["main"], progress_cb=progress_cb)
+    libs = rag.libraries()
+    clean_q = query.strip()
+    if not library and clean_q.startswith("@"):
+        first, _, rest = clean_q.partition(" ")
+        tag = first[1:].lower()
+        if tag in libs:
+            library, clean_q = tag, rest.strip()
+
+    hits = rag.search(clean_q, k=k, library=library)
+    if not hits:
+        return {
+            "answer": f"Docs me is sawal se relevant kuch nahi mila. Aap `@<library>` tag use kar sakte hain: {', '.join(libs)}",
+            "hits": [],
+            "docs_context": "",
+            "library_used": library
+        }
+
+    docs = "\n\n".join(f"[{i}] ({h['library']} {h['version']} p{h['page']})\n{h['text']}"
+                       for i, h in enumerate(hits, 1))
+    docs_prompt = f"Docs:\n{docs}\n\nQuestion: {clean_q}"
+    ans = chat("main", SYS_RAG, docs_prompt, task="rag_answer", temperature=0.2,
+               stream=bool(on_token), on_token=on_token)
+    return {
+        "answer": ans,
+        "hits": hits,
+        "docs_context": docs,
+        "library_used": library
+    }
+
+
+def code_turn(request: str, resume_checkpoint: dict | None = None,
+              force_resume: bool = False, force_fresh: bool = False, progress_cb=None) -> dict:
+    """Execute the autonomous multi-agent code development pipeline."""
+    ensure_servers(["main", "writer"], progress_cb=progress_cb)
+    from pipeline import run_pipeline
+    import checkpoint_manager
+
+    cp = resume_checkpoint
+    if cp is None and (force_resume or not force_fresh):
+        active = checkpoint_manager.get_active_checkpoint()
+        if active:
+            cp = checkpoint_manager.prompt_resume_if_available(force_resume=force_resume, force_fresh=force_fresh)
+
+    final = run_pipeline(request or (cp.get("task") if cp else ""), resume_checkpoint=cp)
+    ans = (final.get("answer") if isinstance(final, dict) else str(final)) or "[done] Pipeline finished."
+    return {"result": final, "summary": ans, "resumed": bool(cp)}
+
+
+def research_turn(topic: str, progress_cb=None) -> dict:
+    """Execute deep web research agent turn."""
+    ensure_servers(["main"], progress_cb=progress_cb)
+    from research.research_web import research_web_agent
+    if progress_cb:
+        progress_cb(f"Conducting deep web research on: {topic}...")
+    result = research_web_agent.invoke(
+        {
+            "query": topic,
+            "attached_files": [],
+            "search_depth": "advanced",
+            "output_type": "deep_dive",
+            "export_format": "markdown",
+            "generated_search_queries": None,
+            "messages": [],
+            "delivery_messages": [],
+            "research_notes": None,
+            "draft_report": None,
+            "audit_feedback": None,
+            "audit_passed": False,
+            "iteration_count": 0,
+            "delivery_iterations": 0,
+            "audit_retries": 0,
+            "saved_path": None,
+            "final": None,
+        },
+        config={"recursion_limit": 60},
+    )
+    report = result.get("final") or result.get("draft_report") or "No research report produced."
+    saved = result.get("saved_path")
+    return {"report": report, "saved_path": saved, "raw_result": result}
+
+
 def chat_mode():
     print("\n[chat] normal chatbot. `/web <sawal>` = zabardasti search, `/menu` = wapas, `/exit`.")
     history: list[tuple[str, str]] = []
@@ -55,26 +186,12 @@ def chat_mode():
         forced = q.startswith("/web ")
         if forced:
             q = q[5:].strip()
-        query = q if forced else None
-        if not forced:
-            out = extract_json(chat("main", SYS_SEARCH, q, task="search_decision", max_tokens=60,
-                                    schema=SCHEMA_SEARCH), {}) or {}
-            s = out.get("search")
-            query = s if isinstance(s, str) and s.strip() else None
-        web = ""
-        if query:
-            print(f"(web search: {query})")
-            res, err = tools.web_search(query, 4)
-            web = tools.format_results(res, 3500) if res else ""
-            if err:
-                print(f"({err})")
-        hist = "\n".join(f"{r}: {t}" for r, t in history[-6:])
-        prompt = (f"Conversation so far:\n{fit(hist, 2500)}\n\n" if hist else "") + \
-                 (f"Web results:\n{web}\n\n" if web else "") + f"User: {q}"
         print("AI> ", end="")
-        ans = chat("main", SYS_CHAT, prompt, task="chat", temperature=0.5, stream=True, on_token=_p)
+        res = chat_turn(q, history=history, force_web=forced, on_token=_p)
         print()
-        history += [("User", q), ("AI", ans)]
+        if res.get("search_query"):
+            print(f"(web search: {res['search_query']})")
+        history += [("User", q), ("AI", res["answer"])]
 
 
 def rag_mode():
@@ -89,28 +206,15 @@ def rag_mode():
             continue
         if q in ("/menu", "/exit"):
             return q == "/exit"
-        lib = None
-        if q.startswith("@"):
-            first, _, rest = q.partition(" ")
-            if first[1:].lower() in libs:
-                lib, q = first[1:].lower(), rest.strip()
-        hits = rag.search(q, k=4, library=lib)
-        if not hits:
-            print("Kuch relevant nahi mila.")
-            continue
-        docs = "\n\n".join(f"[{i}] ({h['library']} {h['version']} p{h['page']})\n{h['text']}"
-                           for i, h in enumerate(hits, 1))
         print("AI> ", end="")
-        chat("main", SYS_RAG, f"Docs:\n{docs}\n\nQuestion: {q}", task="rag_answer", temperature=0.2,
-             stream=True, on_token=_p)
+        res = rag_turn(q, on_token=_p)
         print("\n\nSources:")
-        for i, h in enumerate(hits, 1):
-            print(f"  [{i}] {h['library']} {h['version']} - {h['source'].split('/')[-1].split(chr(92))[-1]} p{h['page']} "
-                  f"({h['heading'] or 'intro'})")
+        for i, h in enumerate(res.get("hits", []), 1):
+            src = h['source'].replace('\\', '/').split('/')[-1]
+            print(f"  [{i}] {h['library']} {h['version']} - {src} p{h['page']} ({h['heading'] or 'intro'})")
 
 
 def research_mode(request: str | None = None):
-    from research.research_web import research_web_agent
     one_shot = request is not None
     print("\n[research] deep web research agent. Topic batao. `/menu` = wapas, `/exit`.")
     while True:
@@ -121,52 +225,16 @@ def research_mode(request: str | None = None):
         if q in ("/menu", "/exit"):
             return q == "/exit"
         print("\n[researcher] investigating and analyzing sources...")
-        result = research_web_agent.invoke(
-            {
-                "query": q,
-                "attached_files": [],
-                "search_depth": "advanced",
-                "output_type": "deep_dive",
-                "export_format": "markdown",
-                "generated_search_queries": None,
-                "messages": [],
-                "delivery_messages": [],
-                "research_notes": None,
-                "draft_report": None,
-                "audit_feedback": None,
-                "audit_passed": False,
-                "iteration_count": 0,
-                "delivery_iterations": 0,
-                "audit_retries": 0,
-                "saved_path": None,
-                "final": None,
-            },
-            config={"recursion_limit": 60},
-        )
-        report = result.get("final") or result.get("draft_report") or "No report produced."
-        saved = result.get("saved_path")
-        print("\n" + "=" * 60 + "\n" + report)
-        if saved:
-            print(f"\n[saved] Saved report to: {saved}")
+        res = research_turn(q)
+        print("\n" + "=" * 60 + "\n" + res["report"])
+        if res.get("saved_path"):
+            print(f"\n[saved] Saved report to: {res['saved_path']}")
         if one_shot:
             return True
 
 
 def code_mode(request: str | None = None, force_resume: bool = False, force_fresh: bool = False):
-    from pipeline import run_pipeline
-    import checkpoint_manager
-
     one_shot = request is not None
-    # Check for active checkpoint before asking
-    cp = checkpoint_manager.prompt_resume_if_available(force_resume=force_resume, force_fresh=force_fresh)
-    if cp:
-        print(f"[code] Resuming previous task: {cp.get('task')}")
-        final = run_pipeline(cp.get("task", ""), resume_checkpoint=cp)
-        ans = (final.get("answer") if isinstance(final, dict) else str(final)) or "[done] Pipeline finished."
-        print("\n" + "=" * 60 + "\n" + ans)
-        if one_shot:
-            return True
-
     print("\n[code] coder pipeline (Researcher + RAG + Coder). Kya banana hai batao. `/menu` = wapas, `/exit`.")
     while True:
         q = request or input("\nKya banana hai> ").strip()
@@ -175,9 +243,8 @@ def code_mode(request: str | None = None, force_resume: bool = False, force_fres
             continue
         if q in ("/menu", "/exit"):
             return q == "/exit"
-        final = run_pipeline(q)
-        ans = (final.get("answer") if isinstance(final, dict) else str(final)) or "[done] Pipeline finished."
-        print("\n" + "=" * 60 + "\n" + ans)
+        res = code_turn(q, force_resume=force_resume, force_fresh=force_fresh)
+        print("\n" + "=" * 60 + "\n" + res["summary"])
         if one_shot:
             return True
 
@@ -235,21 +302,19 @@ def main():
         import selftest
         return selftest.run()
 
-    if args.autostart and not llm.mock_enabled():
-        import start_servers
-        roles = {"chat": ["main"], "rag": ["main"], "code": list(C.MODELS), "research": ["main"], None: list(C.MODELS)}[args.mode]
-        start_servers.launch(roles)
-
     if not llm.mock_enabled():
-        need = {"chat": ["main"], "rag": ["main"], "code": ["main", "writer"], "research": ["main"], None: ["main"]}[args.mode]
-        down = [r for r in need if not llm.server_up(r)]   # baaki roles ka error chat() khud batayega
-        if "writer" in down and llm.server_up("main"):
-            print("[INFO] Server 2 (writer: 8084) is offline. Using Server 1 (main) for both orchestrator and coder writer.")
-            down.remove("writer")
+        need = {"chat": ["main"], "rag": ["main"], "code": ["main", "writer"], "research": ["main"], None: ["main", "writer"]}[args.mode]
+        down = [r for r in need if not llm.server_up(r)]
         if down:
-            print(f"Servers down: {down}. Alag terminal me `python start_servers.py` chalao "
-                  f"(ya `python main.py --autostart`).")
-            return 1
+            print(f"[AutoStart] Servers offline: {down}. Launching local llama-servers automatically...")
+            ensure_servers(down)
+            down = [r for r in need if not llm.server_up(r)]
+            if "writer" in down and llm.server_up("main"):
+                print("[INFO] Server 2 (writer: 8084) is offline. Using Server 1 (main) for both orchestrator and coder writer.")
+                down.remove("writer")
+            if down:
+                print(f"[WARN] Some servers could not be started: {down}. Please check logs/ or run `python start_servers.py`.")
+                return 1
     try:
         menu(args)
     except (KeyboardInterrupt, EOFError):

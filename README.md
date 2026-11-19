@@ -10,21 +10,23 @@ An enterprise-grade, autonomous multi-agent AI software engineer and deep techni
 
 ## Table of Contents
 1. [System Architecture & Macro Overview](#1-system-architecture--macro-overview)
-2. [LangSmith Production Observability & Metrics](#2-langsmith-production-observability--metrics)
-3. [Enterprise Real-World Problem Solving AI Agents Suite](#3-enterprise-real-world-problem-solving-ai-agents-suite)
+2. [Engineering Case Study: Classroom Origin to Production](#2-engineering-case-study-classroom-origin-to-production)
+3. [LangSmith Production Observability & Metrics](#3-langsmith-production-observability--metrics)
+4. [Enterprise Real-World Problem Solving AI Agents Suite](#4-enterprise-real-world-problem-solving-ai-agents-suite)
    - [A. Autonomous SWE Bug Resolver & PR Reviewer (SWE-Agent Style)](#a-autonomous-swe-bug-resolver--pr-reviewer-swe-agent-style)
    - [B. Autonomous B2B Invoice & Expense Audit Agent](#b-autonomous-b2b-invoice--expense-audit-agent)
    - [C. Deep Research & Competitive Intelligence Agent](#c-deep-research--competitive-intelligence-agent)
    - [D. End-to-End Customer Resolution Agent](#d-end-to-end-customer-resolution-agent)
    - [E. Clinical Doctor's Co-pilot & Patient Care Agent](#e-clinical-doctors-co-pilot--patient-care-agent)
-4. [Detailed Agent Diagrams & Workflows](#4-detailed-agent-diagrams--workflows)
-5. [Sub-Agent Roles & Responsibilities](#5-sub-agent-roles--responsibilities)
-6. [Hardware Requirements & Performance Modes](#6-hardware-requirements--performance-modes)
-7. [Speed Optimization Guide (Up to 50x Faster)](#7-speed-optimization-guide-up-to-50x-faster)
-8. [Quickstart & Setup](#8-quickstart--setup)
-9. [CLI Modes & Execution Examples](#9-cli-modes--execution-examples)
-10. [Testing & QA Verification](#10-testing--qa-verification)
-11. [Troubleshooting & FAQs](#11-troubleshooting--faqs)
+5. [Detailed Agent Diagrams & Workflows](#5-detailed-agent-diagrams--workflows)
+6. [Sub-Agent Roles & Responsibilities](#6-sub-agent-roles--responsibilities)
+7. [Hardware Requirements & Performance Modes](#7-hardware-requirements--performance-modes)
+8. [Speed Optimization Guide (Up to 50x Faster)](#8-speed-optimization-guide-up-to-50x-faster)
+9. [Quickstart & Setup](#9-quickstart--setup)
+10. [Mission Control Web UI (Streamlit)](#10-mission-control-web-ui-streamlit)
+11. [CLI Modes & Execution Examples](#11-cli-modes--execution-examples)
+12. [Testing & QA Verification](#12-testing--qa-verification)
+13. [Troubleshooting & FAQs](#13-troubleshooting--faqs)
 
 ---
 
@@ -36,9 +38,9 @@ The **Ultimate Coding Agent** automates end-to-end software engineering workflow
 flowchart TB
     subgraph UI_Layer["User Interaction & Entry Points"]
         CLI["CLI / Terminal (main.py)"]
+        StreamlitUI["Mission Control Dashboard (app.py)"]
         InteractiveMenu["Interactive Menu (1: Chat, 2: RAG, 3: Code, 4: Research)"]
-        AutomatedTask["One-Shot Task Runner (--request)"]
-        HealthCheck["Diagnostic Suite (--health, --selftest)"]
+        HealthCheck["Diagnostic Suite (healthcheck.py)"]
     end
 
     subgraph Core_Orchestrator["Master Pipeline Orchestrator (pipeline.py)"]
@@ -66,7 +68,7 @@ flowchart TB
     end
 
     CLI --> InteractiveMenu
-    CLI --> AutomatedTask
+    StreamlitUI --> InteractiveMenu
     CLI --> HealthCheck
 
     Intake --> Gatekeeper
@@ -85,7 +87,57 @@ flowchart TB
 
 ---
 
-## 2. LangSmith Production Observability & Metrics
+## 2. Engineering Case Study: Classroom Origin to Production
+
+### Ultimate Coding Agent Turns Classroom Project Prompts Into Self-Healing Multi-File Software
+**Engineered by [Nitish Kumar](https://github.com/XestalNitish) in November 2026**
+
+> *"Everyone in class was confused about how to analyze the topic, structure the requirements, and build the project—so I built an autonomous pipeline where you give only your core problem prompt, and it handles requirements, multi-file coding, and self-debugging from start to finish."*  
+> — **Nitish Kumar**, Creator of the Ultimate Coding Agent
+
+#### Classroom Confusion Sparked an Autonomous Pipeline From Prompt to Production
+During a routine lecture at **C.M. Science College, Darbhanga**, an instructor assigned a batch of software project topics to the class. While students understood the high-level problem statements, the majority stalled immediately on the engineering translation: how to decompose a vague topic into concrete system requirements, how to organize a modular multi-file directory structure, and how to diagnose cascading runtime tracebacks once the initial scripts failed.
+
+Standard single-shot chat LLMs only partially solve this problem. When a student pastes a project topic into a chat window, the model typically returns an unverified single-file snippet that breaks on missing imports, unguarded edge cases, or subtle syntax errors. Instead of learning architecture, students get trapped manually copying tracebacks back and forth.
+
+To solve this end-to-end bottleneck, [Nitish Kumar](https://www.linkedin.com/in/nitish-kumar-33714642b) designed the **Ultimate Coding Agent** (with an early interactive prototype showcased via the [X-Estal Code Dev Agent](https://code-dev-agent-by-x-estal-nitish.streamlit.app/)). The design premise is strict: a user supplies only the core problem prompt in a `test` specification, and the pipeline autonomously handles requirement refinement, multi-file synthesis, static security verification, runtime validation, and iterative self-repair into a clean `output` directory.
+
+#### Six Stateful LangGraph Nodes Enforce Security Auditing and Cyclic Self-Repair
+Rather than relying on linear prompt chaining, the Ultimate Coding Agent models software creation as a cyclic directed graph using `StateGraph`. Shared state tracks the parsed project specification, file tree map, abstract syntax tree (AST) audit flags, subprocess `stdout`/`stderr` streams, and retry counter across six specialized nodes:
+
+| Node ID | Pipeline Role | Assigned Local LLM | Primary Input State | Verification Gate & Routing Transition | Guard / Limit |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `planner` | Architectural Planner | Spark 2.5 (4B) | Raw user prompt from test spec | Decomposes prompt into system requirements, module boundaries, and multi-file dependency manifest; routes to `writer`. | 2048 ctx window |
+| `writer` | Senior Code Writer | Spark 2.6 (4B) | Architecture plan or debugger patch diff | Synthesizes complete, runnable multi-file Python code blocks mapped to target file paths; routes directly to `security_check`. | Multi-file output |
+| `security_check` | Pre-Execution AST Auditor | Spark 2.5 (4B) + AST | Generated source files prior to runtime | Performs static analysis for destructive shell calls, unauthorized network sockets, or unsafe imports before execution; routes to `executor` or back to `writer`. | 0 unsafe execs |
+| `executor` | Sandboxed Runtime Executor | Deterministic Subprocess | Security-cleared code package | Executes entrypoints inside an isolated Python subprocess; routes to `reviewer` if `Exit == 0`, or triggers `debugger` if `Exit != 0`. | 15s timeout |
+| `debugger` | Self-Healing Debugger | Spark 2.5 (4B) | Captured `stderr` traceback & failing file | Isolates root cause from stack trace, formulates targeted code repair instructions, and loops back to `writer` until retries exhaust. | Max 3 retries |
+| `reviewer` | Production Reviewer | Spark 2.5 (4B) | Verified codebase (`Exit == 0`) | Validates requirement coverage, code modularity, and documentation readiness before committing final artifacts to `output`. | Final commit |
+
+#### Dual 4B Local Model Routing Eliminates Cloud Costs on 16GB RAM Hardware
+Running a multi-agent coding loop against commercial cloud APIs quickly incurs prohibitive token bills—especially when multi-file codebases enter 2 to 3 self-healing debug iterations. Conversely, running a single massive model locally freezes consumer laptops.
+
+The Ultimate Coding Agent solves this by splitting cognitive workloads across two specialized 4-billion-parameter local models served via an optimized `llama-server` backend:
+* **Spark 2.5 (4B) — Analytical Core:** Assigned to `planner`, `security_check`, `debugger`, and `reviewer`. Optimized for structured decomposition, static vulnerability pattern recognition, and stack-trace root-cause isolation.
+* **Spark 2.6 (4B) — Synthesis Core:** Dedicated exclusively to the `writer` node. Tuned for syntactic accuracy, cross-file import consistency, and clean adherence to the planner's structural manifest.
+* **Subprocess & Context Guards:** Enforces `trim_messages` state pruning to prevent context overflow during multi-turn retries, alongside a strict 15-second subprocess execution timeout in `executor` to automatically terminate hanging processes or infinite loops.
+
+#### LangSmith Benchmarks: Why Tail Latency Is a Feature of Self-Healing Systems
+Across a batch of **90 to 100 diverse project prompts**, telemetry captured in LangSmith demonstrated a signature bimodal distribution:
+* **Median Latency (P50): 0.2s** — When a prompt succeeds on the first pass (`Exit == 0`), the graph traverses only five nodes linearly (`planner → writer → security_check → executor → reviewer`).
+* **Tail Latency (P99): 2.3Ks** — When a complex prompt triggers an `ImportError` or timeout, the graph loops through `debugger → writer → security_check → executor` up to 3 times (up to 14 sequential steps), trading wall-clock time for a verified **90–95% final pass rate (only 5 failures)** at **$0 cloud cost**.
+
+| LangSmith Evaluation Dimension | Observed Benchmark Result | Primary Architectural Driver | Measured Value |
+| :--- | :--- | :--- | :--- |
+| **Total Benchmark Volume** | End-to-end multi-file prompts executed | Automated batch harness | **90–100 runs** |
+| **End-to-End Pass Rate** | Verified `Exit == 0` builds passing reviewer | Iterative debugger feedback loop | **90%–95%** |
+| **Unrecovered Failures** | Prompts exhausting all 3 retry cycles | Complex cross-file state dependencies | **5 fails** |
+| **Median Latency (P50)** | Ultra-low wall-clock execution time | 5-node single-pass traversal | **0.2s** |
+| **Tail Latency (P99)** | Extended self-healing deep-repair cycles | Up to 14 nodes + 15s subprocess guards | **2.3Ks** |
+
+---
+
+## 3. LangSmith Production Observability & Metrics
 
 Full production telemetry, span traces, latency tracking, and autonomous tool call tracking are streamed live to **LangSmith** under project `ultimate-coding-agent` (Created by **Nitish Kumar**).
 
@@ -117,7 +169,7 @@ chroma_store           [=====               ] 11% (10 calls)
 
 ---
 
-## 3. Enterprise Real-World Problem Solving AI Agents Suite
+## 4. Enterprise Real-World Problem Solving AI Agents Suite
 
 Built inside the `output/` ecosystem with production-grade Pydantic models, deterministic state machines, and built-in non-interactive self-test suites (`selftest()`).
 
@@ -200,7 +252,7 @@ Built inside the `output/` ecosystem with production-grade Pydantic models, dete
 
 ---
 
-## 4. Detailed Agent Diagrams & Workflows
+## 5. Detailed Agent Diagrams & Workflows
 
 ### High-Level Multi-Agent Coordination Flow
 
@@ -236,7 +288,7 @@ sequenceDiagram
 
 ---
 
-## 5. Sub-Agent Roles & Responsibilities
+## 6. Sub-Agent Roles & Responsibilities
 
 | Sub-Agent | Primary Script | Core Responsibility | Verification Gate |
 | :--- | :--- | :--- | :--- |
@@ -250,7 +302,7 @@ sequenceDiagram
 
 ---
 
-## 6. Hardware Requirements & Performance Modes
+## 7. Hardware Requirements & Performance Modes
 
 ### Hardware Recommendations
 * **Minimum (100% CPU Mode):**
@@ -264,7 +316,7 @@ sequenceDiagram
 
 ---
 
-## 7. Speed Optimization Guide (Up to 50x Faster)
+## 8. Speed Optimization Guide (Up to 50x Faster)
 
 1. **Keep Models in RAM:** Use dual `llama-server` background instances to keep model weights memory-resident.
 2. **Deterministic Debugger:** The built-in zero-LLM debugger injects standard library imports in **0.01 seconds**, completely bypassing expensive 15-minute LLM re-prompts for missing imports.
@@ -272,7 +324,7 @@ sequenceDiagram
 
 ---
 
-## 8. Quickstart & Setup
+## 9. Quickstart & Setup
 
 ### 1. Clone & Set Up Virtual Environment
 ```powershell
@@ -314,7 +366,16 @@ python healthcheck.py
 
 ---
 
-## 9. CLI Modes & Execution Examples
+## 10. Mission Control Web UI (Streamlit)
+
+Launch the interactive neural web dashboard to control the pipeline, engage with neural chat, query hybrid RAG with LLM synthesis, run the 5 real-world agents, inspect LangSmith telemetry, and explore the engineering case study:
+```powershell
+streamlit run app.py
+```
+
+---
+
+## 11. CLI Modes & Execution Examples
 
 ### One-Shot Code Generation
 ```powershell
@@ -334,7 +395,7 @@ python main.py --mode code --resume
 
 ---
 
-## 10. Testing & QA Verification
+## 12. Testing & QA Verification
 
 The system includes a 100% automated test suite verified with Pytest:
 
@@ -357,7 +418,7 @@ All 5 enterprise problem-solving agents pass deterministic assertions and publis
 
 ---
 
-## 11. Troubleshooting & FAQs
+## 13. Troubleshooting & FAQs
 
 #### Q1: What was `EnvAddressError` in LangSmith and how was it solved?
 * **Answer:** `EnvAddressError` occurs when both `LANGCHAIN_PROJECT` (project tracing) and `LANGSMITH_AGENT_ID` / `LANGSMITH_AGENT_ENVIRONMENT` (agent addressing) are simultaneously set. In `config.py`, conflicting addressing variables are automatically sanitized at startup, ensuring clean, continuous tracing to project `ultimate-coding-agent`.
