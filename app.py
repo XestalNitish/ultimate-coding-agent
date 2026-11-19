@@ -458,31 +458,54 @@ if nav == "💬 Neural Chat (AI + Live Web)":
     st.markdown('<div class="hero-title">💬 Neural Assistant & Live Web Agent</div>', unsafe_allow_html=True)
     st.markdown(
         '<div class="hero-subtitle">Interactive conversational engineering powered by local <b>Spark 2.5 (4B)</b> '
-        'with autonomous web intent analysis. Routed via <code>main.chat_turn</code>.</div>',
+        'with multi-tool research intelligence (Web, News, GitHub, URL Reader). Routed via <code>main.chat_turn</code>.</div>',
         unsafe_allow_html=True
     )
 
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = []
 
-    # Chat controls bar
+    # Chat controls bar with Research Tool Selector
     col_ctrl1, col_ctrl2 = st.columns([3, 1])
     with col_ctrl1:
-        force_web = st.checkbox("🌐 Force Web Search for this turn (`/web` mode)", value=False)
+        tool_option = st.selectbox(
+            "Intelligence & Research Mode",
+            options=[
+                "⚡ Auto (Smart Tool Router: Web / News / GitHub / URL Reader)",
+                "🌐 Deep Web Search (/web)",
+                "📰 Live News Search (/news)",
+                "🐙 GitHub Repositories (/github)",
+                "📑 Read Web Page from URL (/read)",
+            ],
+            index=0,
+        )
     with col_ctrl2:
+        st.markdown("<div style='height:28px;'></div>", unsafe_allow_html=True)
         if st.button("🗑️ Clear History", use_container_width=True):
             st.session_state.chat_history = []
             st.rerun()
 
+    tool_mode_map = {
+        "⚡ Auto (Smart Tool Router: Web / News / GitHub / URL Reader)": None,
+        "🌐 Deep Web Search (/web)": "web",
+        "📰 Live News Search (/news)": "news",
+        "🐙 GitHub Repositories (/github)": "github",
+        "📑 Read Web Page from URL (/read)": "read",
+    }
+    active_tool_override = tool_mode_map.get(tool_option)
+
     # Welcome Card if conversation is empty
-    if not st.session_state.chat_history:
+    if len(st.session_state.chat_history) == 0:
         st.markdown("""
         <div class="clay-card" style="border-color: rgba(0, 240, 255, 0.25);">
             <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
                 <span style="font-size:24px;">⚡</span>
                 <div>
                     <h3 style="margin:0; font-size:18px; color:#f8fafc;">Welcome to X-ESTAL AI Workspace</h3>
-                    <p style="margin:0; font-size:13px; color:#94a3b8;">Ask architecture questions, debug tracebacks, or request live web research.</p>
+                    <p style="margin:0; font-size:13px; color:#94a3b8;">
+                        Ask architecture questions, debug code, or request live web/news/GitHub research.
+                        Communicates in fluent English or natural Hinglish with persistent conversational memory.
+                    </p>
                 </div>
             </div>
         </div>
@@ -490,59 +513,67 @@ if nav == "💬 Neural Chat (AI + Live Web)":
 
     # Display past conversation
     for sender, msg, metadata in st.session_state.chat_history:
-        with st.chat_message("user" if sender == "User" else "assistant"):
+        is_user = sender == "User"
+        with st.chat_message("user" if is_user else "assistant", avatar="👤" if is_user else "⚡"):
             st.markdown(msg)
-            if metadata and metadata.get("search_query"):
-                with st.expander(f"🔍 Web Search Telemetry: `{metadata['search_query']}`"):
-                    st.text(metadata.get("web_results", "No snippet stored."))
+            if metadata and metadata.get("tool_used"):
+                tool_label = metadata["tool_used"].upper()
+                query_info = metadata.get("search_query") or "Executed"
+                with st.expander(f"🔍 Research Tool Used: [{tool_label}] on `{query_info}`"):
+                    st.text(metadata.get("web_results", "No raw snippet stored."))
 
     # Chat input box
     user_input = st.chat_input("Prompt X-ESTAL AI for code, debugging, or real-time web research...")
 
-    # Quick prompt pills
-    st.markdown("<p style='font-size:12px; color:#94a3b8; font-weight:700; margin-top:16px;'>QUICK PROMPTS:</p>", unsafe_allow_html=True)
-    q_col1, q_col2, q_col3 = st.columns(3)
+    # Quick prompt pills - ONLY SHOW WHEN NO MESSAGES HAVE BEEN SENT YET!
     preset_query = None
-    with q_col1:
-        if st.button("🔍 6-Node LangGraph Pipeline", key="q1"):
-            preset_query = "Explain how the LangGraph 6-node state machine handles AST security checks and self-healing retries."
-    with q_col2:
-        if st.button("⚡ Spark 2.5 vs 2.6 Dual Routing", key="q2"):
-            preset_query = "Why does X-ESTAL NITISH split analytical reasoning (Spark 2.5) from code synthesis (Spark 2.6)?"
-    with q_col3:
-        if st.button("📊 P50 vs P99 Tail Latency", key="q3"):
-            preset_query = "What is the engineering tradeoff between P50 fast-path latency and P99 tail latency in self-healing agents?"
+    if len(st.session_state.chat_history) == 0:
+        st.markdown("<p style='font-size:12px; color:#94a3b8; font-weight:700; margin-top:16px;'>QUICK PROMPTS:</p>", unsafe_allow_html=True)
+        q_col1, q_col2, q_col3 = st.columns(3)
+        with q_col1:
+            if st.button("🔍 6-Node LangGraph Pipeline", key="q1"):
+                preset_query = "Explain how the LangGraph 6-node state machine handles AST security checks and self-healing retries."
+        with q_col2:
+            if st.button("⚡ Spark 2.5 vs 2.6 Dual Routing", key="q2"):
+                preset_query = "Why does X-ESTAL NITISH split analytical reasoning (Spark 2.5) from code synthesis (Spark 2.6)?"
+        with q_col3:
+            if st.button("📊 P50 vs P99 Tail Latency", key="q3"):
+                preset_query = "What is the engineering tradeoff between P50 fast-path latency and P99 tail latency in self-healing agents?"
 
     final_query = user_input or preset_query
 
     if final_query:
         auto_start_servers_ui(["main"])
         
-        with st.chat_message("user"):
+        with st.chat_message("user", avatar="👤"):
             st.markdown(final_query)
 
-        with st.chat_message("assistant"):
+        with st.chat_message("assistant", avatar="⚡"):
             message_placeholder = st.empty()
-            with st.spinner("Processing neural inference & web intent..."):
+            with st.spinner("X-ESTAL is reasoning & querying research tools..."):
                 try:
                     res = main.chat_turn(
                         query=final_query,
                         history=[(s, m) for s, m, _ in st.session_state.chat_history],
-                        force_web=force_web,
+                        force_web=bool(active_tool_override == "web"),
+                        tool_override=active_tool_override,
                     )
                     answer = res["answer"]
                     message_placeholder.markdown(answer)
 
                     meta = {
                         "search_query": res.get("search_query"),
+                        "tool_used": res.get("tool_used"),
                         "web_results": res.get("web_results")
                     }
-                    if res.get("search_query"):
-                        with st.expander(f"🔍 Web Search Executed: `{res['search_query']}`"):
+                    if res.get("tool_used"):
+                        tool_name = res["tool_used"].upper()
+                        with st.expander(f"🔍 Research Tool Telemetry: [{tool_name}] `{res.get('search_query', '')}`"):
                             st.text(res.get("web_results", ""))
 
                     st.session_state.chat_history.append(("User", final_query, None))
-                    st.session_state.chat_history.append(("AI", answer, meta))
+                    st.session_state.chat_history.append(("X-ESTAL", answer, meta))
+                    st.rerun()
                 except Exception as e:
                     message_placeholder.error(f"Chat generation error: {e}")
 

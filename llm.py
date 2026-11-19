@@ -71,28 +71,44 @@ def server_up(role: str) -> bool:
         return False
 
 
-def chat(role: str, system: str, user: str, *, task: str = "", max_tokens: int | None = None,
-         temperature: float = 0.2, schema: dict | None = None, stream: bool = False,
-         on_token=None) -> str:
+def chat(role: str, system: str = "", user: str = "", *, messages: list[dict] | None = None,
+         task: str = "", max_tokens: int | None = None, temperature: float = 0.2,
+         schema: dict | None = None, stream: bool = False, on_token=None) -> str:
     cfg = C.MODELS[C.real_role(role)]                  # summarizer -> main ka server
     max_tokens = max_tokens or C.MODELS[role].get("max_tokens") or cfg["max_tokens"]
 
     if mock_enabled():
         from mock_llm import mock_chat
-        out = mock_chat(role, task, system, user)
+        query_text = user or (messages[-1]["content"] if messages else "")
+        out = mock_chat(role, task, system, query_text)
         if on_token:
             on_token(out)
         return out
 
     # context guard: prompt + output ctx ke andar hi rahe
     budget_chars = max(600, (cfg["ctx"] - max_tokens - approx_tokens(system) - 80) * 3)
-    user = fit(user, budget_chars)
-    if cfg.get("no_think"):
-        user += "\n/no_think"
+
+    if messages:
+        # Build payload with true multi-turn history
+        final_msgs = []
+        for m in messages:
+            final_msgs.append({
+                "role": m.get("role", "user"),
+                "content": str(m.get("content", ""))
+            })
+        if cfg.get("no_think") and final_msgs and final_msgs[-1]["role"] == "user":
+            if not final_msgs[-1]["content"].endswith("/no_think"):
+                final_msgs[-1]["content"] += "\n/no_think"
+        payload_messages = final_msgs
+    else:
+        user = fit(user, budget_chars)
+        if cfg.get("no_think"):
+            user += "\n/no_think"
+        payload_messages = [{"role": "system", "content": system}, {"role": "user", "content": user}]
 
     payload = {
         "model": role,
-        "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
+        "messages": payload_messages,
         "max_tokens": max_tokens,
         "temperature": temperature,
         "top_p": 0.9,

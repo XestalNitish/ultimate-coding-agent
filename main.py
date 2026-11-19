@@ -27,16 +27,32 @@ if __name__ == "__main__" and _VENV_PY.exists() and Path(sys.executable).resolve
 import config as C
 import llm
 import rag
+import re
 import tools
 from llm import chat, extract_json, fit
 
-SYS_CHAT = ("You are a helpful assistant. Answer clearly and briefly. Reply in the same language as the user "
-            "(Hinglish is fine). Use web results only if provided; mention the source URL when you use them.")
+SYS_CHAT = ("You are X-ESTAL, an advanced autonomous AI software engineering assistant created and engineered by X-ESTAL NITISH (Nitish Kumar).\n\n"
+            "CRITICAL IDENTITY & LANGUAGE RULES:\n"
+            "1. YOUR NAME IS STRICTLY X-ESTAL. If anyone asks 'who are you', 'kya naam hai', 'what is your name', or about your identity, you MUST explicitly state that your name is X-ESTAL, an autonomous AI software engineer and intelligence agent engineered by X-ESTAL NITISH (Nitish Kumar).\n"
+            "2. LANGUAGE: You MUST communicate in clear, fluent English or natural, modern Hinglish (conversational Hindi written in English/Latin letters). NEVER respond in pure Devanagari Hindi or overly formal Hindi unless the user explicitly asks for Devanagari Hindi. Match the user's style: if they ask in English, answer in English; if they ask in Hinglish, answer in Hinglish.\n"
+            "3. CONVERSATION MEMORY: Carefully remember all prior context, code, and user statements in this dialogue. When asked about something mentioned earlier (e.g. user's name, previous questions), recall and use it accurately.\n"
+            "4. TECHNICAL CAPABILITIES: Provide modular, clean, working code examples and precise technical explanations. If research results or web data are provided below, synthesize them cleanly and cite source URLs.")
+
 SYS_RAG = ("Answer ONLY from the documentation excerpts. Give a short answer with a small code example when "
-           "useful. If the docs do not contain the answer, say so. Reply in the same language as the user.")
-SYS_SEARCH = ("Decide if a web search is needed (recent info, versions, prices, news, facts you may not know). "
-              "Output JSON {\"search\": \"<query>\"} or {\"search\": null}.")
-SCHEMA_SEARCH = {"type": "object", "properties": {"search": {"type": ["string", "null"]}}, "required": ["search"]}
+           "useful. If the docs do not contain the answer, say so. Reply in fluent English or modern Hinglish.")
+
+SYS_SEARCH = ("Decide if external web intelligence or research tools are needed (recent info, versions, prices, news, GitHub repos, URLs, live facts you may not know).\n"
+              "Output JSON: {\"tool\": \"web\"|\"news\"|\"github\"|\"read\"|null, \"query\": \"<short query or url>\"}.\n"
+              "Use null for general chat, identity questions ('what is your name', 'who created you'), or standard coding.")
+
+SCHEMA_SEARCH = {
+    "type": "object",
+    "properties": {
+        "tool": {"type": ["string", "null"], "enum": ["web", "news", "github", "read", None]},
+        "query": {"type": ["string", "null"]}
+    },
+    "required": ["tool", "query"]
+}
 
 
 def _p(t):
@@ -50,42 +66,86 @@ def ensure_servers(roles: list[str] | None = None, progress_cb=None) -> bool:
 
 
 def chat_turn(query: str, history: list[tuple[str, str]] | None = None,
-              force_web: bool = False, on_token=None, progress_cb=None) -> dict:
-    """Execute a single chat turn with optional web search and streaming LLM generation."""
+              force_web: bool = False, tool_override: str | None = None,
+              on_token=None, progress_cb=None) -> dict:
+    """Execute a single chat turn with true multi-turn memory, multi-tool research intelligence, and streaming LLM generation."""
     ensure_servers(["main"], progress_cb=progress_cb)
     history = history or []
-    query_to_search = None
-    if force_web:
-        query_to_search = query
-    else:
+
+    # 1) Detect URLs in query
+    url_match = re.search(r'https?://[^\s<>"\'\)]+', query)
+    detected_url = url_match.group(0) if url_match else None
+
+    chosen_tool = tool_override
+    tool_query = None
+
+    if query.startswith("/web "):
+        chosen_tool, tool_query = "web", query[5:].strip()
+    elif query.startswith("/news "):
+        chosen_tool, tool_query = "news", query[6:].strip()
+    elif query.startswith("/github "):
+        chosen_tool, tool_query = "github", query[8:].strip()
+    elif query.startswith("/read "):
+        chosen_tool, tool_query = "read", query[6:].strip()
+    elif force_web:
+        chosen_tool, tool_query = "web", query
+    elif detected_url and not chosen_tool:
+        chosen_tool, tool_query = "read", detected_url
+
+    # If not manually specified, consult smart intent router
+    if not chosen_tool:
         try:
             out = extract_json(chat("main", SYS_SEARCH, query, task="search_decision", max_tokens=60,
                                     schema=SCHEMA_SEARCH), {}) or {}
-            s = out.get("search")
-            if isinstance(s, str) and s.strip():
-                query_to_search = s.strip()
+            t = out.get("tool")
+            q = out.get("query")
+            if t in ("web", "news", "github", "read") and isinstance(q, str) and q.strip():
+                chosen_tool = t
+                tool_query = q.strip()
         except Exception:
-            query_to_search = None
+            chosen_tool = None
 
-    web_content = ""
-    web_err = None
-    if query_to_search:
+    tool_output = ""
+    tool_err = None
+
+    if chosen_tool and tool_query:
         if progress_cb:
-            progress_cb(f"Web search: {query_to_search}...")
-        res, web_err = tools.web_search(query_to_search, 4)
-        web_content = tools.format_results(res, 3500) if res else ""
+            progress_cb(f"Executing research tool '{chosen_tool}' on: {tool_query}...")
+        try:
+            if chosen_tool == "news":
+                from research.tools.research_web import news_search
+                tool_output = news_search.invoke({"topic": tool_query, "max_results": 4})
+            elif chosen_tool == "github":
+                from research.tools.research_web import github_search
+                tool_output = github_search.invoke({"query": tool_query, "max_results": 4})
+            elif chosen_tool == "read":
+                from research.tools.research_web import web_reader
+                tool_output = web_reader.invoke({"url": tool_query, "max_chars": 4500})
+            else:  # 'web'
+                res, tool_err = tools.web_search(tool_query, 4)
+                tool_output = tools.format_results(res, 4000) if res else ""
+        except Exception as e:
+            tool_err = str(e)
 
-    hist_text = "\n".join(f"{r}: {t}" for r, t in history[-6:])
-    prompt = (f"Conversation so far:\n{fit(hist_text, 2500)}\n\n" if hist_text else "") + \
-             (f"Web results:\n{web_content}\n\n" if web_content else "") + f"User: {query}"
+    # 2) Assemble True Multi-Turn Dialogue Memory
+    messages = [{"role": "system", "content": SYS_CHAT}]
+    for speaker, text in history:
+        role_tag = "user" if speaker in ("User", "user", "Human") else "assistant"
+        messages.append({"role": role_tag, "content": text})
 
-    ans = chat("main", SYS_CHAT, prompt, task="chat", temperature=0.5,
+    current_turn_prompt = query
+    if tool_output:
+        current_turn_prompt = f"Live Research Tool Evidence ({chosen_tool.upper()}):\n{tool_output}\n\nUser Question: {query}"
+    messages.append({"role": "user", "content": current_turn_prompt})
+
+    ans = chat("main", SYS_CHAT, messages=messages, task="chat", temperature=0.4,
                stream=bool(on_token), on_token=on_token)
     return {
         "answer": ans,
-        "search_query": query_to_search,
-        "web_results": web_content,
-        "web_error": web_err
+        "search_query": tool_query,
+        "tool_used": chosen_tool,
+        "web_results": tool_output,
+        "web_error": tool_err
     }
 
 
