@@ -751,12 +751,16 @@ elif nav == "🚀 Autonomous Code Synthesizer":
         with st.spinner("Synthesizing multi-file codebase with dual local models..."):
             try:
                 progress_bar.progress(15, text="Node 1: Checking research & architecture requirements...")
-                res = main.code_turn(
-                    request=task_prompt,
-                    force_fresh=True,
-                    research=mode_val,
-                    progress_cb=on_step_ui,
-                )
+                import importlib
+                importlib.reload(main)
+                import inspect
+                sig = inspect.signature(main.code_turn)
+                call_kwargs = {"request": task_prompt, "force_fresh": True}
+                if "research" in sig.parameters:
+                    call_kwargs["research"] = mode_val
+                if "progress_cb" in sig.parameters:
+                    call_kwargs["progress_cb"] = on_step_ui
+                res = main.code_turn(**call_kwargs)
                 progress_bar.progress(100, text="Pipeline Execution Complete!")
                 status_box.markdown('<div class="chip chip-green">✅ Autonomous Execution Complete!</div>', unsafe_allow_html=True)
                 
