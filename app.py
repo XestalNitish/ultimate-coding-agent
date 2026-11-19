@@ -1,9 +1,9 @@
-"""Ultimate Coding Agent & Enterprise Autonomous AI Engineering Suite.
+"""X-ESTAL NITISH | Ultimate Coding Agent & Enterprise Autonomous AI Engineering Suite.
 
 Mission Control Dashboard with Claymorphic + Glassmorphic Neural AI Design.
-Engineered by Nitish Kumar (XestalNitish).
+Engineered by X-ESTAL NITISH (Nitish Kumar).
 Observability: LangSmith Production Telemetry (Project: ultimate-coding-agent)
-Local Backend: Dual local LLM topology (Spark 2.5 on 8082, Spark 2.6 on 8084)
+Backend: Dual Local LLM Topology (Spark 2.5 on 8082, Spark 2.6 on 8084)
 """
 from __future__ import annotations
 
@@ -19,8 +19,8 @@ import streamlit as st
 
 # Configure page settings
 st.set_page_config(
-    page_title="Ultimate Coding Agent | Neural Mission Control",
-    page_icon="🧠",
+    page_title="X-ESTAL NITISH | Ultimate Coding Agent",
+    page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -39,66 +39,192 @@ try:
     import start_servers
     import checkpoint_manager
 except Exception as e:
-    st.error(f"Critical initialization error: {e}")
+    st.error(f"Initialization error: {e}")
 
 # ============================================================================
-# CLAYMORPHISM + GLASSMORPHISM + NEURAL AI STYLING
+# COMPREHENSIVE CYBER / CLAYMORPHIC / GLASSMORPHIC THEME OVERRIDE
 # ============================================================================
 st.markdown("""
 <style>
-    /* Dark Neural Cyber Base */
     @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
-    html, body, [class*="css"] {
-        font-family: 'Plus Jakarta Sans', sans-serif;
+    /* Global Typography & Deep Dark Background */
+    html, body, [class*="css"], .stApp {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+        background: radial-gradient(circle at 10% 10%, rgba(0, 240, 255, 0.05) 0%, transparent 45%),
+                    radial-gradient(circle at 90% 15%, rgba(139, 92, 246, 0.07) 0%, transparent 45%),
+                    radial-gradient(circle at 50% 90%, rgba(16, 185, 129, 0.04) 0%, transparent 50%),
+                    #070a13 !important;
+        color: #f1f5f9 !important;
     }
-    
+
     code, pre, .stCode, [data-testid="stCodeBlock"] {
         font-family: 'JetBrains Mono', monospace !important;
     }
 
-    .stApp {
-        background: radial-gradient(circle at 15% 10%, rgba(14, 165, 233, 0.08) 0%, transparent 40%),
-                    radial-gradient(circle at 85% 20%, rgba(139, 92, 246, 0.09) 0%, transparent 45%),
-                    radial-gradient(circle at 50% 85%, rgba(16, 185, 129, 0.06) 0%, transparent 50%),
-                    #070a14;
-        color: #f1f5f9;
+    /* Force Dark Theme on Sidebar */
+    [data-testid="stSidebar"], section[data-testid="stSidebar"] > div {
+        background: linear-gradient(180deg, #090e1b 0%, #060913 100%) !important;
+        border-right: 1px solid rgba(0, 240, 255, 0.12) !important;
+        color: #f1f5f9 !important;
+    }
+
+    /* Brand Header Box in Sidebar */
+    .brand-box {
+        background: linear-gradient(135deg, rgba(20, 32, 54, 0.7), rgba(10, 16, 30, 0.9));
+        border: 1px solid rgba(0, 240, 255, 0.2);
+        border-radius: 16px;
+        padding: 16px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.1);
+    }
+    .brand-title {
+        font-size: 16px;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        background: linear-gradient(135deg, #00f0ff 0%, #a855f7 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 2px;
+    }
+    .brand-subtitle {
+        font-size: 11px;
+        color: #94a3b8;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+    }
+    .brand-badge {
+        display: inline-block;
+        padding: 3px 8px;
+        background: rgba(0, 240, 255, 0.12);
+        border: 1px solid rgba(0, 240, 255, 0.3);
+        border-radius: 6px;
+        color: #00f0ff;
+        font-size: 10px;
+        font-weight: 700;
+        margin-top: 8px;
+    }
+
+    /* Sleek Navigation Radio - Transform into SaaS Menu Pills */
+    [data-testid="stRadio"] > div {
+        gap: 6px !important;
+    }
+    [data-testid="stRadio"] div[role="radiogroup"] > label div:first-child {
+        display: none !important;
+    }
+    [data-testid="stRadio"] div[role="radiogroup"] > label {
+        background: rgba(15, 23, 42, 0.65) !important;
+        border: 1px solid rgba(255, 255, 255, 0.06) !important;
+        border-radius: 12px !important;
+        padding: 10px 14px !important;
+        color: #94a3b8 !important;
+        font-size: 13px !important;
+        font-weight: 500 !important;
+        transition: all 0.2s ease !important;
+        cursor: pointer !important;
+        display: flex !important;
+        align-items: center !important;
+        margin-bottom: 4px !important;
+    }
+    [data-testid="stRadio"] div[role="radiogroup"] > label:hover {
+        background: rgba(26, 38, 64, 0.8) !important;
+        border-color: rgba(0, 240, 255, 0.3) !important;
+        color: #f8fafc !important;
+        transform: translateX(3px) !important;
+    }
+    [data-testid="stRadio"] div[role="radiogroup"] > label:has(input:checked) {
+        background: linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(168, 85, 247, 0.15)) !important;
+        border: 1px solid #00f0ff !important;
+        color: #00f0ff !important;
+        font-weight: 700 !important;
+        box-shadow: 0 0 16px rgba(0, 240, 255, 0.25) !important;
+    }
+
+    /* Top Navigation Bar */
+    .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(13, 20, 36, 0.7);
+        border: 1px solid rgba(0, 240, 255, 0.15);
+        border-radius: 16px;
+        padding: 14px 20px;
+        margin-bottom: 24px;
+        backdrop-filter: blur(16px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    .top-bar-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .top-bar-brand {
+        font-weight: 800;
+        font-size: 16px;
+        color: #f8fafc;
+        letter-spacing: -0.01em;
+    }
+    .top-bar-brand span {
+        color: #00f0ff;
+    }
+    .top-chips {
+        display: flex;
+        gap: 8px;
+    }
+    .chip {
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 600;
+    }
+    .chip-cyan {
+        background: rgba(0, 240, 255, 0.1);
+        border: 1px solid rgba(0, 240, 255, 0.3);
+        color: #38bdf8;
+    }
+    .chip-purple {
+        background: rgba(168, 85, 247, 0.1);
+        border: 1px solid rgba(168, 85, 247, 0.3);
+        color: #c084fc;
+    }
+    .chip-green {
+        background: rgba(34, 197, 94, 0.1);
+        border: 1px solid rgba(34, 197, 94, 0.3);
+        color: #4ade80;
     }
 
     /* Claymorphic Card */
     .clay-card {
-        background: linear-gradient(135deg, rgba(22, 32, 54, 0.75), rgba(11, 17, 32, 0.9));
+        background: linear-gradient(135deg, rgba(20, 30, 50, 0.8), rgba(10, 16, 30, 0.95));
         border-radius: 20px;
         box-shadow: 8px 8px 24px rgba(0, 0, 0, 0.65),
-                    -4px -4px 16px rgba(255, 255, 255, 0.035),
-                    inset 1px 1px 2px rgba(255, 255, 255, 0.1),
+                    -4px -4px 16px rgba(255, 255, 255, 0.03),
+                    inset 1px 1px 2px rgba(255, 255, 255, 0.08),
                     inset -2px -2px 6px rgba(0, 0, 0, 0.45);
-        border: 1px solid rgba(0, 240, 255, 0.12);
+        border: 1px solid rgba(0, 240, 255, 0.14);
         padding: 24px;
         backdrop-filter: blur(20px) saturate(180%);
-        margin-bottom: 20px;
+        margin-bottom: 22px;
         transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
-
     .clay-card:hover {
-        transform: translateY(-3px);
-        border-color: rgba(0, 240, 255, 0.3);
+        border-color: rgba(0, 240, 255, 0.35);
         box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.75),
-                    -5px -5px 20px rgba(0, 240, 255, 0.06),
-                    inset 1px 1px 3px rgba(255, 255, 255, 0.15);
+                    -5px -5px 20px rgba(0, 240, 255, 0.08);
+        transform: translateY(-2px);
     }
 
-    /* Clay Metric Tile */
+    /* Clay Metric Card */
     .clay-metric {
-        background: linear-gradient(145deg, rgba(26, 38, 64, 0.8), rgba(13, 20, 36, 0.95));
+        background: linear-gradient(145deg, rgba(24, 35, 60, 0.85), rgba(12, 18, 34, 0.95));
         border-radius: 18px;
         padding: 18px 22px;
-        box-shadow: 6px 6px 18px rgba(0, 0, 0, 0.55),
-                    -3px -3px 12px rgba(255, 255, 255, 0.04),
-                    inset 1px 1px 2px rgba(255, 255, 255, 0.1),
-                    inset -2px -2px 5px rgba(0, 0, 0, 0.4);
-        border: 1px solid rgba(56, 189, 248, 0.15);
-        margin-bottom: 14px;
+        box-shadow: 6px 6px 18px rgba(0, 0, 0, 0.6),
+                    -3px -3px 12px rgba(255, 255, 255, 0.035),
+                    inset 1px 1px 2px rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(0, 240, 255, 0.15);
+        margin-bottom: 16px;
     }
     .clay-metric .label {
         font-size: 11px;
@@ -117,54 +243,16 @@ st.markdown("""
     .clay-metric .sub {
         font-size: 12px;
         font-weight: 500;
-        color: #38bdf8;
+        color: #00f0ff;
         margin-top: 4px;
-    }
-
-    /* Glassmorphic Badge */
-    .glass-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 6px 14px;
-        border-radius: 30px;
-        font-size: 12px;
-        font-weight: 600;
-        letter-spacing: 0.02em;
-        background: rgba(15, 23, 42, 0.65);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(12px);
-        margin-right: 8px;
-        margin-bottom: 8px;
-    }
-    .glass-badge-cyan {
-        color: #38bdf8;
-        border-color: rgba(56, 189, 248, 0.35);
-        background: rgba(14, 165, 233, 0.12);
-    }
-    .glass-badge-purple {
-        color: #c084fc;
-        border-color: rgba(192, 132, 252, 0.35);
-        background: rgba(168, 85, 247, 0.12);
-    }
-    .glass-badge-green {
-        color: #4ade80;
-        border-color: rgba(74, 222, 128, 0.35);
-        background: rgba(34, 197, 94, 0.12);
-    }
-    .glass-badge-amber {
-        color: #fbbf24;
-        border-color: rgba(251, 191, 36, 0.35);
-        background: rgba(245, 158, 11, 0.12);
     }
 
     /* Live Pulse Indicator */
     .pulse-dot {
-        width: 9px;
-        height: 9px;
+        width: 8px;
+        height: 8px;
         border-radius: 50%;
         display: inline-block;
-        margin-right: 6px;
     }
     .pulse-green {
         background-color: #10b981;
@@ -178,13 +266,13 @@ st.markdown("""
     }
     .pulse-red {
         background-color: #ef4444;
-        box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+        box-shadow: 0 0 8px rgba(239, 68, 68, 0.7);
     }
 
     /* Terminal Console */
     .neural-console {
-        background: #090d16;
-        border: 1px solid rgba(56, 189, 248, 0.2);
+        background: #090e18;
+        border: 1px solid rgba(0, 240, 255, 0.2);
         border-radius: 14px;
         padding: 16px 20px;
         color: #38bdf8;
@@ -195,37 +283,57 @@ st.markdown("""
         overflow-x: auto;
     }
 
-    /* Header title gradient */
-    .neural-title {
-        background: linear-gradient(135deg, #ffffff 20%, #38bdf8 60%, #c084fc 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+    /* Gradient Headers */
+    .hero-title {
+        font-size: 28px;
         font-weight: 800;
         letter-spacing: -0.02em;
+        background: linear-gradient(135deg, #ffffff 10%, #00f0ff 60%, #c084fc 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 6px;
+    }
+    .hero-subtitle {
+        color: #94a3b8;
+        font-size: 14px;
+        margin-bottom: 20px;
     }
 
-    /* Streamlit overrides for clay buttons */
-    div.stButton > button:first-child {
-        background: linear-gradient(135deg, #1e293b, #0f172a);
-        color: #f8fafc;
-        border-radius: 12px;
-        border: 1px solid rgba(56, 189, 248, 0.3);
-        box-shadow: 4px 4px 12px rgba(0,0,0,0.4), -2px -2px 8px rgba(255,255,255,0.03);
-        font-weight: 600;
-        transition: all 0.2s ease;
+    /* Buttons override */
+    div.stButton > button {
+        background: linear-gradient(135deg, #16243d 0%, #0c1527 100%) !important;
+        border: 1px solid rgba(0, 240, 255, 0.25) !important;
+        border-radius: 12px !important;
+        color: #f1f5f9 !important;
+        font-weight: 600 !important;
+        box-shadow: 4px 4px 12px rgba(0,0,0,0.5), -2px -2px 8px rgba(255,255,255,0.03), inset 1px 1px 2px rgba(255,255,255,0.08) !important;
+        padding: 8px 18px !important;
+        transition: all 0.2s ease !important;
     }
-    div.stButton > button:first-child:hover {
-        border-color: #38bdf8;
-        box-shadow: 0 0 16px rgba(56, 189, 248, 0.4);
-        transform: translateY(-1px);
-        color: #38bdf8;
+    div.stButton > button:hover {
+        border-color: #00f0ff !important;
+        color: #00f0ff !important;
+        box-shadow: 0 0 18px rgba(0, 240, 255, 0.4) !important;
+        transform: translateY(-2px) !important;
+    }
+
+    /* Inputs & Selectboxes */
+    .stTextInput > div > div, .stTextArea > div > div, .stSelectbox > div > div {
+        background-color: rgba(14, 21, 37, 0.75) !important;
+        border: 1px solid rgba(0, 240, 255, 0.18) !important;
+        border-radius: 12px !important;
+        color: #f1f5f9 !important;
+    }
+    .stTextInput > div > div:focus-within, .stTextArea > div > div:focus-within {
+        border-color: #00f0ff !important;
+        box-shadow: 0 0 12px rgba(0, 240, 255, 0.3) !important;
     }
 </style>
 """, unsafe_allow_html=True)
 
 
 # ============================================================================
-# HARDWARE & SERVER TELEMETRY CONTROLLERS
+# SERVER CONTROL & TELEMETRY
 # ============================================================================
 
 def check_server(role: str) -> bool:
@@ -242,7 +350,7 @@ def auto_start_servers_ui(roles: list[str] | None = None) -> bool:
     if not needed:
         return True
     
-    with st.status(f"⚡ Auto-Starting Local LLM Servers: {needed}...", expanded=True) as status:
+    with st.status(f"⚡ Auto-Starting Local LLM Daemons: {needed}...", expanded=True) as status:
         st.write("Initializing model weights & memory locking (--mlock)...")
         log_holder = st.empty()
         
@@ -251,34 +359,29 @@ def auto_start_servers_ui(roles: list[str] | None = None) -> bool:
 
         success = start_servers.ensure_servers(needed, wait=True, timeout=150, progress_cb=progress_update)
         if success:
-            status.update(label="✅ Local LLM Servers Online & Ready!", state="complete", expanded=False)
+            status.update(label="✅ Local LLM Daemons Online & Ready!", state="complete", expanded=False)
             return True
         else:
-            status.update(label="⚠️ Server startup delayed. Check server logs.", state="error", expanded=True)
+            status.update(label="⚠️ Server startup delayed. Check logs.", state="error", expanded=True)
             return False
 
 
-def load_validation_report() -> dict:
-    rep_path = ROOT / "output" / "real_world_agents_validation_report.json"
-    if rep_path.exists():
-        try:
-            with open(rep_path, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception:
-            pass
-    return {}
-
-
 # ============================================================================
-# SIDEBAR NAVIGATION & MISSION HARDWARE STATUS
+# SIDEBAR NAVIGATION & MISSION CONTROL HARDWARE STATUS
 # ============================================================================
 
 with st.sidebar:
-    st.markdown('<h2 class="neural-title" style="font-size:22px; margin-bottom:2px;">🧠 Ultimate Coding Agent</h2>', unsafe_allow_html=True)
-    st.caption("Enterprise Autonomous Multi-Agent Suite & Observability")
-    st.markdown("**Lead Architect:** [Nitish Kumar](https://github.com/XestalNitish)")
+    st.markdown("""
+    <div class="brand-box">
+        <div class="brand-title">⚡ X-ESTAL NITISH</div>
+        <div class="brand-subtitle">ULTIMATE CODING AGENT</div>
+        <div class="brand-badge">Autonomous Software Engineer</div>
+    </div>
+    """, unsafe_allow_html=True)
     
-    st.markdown("---")
+    st.caption("**Lead Architect:** [X-ESTAL NITISH (Nitish Kumar)](https://github.com/XestalNitish)")
+    
+    st.markdown("<div style='height:8px;'></div>", unsafe_allow_html=True)
     nav = st.radio(
         "Navigation Matrix",
         [
@@ -295,39 +398,56 @@ with st.sidebar:
     )
     
     st.markdown("---")
-    st.markdown("#### ⚡ Hardware & Model Daemons")
+    st.markdown("#### ⚡ Local Hardware Daemons")
     
     s1_ok = check_server("main")
     s2_ok = check_server("writer")
     
-    col_s1, col_s2 = st.columns(2)
-    with col_s1:
-        if s1_ok:
-            st.markdown('<div class="glass-badge glass-badge-green"><span class="pulse-dot pulse-green"></span>Spark 2.5: UP</div>', unsafe_allow_html=True)
-        else:
-            st.markdown('<div class="glass-badge glass-badge-amber"><span class="pulse-dot pulse-red"></span>Spark 2.5: OFF</div>', unsafe_allow_html=True)
-    with col_s2:
-        if s2_ok:
-            st.markdown('<div class="glass-badge glass-badge-green"><span class="pulse-dot pulse-green"></span>Spark 2.6: UP</div>', unsafe_allow_html=True)
-        else:
-            st.markdown('<div class="glass-badge glass-badge-amber"><span class="pulse-dot pulse-red"></span>Spark 2.6: OFF</div>', unsafe_allow_html=True)
+    c_s1, c_s2 = st.columns(2)
+    with c_s1:
+        color = "chip-green" if s1_ok else "chip-purple"
+        p_class = "pulse-green" if s1_ok else "pulse-red"
+        st.markdown(f'<div class="chip {color}"><span class="pulse-dot {p_class}"></span> S1: {"UP" if s1_ok else "OFF"}</div>', unsafe_allow_html=True)
+    with c_s2:
+        color = "chip-green" if s2_ok else "chip-purple"
+        p_class = "pulse-green" if s2_ok else "pulse-red"
+        st.markdown(f'<div class="chip {color}"><span class="pulse-dot {p_class}"></span> S2: {"UP" if s2_ok else "OFF"}</div>', unsafe_allow_html=True)
 
+    st.markdown("<div style='height:6px;'></div>", unsafe_allow_html=True)
     c_b1, c_b2 = st.columns(2)
     with c_b1:
-        if st.button("⚡ Start Servers", use_container_width=True):
+        if st.button("⚡ Start", use_container_width=True):
             auto_start_servers_ui(["main", "writer"])
             st.rerun()
     with c_b2:
-        if st.button("🛑 Stop Servers", use_container_width=True):
+        if st.button("🛑 Stop", use_container_width=True):
             start_servers.stop_servers()
             st.info("Servers stopped.")
             time.sleep(1)
             st.rerun()
 
-    st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("**LangSmith:** `Connected (ultimate-coding-agent)`")
-    st.markdown("**RAG Index:** `ChromaDB + BM25 (8 Libraries)`")
-    st.markdown("**Environment:** `Python 3.14.3 (.venv)`")
+    st.markdown("---")
+    st.caption("Telemetry: `LangSmith (ultimate-coding-agent)`")
+    st.caption("Vector DB: `ChromaDB + BM25 (8 Libraries)`")
+    st.caption("Engine: `Dual Spark 4B Topology`")
+
+
+# ============================================================================
+# TOP BRAND BAR
+# ============================================================================
+st.markdown(f"""
+<div class="top-bar">
+    <div class="top-bar-left">
+        <span class="pulse-dot pulse-green"></span>
+        <div class="top-bar-brand">X-ESTAL NITISH <span>/</span> Mission Control</div>
+    </div>
+    <div class="top-chips">
+        <span class="chip chip-cyan">Dual 4B Local LLM</span>
+        <span class="chip chip-purple">LangSmith Tracing: ON</span>
+        <span class="chip chip-green">Inference Cost: $0.00</span>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 
 # ============================================================================
@@ -335,23 +455,38 @@ with st.sidebar:
 # ============================================================================
 
 if nav == "💬 Neural Chat (AI + Live Web)":
-    st.markdown('<h1 class="neural-title">💬 Neural Assistant & Live Web Agent</h1>', unsafe_allow_html=True)
+    st.markdown('<div class="hero-title">💬 Neural Assistant & Live Web Agent</div>', unsafe_allow_html=True)
     st.markdown(
-        "Direct interactive chat powered by local **Spark 2.5 (4B)** with autonomous search intent detection "
-        "and real-time web synthesis. Connected directly via `main.chat_turn`."
+        '<div class="hero-subtitle">Interactive conversational engineering powered by local <b>Spark 2.5 (4B)</b> '
+        'with autonomous web intent analysis. Routed via <code>main.chat_turn</code>.</div>',
+        unsafe_allow_html=True
     )
 
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = []
 
-    # Chat controls
+    # Chat controls bar
     col_ctrl1, col_ctrl2 = st.columns([3, 1])
     with col_ctrl1:
-        force_web = st.checkbox("🌐 Force Web Search for this query (`/web` mode)", value=False)
+        force_web = st.checkbox("🌐 Force Web Search for this turn (`/web` mode)", value=False)
     with col_ctrl2:
-        if st.button("🗑️ Clear Chat History", use_container_width=True):
+        if st.button("🗑️ Clear History", use_container_width=True):
             st.session_state.chat_history = []
             st.rerun()
+
+    # Welcome Card if conversation is empty
+    if not st.session_state.chat_history:
+        st.markdown("""
+        <div class="clay-card" style="border-color: rgba(0, 240, 255, 0.25);">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+                <span style="font-size:24px;">⚡</span>
+                <div>
+                    <h3 style="margin:0; font-size:18px; color:#f8fafc;">Welcome to X-ESTAL AI Workspace</h3>
+                    <p style="margin:0; font-size:13px; color:#94a3b8;">Ask architecture questions, debug tracebacks, or request live web research.</p>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
     # Display past conversation
     for sender, msg, metadata in st.session_state.chat_history:
@@ -362,18 +497,18 @@ if nav == "💬 Neural Chat (AI + Live Web)":
                     st.text(metadata.get("web_results", "No snippet stored."))
 
     # Chat input box
-    user_input = st.chat_input("Ask anything, prompt for coding advice, or request live info...")
+    user_input = st.chat_input("Prompt X-ESTAL AI for code, debugging, or real-time web research...")
 
-    # Preset suggestions
-    st.markdown("<br><p style='font-size:12px; color:#94a3b8; font-weight:600;'>QUICK PROMPT SYNAPSES:</p>", unsafe_allow_html=True)
+    # Quick prompt pills
+    st.markdown("<p style='font-size:12px; color:#94a3b8; font-weight:700; margin-top:16px;'>QUICK PROMPTS:</p>", unsafe_allow_html=True)
     q_col1, q_col2, q_col3 = st.columns(3)
     preset_query = None
     with q_col1:
-        if st.button("🔍 Explain 6-Node LangGraph Pipeline", key="q1"):
+        if st.button("🔍 6-Node LangGraph Pipeline", key="q1"):
             preset_query = "Explain how the LangGraph 6-node state machine handles AST security checks and self-healing retries."
     with q_col2:
         if st.button("⚡ Spark 2.5 vs 2.6 Dual Routing", key="q2"):
-            preset_query = "Why does Ultimate Coding Agent split analytical reasoning (Spark 2.5) from code synthesis (Spark 2.6)?"
+            preset_query = "Why does X-ESTAL NITISH split analytical reasoning (Spark 2.5) from code synthesis (Spark 2.6)?"
     with q_col3:
         if st.button("📊 P50 vs P99 Tail Latency", key="q3"):
             preset_query = "What is the engineering tradeoff between P50 fast-path latency and P99 tail latency in self-healing agents?"
@@ -381,7 +516,6 @@ if nav == "💬 Neural Chat (AI + Live Web)":
     final_query = user_input or preset_query
 
     if final_query:
-        # Check and auto-start servers
         auto_start_servers_ui(["main"])
         
         with st.chat_message("user"):
@@ -389,7 +523,7 @@ if nav == "💬 Neural Chat (AI + Live Web)":
 
         with st.chat_message("assistant"):
             message_placeholder = st.empty()
-            with st.spinner("Neural processing & web intent analysis..."):
+            with st.spinner("Processing neural inference & web intent..."):
                 try:
                     res = main.chat_turn(
                         query=final_query,
@@ -418,15 +552,16 @@ if nav == "💬 Neural Chat (AI + Live Web)":
 # ============================================================================
 
 elif nav == "📚 Hybrid RAG Intelligence":
-    st.markdown('<h1 class="neural-title">📚 Hybrid RAG Knowledge Engine</h1>', unsafe_allow_html=True)
+    st.markdown('<div class="hero-title">📚 Hybrid RAG Knowledge Engine</div>', unsafe_allow_html=True)
     st.markdown(
-        "Semantic Vector Search (ChromaDB + BGE-Small) + BM25 Lexical Keyword Ranking + "
-        "**Post-Retrieval Local LLM Synthesis (`Spark 2.5 4B`)** for grounded documentation answers with citations."
+        '<div class="hero-subtitle">Dense Vector Search (ChromaDB + BGE-Small) + BM25 Lexical Ranking + '
+        '<b>Post-Retrieval Local LLM Synthesis (Spark 2.5 4B)</b> for grounded documentation answers with citations.</div>',
+        unsafe_allow_html=True
     )
 
     libs = rag.libraries() if "rag" in sys.modules else []
     
-    col_l1, col_l2, col_l3 = st.columns([2, 1, 1])
+    col_l1, col_l2 = st.columns([2, 1])
     with col_l1:
         target_lib = st.selectbox(
             "Filter by Documentation Library",
@@ -434,39 +569,33 @@ elif nav == "📚 Hybrid RAG Intelligence":
             index=0,
         )
     with col_l2:
-        top_k = st.slider("Top Documents (k)", min_value=1, max_value=8, value=4)
-    with col_l3:
-        st.markdown(f"<br><span class='glass-badge glass-badge-cyan'>Indexed: {len(libs)} Libs</span>", unsafe_allow_html=True)
+        top_k = st.slider("Top Relevant Chunks (k)", min_value=1, max_value=8, value=4)
 
     rag_query = st.text_input(
-        "Documentation Query",
-        placeholder="e.g. How to define state in LangGraph StateGraph, or FastAPI dependency injection",
+        "Technical Documentation Query",
+        placeholder="e.g. How to define state in LangGraph StateGraph, or FastAPI dependency injection pattern",
     )
 
-    c_s1, c_s2 = st.columns([1, 4])
-    with c_s1:
-        run_rag = st.button("🔍 Search & Synthesize", use_container_width=True)
-
-    if run_rag and rag_query:
+    if st.button("🔍 Search & Synthesize Grounded Answer", use_container_width=True) and rag_query:
         auto_start_servers_ui(["main"])
         selected_lib = None if target_lib == "All Indexed Libraries" else target_lib
         
-        with st.spinner("Querying vector index, retrieving chunks, and generating synthesized answer..."):
+        with st.spinner("Retrieving vector embeddings and synthesizing answer via Spark 2.5 4B..."):
             res = main.rag_turn(query=rag_query, library=selected_lib, k=top_k)
             
             st.markdown('<div class="clay-card">', unsafe_allow_html=True)
-            st.markdown("### 🤖 Synthesized Documentation Answer (Spark 2.5 4B)")
+            st.markdown("### 🤖 Synthesized Grounded Answer (Spark 2.5 4B)")
             st.markdown(res["answer"])
             st.markdown("</div>", unsafe_allow_html=True)
 
             hits = res.get("hits", [])
-            st.markdown(f"#### 📑 Retrieved Document Excerpts ({len(hits)} Matches)")
+            st.markdown(f"#### 📑 Retrieved Source Excerpts ({len(hits)} Matches)")
             if hits:
                 for i, hit in enumerate(hits, 1):
                     src_file = hit["source"].replace("\\", "/").split("/")[-1]
                     with st.expander(f"[{i}] {hit['library']} (v{hit['version']}) — {src_file} [Page {hit['page']}] - {hit.get('heading') or 'Section'}"):
                         st.markdown(f"**Score:** `{hit.get('score', 0):.4f}` | **Heading:** `{hit.get('heading') or 'None'}`")
-                        st.markdown(f"```text\n{hit['text']}\n```")
+                        st.code(hit['text'], language="text")
             else:
                 st.info("No matching chunks found in the index.")
 
@@ -476,9 +605,11 @@ elif nav == "📚 Hybrid RAG Intelligence":
 # ============================================================================
 
 elif nav == "🚀 Autonomous Code Synthesizer":
-    st.markdown('<h1 class="neural-title">🚀 Autonomous Code Dev Pipeline</h1>', unsafe_allow_html=True)
+    st.markdown('<div class="hero-title">🚀 Autonomous Code Dev Pipeline</div>', unsafe_allow_html=True)
     st.markdown(
-        "Orchestrates dual local 4B models across **Planner → Writer → AST Security Gate → Sandboxed Subprocess Executor → Self-Healing Debugger → Reviewer**."
+        '<div class="hero-subtitle">Multi-Agent Code Engine by <b>X-ESTAL NITISH</b>. '
+        'Orchestrates <b>Planner → Writer → AST Security Gate → Sandboxed Executor → Self-Healing Debugger → Reviewer</b>.</div>',
+        unsafe_allow_html=True
     )
 
     # Check for active checkpoint
@@ -491,27 +622,23 @@ elif nav == "🚀 Autonomous Code Synthesizer":
     if active_cp:
         st.markdown(f"""
         <div class="clay-card" style="border-color: rgba(245, 158, 11, 0.4);">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-                <div>
-                    <span class="glass-badge glass-badge-amber">ACTIVE CHECKPOINT DETECTED</span>
-                    <h4 style="margin:8px 0 4px 0; color:#f8fafc;">Task: {active_cp.get('task', 'Unknown')}</h4>
-                    <span style="font-size:12px; color:#94a3b8;">Stage: <b>{active_cp.get('stage')}</b> | Saved Files: <b>{active_cp.get('files_count', 0)}</b></span>
-                </div>
-            </div>
+            <span class="chip chip-purple">ACTIVE CHECKPOINT DETECTED</span>
+            <h4 style="margin:8px 0 4px 0; color:#f8fafc;">Task: {active_cp.get('task', 'Unknown')}</h4>
+            <span style="font-size:12px; color:#94a3b8;">Stage: <b>{active_cp.get('stage')}</b> | Files Saved: <b>{active_cp.get('files_count', 0)}</b></span>
         </div>
         """, unsafe_allow_html=True)
         
         c_cp1, c_cp2 = st.columns(2)
         with c_cp1:
-            resume_btn = st.button("🔄 Resume Previous Incomplete Task", use_container_width=True)
+            resume_btn = st.button("🔄 Resume Interrupted Session", use_container_width=True)
         with c_cp2:
-            discard_btn = st.button("🗑️ Archive Checkpoint & Start Fresh", use_container_width=True)
+            discard_btn = st.button("🗑️ Archive & Start Fresh Task", use_container_width=True)
         
         if resume_btn:
             auto_start_servers_ui(["main", "writer"])
-            with st.spinner("Resuming pipeline from last validated checkpoint..."):
+            with st.spinner("Resuming pipeline from last checkpoint..."):
                 res = main.code_turn(request="", resume_checkpoint=active_cp)
-                st.success("Task completed!")
+                st.success("Session completed!")
                 st.markdown(res.get("summary", ""))
         
         if discard_btn:
@@ -519,24 +646,17 @@ elif nav == "🚀 Autonomous Code Synthesizer":
             st.info("Checkpoint archived to history.")
             st.rerun()
 
-    st.markdown("### 🛠️ New Autonomous Engineering Task")
+    st.markdown("### 🛠️ New Autonomous Engineering Specification")
     task_prompt = st.text_area(
         "Software Specification Prompt",
         height=130,
         placeholder="e.g. Build an asynchronous high-throughput REST API with FastAPI, JWT authentication, SQLite, and pytest test suite.",
     )
 
-    c_opt1, c_opt2, c_opt3 = st.columns([1, 1, 2])
-    with c_opt1:
-        run_pipeline_btn = st.button("🚀 Launch Autonomous Pipeline", use_container_width=True)
-
-    if run_pipeline_btn and task_prompt:
+    if st.button("🚀 Launch Autonomous Multi-Agent Pipeline", use_container_width=True) and task_prompt:
         auto_start_servers_ui(["main", "writer"])
         
-        # Display progress animation
         progress_bar = st.progress(0, text="Initializing state machine...")
-        status_box = st.empty()
-
         with st.spinner("Synthesizing multi-file codebase with dual local models..."):
             try:
                 progress_bar.progress(20, text="Node 1/6: Planner (Spark 2.5) decomposing requirements...")
@@ -544,7 +664,7 @@ elif nav == "🚀 Autonomous Code Synthesizer":
                 progress_bar.progress(100, text="Pipeline Execution Complete!")
                 
                 st.markdown('<div class="clay-card">', unsafe_allow_html=True)
-                st.markdown("### 📦 Pipeline Output Summary")
+                st.markdown("### 📦 Synthesized Repository Output")
                 st.markdown(res.get("summary", "Done"))
                 st.markdown("</div>", unsafe_allow_html=True)
             except Exception as e:
@@ -579,24 +699,25 @@ elif nav == "🚀 Autonomous Code Synthesizer":
 # ============================================================================
 
 elif nav == "🌐 Deep Web Research Agent":
-    st.markdown('<h1 class="neural-title">🌐 Deep Web Research Agent</h1>', unsafe_allow_html=True)
+    st.markdown('<div class="hero-title">🌐 Deep Web Research Agent</div>', unsafe_allow_html=True)
     st.markdown(
-        "Autonomous recursive research engine inspired by OpenAI Deep Research. "
-        "Formulates search queries, extracts facts via Playwright/Tavily, audits for hallucinations, and drafts comprehensive reports."
+        '<div class="hero-subtitle">Autonomous recursive market intelligence & whitepaper engine. '
+        'Formulates multi-angle search queries, fact-checks claims, and synthesizes executive dossiers.</div>',
+        unsafe_allow_html=True
     )
 
     research_topic = st.text_input(
-        "Enter Research Topic or Competitive Analysis Query",
+        "Enter Research Topic or Competitive Intelligence Query",
         placeholder="e.g. Next-generation local LLM inference engines and quantization benchmarks in late 2026",
     )
 
-    if st.button("🔬 Start Autonomous Deep Research", use_container_width=True) and research_topic:
+    if st.button("🔬 Execute Deep Research Whitepaper", use_container_width=True) and research_topic:
         auto_start_servers_ui(["main"])
-        with st.spinner("Exploring web, auditing findings, and drafting technical whitepaper..."):
+        with st.spinner("Scraping web sources, validating citations, and compiling dossier..."):
             try:
                 res = main.research_turn(research_topic)
                 st.markdown('<div class="clay-card">', unsafe_allow_html=True)
-                st.markdown("### 📄 Research Report")
+                st.markdown("### 📄 Research Report Dossier")
                 st.markdown(res.get("report", ""))
                 if res.get("saved_path"):
                     st.success(f"Report saved to disk: `{res['saved_path']}`")
@@ -610,10 +731,11 @@ elif nav == "🌐 Deep Web Research Agent":
 # ============================================================================
 
 elif nav == "🤖 Enterprise 5-Agent Suite":
-    st.markdown('<h1 class="neural-title">🤖 Enterprise 5-Agent Suite</h1>', unsafe_allow_html=True)
+    st.markdown('<div class="hero-title">🤖 Enterprise 5-Agent Suite</div>', unsafe_allow_html=True)
     st.markdown(
-        "Production multi-agent applications architected for enterprise problem domains, "
-        "each verified with automated unit tests and LangSmith tracing."
+        '<div class="hero-subtitle">Production multi-agent systems designed by <b>X-ESTAL NITISH</b>, '
+        'verified with automated unit test suites and LangSmith tracing.</div>',
+        unsafe_allow_html=True
     )
 
     agents = [
@@ -629,19 +751,15 @@ elif nav == "🤖 Enterprise 5-Agent Suite":
 
     st.markdown(f"""
     <div class="clay-card">
-        <span class="glass-badge glass-badge-purple">PRODUCTION MULTI-AGENT ARCHITECTURE</span>
+        <span class="chip chip-purple">ENTERPRISE SYSTEM ARCHITECTURE</span>
         <h3 style="color:#f8fafc; margin-top:8px;">{agent_info[0]}</h3>
         <p style="color:#94a3b8;">{agent_info[2]}</p>
-        <span style="font-size:12px; color:#38bdf8;">File: <code>{agent_info[1]}</code></span>
+        <span style="font-size:12px; color:#00f0ff;">File: <code>{agent_info[1]}</code></span>
     </div>
     """, unsafe_allow_html=True)
 
-    c_run1, c_run2 = st.columns([1, 2])
-    with c_run1:
-        execute_agent_btn = st.button("⚡ Run Agent Benchmark", use_container_width=True)
-
-    if execute_agent_btn:
-        with st.spinner(f"Executing self-test suite for {agent_info[0]}..."):
+    if st.button("⚡ Run Agent Benchmark Verification", use_container_width=True):
+        with st.spinner(f"Running automated test harness for {agent_info[0]}..."):
             proc = subprocess.run(
                 [str(PYTHON_EXE), str(ROOT / agent_info[1])],
                 capture_output=True,
@@ -649,7 +767,7 @@ elif nav == "🤖 Enterprise 5-Agent Suite":
                 cwd=str(ROOT),
             )
             if proc.returncode == 0:
-                st.success("✅ Execution Verified: All self-tests passed cleanly!")
+                st.success("✅ Verification Passed: Deterministic assertions confirmed!")
                 st.markdown(f'<div class="neural-console">{proc.stdout}</div>', unsafe_allow_html=True)
             else:
                 st.error("Execution encountered errors:")
@@ -665,10 +783,11 @@ elif nav == "🤖 Enterprise 5-Agent Suite":
 # ============================================================================
 
 elif nav == "📊 LangSmith Production Observability":
-    st.markdown('<h1 class="neural-title">📊 LangSmith Production Observability</h1>', unsafe_allow_html=True)
+    st.markdown('<div class="hero-title">📊 LangSmith Production Observability</div>', unsafe_allow_html=True)
     st.markdown(
-        "Production evaluation telemetry captured across **90–100 end-to-end benchmark runs** "
-        "on the `ultimate-coding-agent` project workspace."
+        '<div class="hero-subtitle">Production telemetry across <b>90–100 benchmark runs</b> '
+        'on project <code>ultimate-coding-agent</code> by <b>X-ESTAL NITISH</b>.</div>',
+        unsafe_allow_html=True
     )
 
     # Top KPI Metrics Cards in Claymorphism
@@ -701,7 +820,7 @@ elif nav == "📊 LangSmith Production Observability":
         st.markdown("""
         <div class="clay-metric">
             <div class="label">Total Cloud Cost</div>
-            <div class="value" style="color:#38bdf8;">$0.00</div>
+            <div class="value" style="color:#00f0ff;">$0.00</div>
             <div class="sub">100% Local Inference</div>
         </div>
         """, unsafe_allow_html=True)
@@ -717,10 +836,10 @@ elif nav == "📊 LangSmith Production Observability":
             <div style="margin-top:14px;">
                 <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
                     <span style="font-weight:600;">X-Estal-4B Dual Topology</span>
-                    <span style="color:#38bdf8; font-weight:700;">197 calls (100%)</span>
+                    <span style="color:#00f0ff; font-weight:700;">197 calls (100%)</span>
                 </div>
                 <div style="background:#1e293b; border-radius:10px; height:8px; overflow:hidden;">
-                    <div style="background:#38bdf8; width:100%; height:100%;"></div>
+                    <div style="background:linear-gradient(90deg, #00f0ff, #a855f7); width:100%; height:100%;"></div>
                 </div>
             </div>
         </div>
@@ -732,19 +851,19 @@ elif nav == "📊 LangSmith Production Observability":
             <h4>🛠️ Tool Invocations Breakdown</h4>
             <div style="font-size:13px; line-height:2;">
                 <div style="display:flex; justify-content:space-between;">
-                    <span>🌐 <code>web_search</code></span><span style="font-weight:700; color:#38bdf8;">36 calls (40%)</span>
+                    <span>🌐 <code>web_search</code></span><span style="font-weight:700; color:#00f0ff;">36 calls (40%)</span>
                 </div>
                 <div style="display:flex; justify-content:space-between;">
-                    <span>📄 <code>web_reader</code></span><span style="font-weight:700; color:#38bdf8;">21 calls (23%)</span>
+                    <span>📄 <code>web_reader</code></span><span style="font-weight:700; color:#00f0ff;">21 calls (23%)</span>
                 </div>
                 <div style="display:flex; justify-content:space-between;">
-                    <span>📑 <code>pdf_reader</code></span><span style="font-weight:700; color:#38bdf8;">12 calls (13%)</span>
+                    <span>📑 <code>pdf_reader</code></span><span style="font-weight:700; color:#00f0ff;">12 calls (13%)</span>
                 </div>
                 <div style="display:flex; justify-content:space-between;">
-                    <span>🧩 <code>smart_chunk_document</code></span><span style="font-weight:700; color:#38bdf8;">12 calls (13%)</span>
+                    <span>🧩 <code>smart_chunk_document</code></span><span style="font-weight:700; color:#00f0ff;">12 calls (13%)</span>
                 </div>
                 <div style="display:flex; justify-content:space-between;">
-                    <span>💾 <code>chroma_store</code></span><span style="font-weight:700; color:#38bdf8;">10 calls (11%)</span>
+                    <span>💾 <code>chroma_store</code></span><span style="font-weight:700; color:#00f0ff;">10 calls (11%)</span>
                 </div>
             </div>
         </div>
@@ -758,7 +877,7 @@ elif nav == "📊 LangSmith Production Observability":
             In self-healing autonomous agents, however, <b>high P99 tail latency is the mathematical signature of the self-healing loop doing its job</b>.
         </p>
         <ul style="color:#cbd5e1; font-size:14px; line-height:1.7;">
-            <li><b>P50 Fast Path (Attempt 1):</b> Single-pass linear execution (<code>planner → writer → security_check → executor → reviewer</code>) finishes with zero retries. Latency is ultra-low.</li>
+            <li><b>P50 Fast Path (Attempt 1):</b> Single-pass linear execution (<code>planner → writer → security_check → executor → reviewer</code>) finishes with zero retries. Latency is ultra-low (0.2s).</li>
             <li><b>P99 Tail Path (3 Retries):</b> Up to 3 recursive debug loops (<code>debugger → writer → security_check → executor</code>) expanding the state machine from 5 to 14 sequential node invocations, absorbing complex runtime debugging into tail latency while delivering a 90–95% final pass rate.</li>
         </ul>
     </div>
@@ -770,15 +889,15 @@ elif nav == "📊 LangSmith Production Observability":
 # ============================================================================
 
 elif nav == "📖 Technical Case Study":
-    st.markdown('<h1 class="neural-title">📖 Engineering Case Study</h1>', unsafe_allow_html=True)
+    st.markdown('<div class="hero-title">📖 Engineering Case Study</div>', unsafe_allow_html=True)
     st.markdown("### Ultimate Coding Agent Turns Classroom Project Prompts Into Self-Healing Multi-File Software")
-    st.markdown("**Engineered by [Nitish Kumar](https://github.com/XestalNitish) in November 2026**")
+    st.markdown("**Engineered by [X-ESTAL NITISH (Nitish Kumar)](https://github.com/XestalNitish) in November 2026**")
 
     st.markdown("""
     <div class="clay-card">
-        <blockquote style="font-size:16px; font-style:italic; color:#38bdf8; border-left:4px solid #38bdf8; padding-left:16px; margin:0 0 16px 0;">
+        <blockquote style="font-size:16px; font-style:italic; color:#00f0ff; border-left:4px solid #00f0ff; padding-left:16px; margin:0 0 16px 0;">
             "Everyone in class was confused about how to analyze the topic, structure the requirements, and build the project—so I built an autonomous pipeline where you give only your core problem prompt, and it handles requirements, multi-file coding, and self-debugging from start to finish."
-            <br><span style="font-size:13px; font-weight:700; color:#f8fafc; font-style:normal;">— Nitish Kumar, Creator of Ultimate Coding Agent</span>
+            <br><span style="font-size:13px; font-weight:700; color:#f8fafc; font-style:normal;">— X-ESTAL NITISH, Creator of Ultimate Coding Agent</span>
         </blockquote>
         <p style="color:#cbd5e1; line-height:1.7;">
             During a routine lecture at <b>C.M. Science College, Darbhanga</b>, an instructor assigned a batch of software project topics to the class. 
@@ -792,7 +911,7 @@ elif nav == "📖 Technical Case Study":
             Instead of learning architecture, students get trapped manually copying tracebacks back and forth.
         </p>
         <p style="color:#cbd5e1; line-height:1.7;">
-            To eliminate this bottleneck, Nitish Kumar engineered the <b>Ultimate Coding Agent</b>: 
+            To eliminate this bottleneck, X-ESTAL NITISH engineered the <b>Ultimate Coding Agent</b>: 
             a six-node stateful LangGraph pipeline orchestrating dual local 4B models (<code>Spark 2.5</code> and <code>Spark 2.6</code>) 
             to autonomously plan, synthesize, audit, execute, and debug complete repositories on consumer hardware with <b>zero cloud API cost</b>.
         </p>
@@ -823,7 +942,7 @@ elif nav == "📖 Technical Case Study":
             The Ultimate Coding Agent solves this by splitting cognitive workloads across two specialized 4-billion-parameter local models served via an optimized <code>llama-server</code> daemon:
         </p>
         <ul style="color:#cbd5e1; line-height:1.8;">
-            <li><b>Spark 2.5 (4B) — Analytical Core:</b> Assigned to <code>planner</code>, <code>security_check</code>, <code>debugger</code>, and <code>reviewer</code>. Optimized for structured decomposition, static vulnerability pattern recognition, and stack-trace root-cause isolation where concise analytical precision matters more than raw code token volume.</li>
+            <li><b>Spark 2.5 (4B) — Analytical Core:</b> Assigned to <code>planner</code>, <code>security_check</code>, <code>debugger</code>, and <code>reviewer</code>. Optimized for structured decomposition, static vulnerability pattern recognition, and stack-trace root-cause isolation.</li>
             <li><b>Spark 2.6 (4B) — Synthesis Core:</b> Dedicated exclusively to the <code>writer</code> node. Tuned for syntactic accuracy, cross-file import consistency, and clean adherence to the planner's structural manifest.</li>
             <li><b>Subprocess & Context Guards:</b> Enforces <code>trim_messages</code> state pruning to prevent context overflow during multi-turn retries, alongside a strict 15-second subprocess execution timeout in <code>executor</code> to automatically catch infinite loops.</li>
         </ul>
@@ -843,51 +962,49 @@ elif nav == "📖 Technical Case Study":
 # ============================================================================
 
 elif nav == "⚡ System & Server Mission Control":
-    st.markdown('<h1 class="neural-title">⚡ System & Server Mission Control</h1>', unsafe_allow_html=True)
-    st.markdown("Real-time telemetry, model daemon controllers, environment diagnostics, and live server logs.")
+    st.markdown('<div class="hero-title">⚡ System & Server Mission Control</div>', unsafe_allow_html=True)
+    st.markdown('<div class="hero-subtitle">Real-time daemon management, ports health, and execution telemetry.</div>', unsafe_allow_html=True)
 
     col_srv1, col_srv2 = st.columns(2)
     with col_srv1:
         s1 = check_server("main")
+        color = "chip-green" if s1 else "chip-purple"
+        p_class = "pulse-green" if s1 else "pulse-red"
         st.markdown(f"""
         <div class="clay-card">
-            <span class="glass-badge {'glass-badge-green' if s1 else 'glass-badge-amber'}">
-                <span class="pulse-dot {'pulse-green' if s1 else 'pulse-red'}"></span>
-                PORT 8082: {'ONLINE' if s1 else 'OFFLINE'}
-            </span>
+            <span class="chip {color}"><span class="pulse-dot {p_class}"></span> PORT 8082: {'ONLINE' if s1 else 'OFFLINE'}</span>
             <h3 style="margin-top:10px;">Server 1: Spark 2.5 (4B)</h3>
-            <p style="color:#94a3b8; font-size:13px;">Roles: Orchestrator, Planner, Security AST Checker, Debugger, Reviewer, Chat, RAG</p>
-            <span style="font-size:12px; color:#38bdf8;">Endpoint: <code>http://127.0.0.1:8082/health</code></span>
+            <p style="color:#94a3b8; font-size:13px;">Analytical Core: Orchestrator, Planner, Security AST Checker, Debugger, Reviewer, Chat, RAG</p>
+            <span style="font-size:12px; color:#00f0ff;">Endpoint: <code>http://127.0.0.1:8082/health</code></span>
         </div>
         """, unsafe_allow_html=True)
     
     with col_srv2:
         s2 = check_server("writer")
+        color = "chip-green" if s2 else "chip-purple"
+        p_class = "pulse-green" if s2 else "pulse-red"
         st.markdown(f"""
         <div class="clay-card">
-            <span class="glass-badge {'glass-badge-green' if s2 else 'glass-badge-amber'}">
-                <span class="pulse-dot {'pulse-green' if s2 else 'pulse-red'}"></span>
-                PORT 8084: {'ONLINE' if s2 else 'OFFLINE'}
-            </span>
+            <span class="chip {color}"><span class="pulse-dot {p_class}"></span> PORT 8084: {'ONLINE' if s2 else 'OFFLINE'}</span>
             <h3 style="margin-top:10px;">Server 2: Spark 2.6 (4B)</h3>
-            <p style="color:#94a3b8; font-size:13px;">Role: Senior Code Writer & Synthesis Core</p>
-            <span style="font-size:12px; color:#38bdf8;">Endpoint: <code>http://127.0.0.1:8084/health</code></span>
+            <p style="color:#94a3b8; font-size:13px;">Synthesis Core: Senior Code Writer Node</p>
+            <span style="font-size:12px; color:#00f0ff;">Endpoint: <code>http://127.0.0.1:8084/health</code></span>
         </div>
         """, unsafe_allow_html=True)
 
     c_act1, c_act2, c_act3 = st.columns(3)
     with c_act1:
-        if st.button("⚡ Start / Restart All Servers", use_container_width=True):
+        if st.button("⚡ Start All Daemons", use_container_width=True):
             auto_start_servers_ui(["main", "writer"])
             st.rerun()
     with c_act2:
-        if st.button("🛑 Stop All Server Processes", use_container_width=True):
+        if st.button("🛑 Stop All Daemons", use_container_width=True):
             start_servers.stop_servers()
             st.info("Stopped all local daemons.")
             time.sleep(1)
             st.rerun()
     with c_act3:
-        if st.button("🧪 Run Diagnostic Healthcheck", use_container_width=True):
+        if st.button("🧪 System Diagnostic", use_container_width=True):
             with st.spinner("Executing healthcheck.py..."):
                 proc = subprocess.run([str(PYTHON_EXE), "healthcheck.py"], capture_output=True, text=True, cwd=str(ROOT))
                 st.code(proc.stdout)
