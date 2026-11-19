@@ -195,7 +195,8 @@ def rag_turn(query: str, library: str | None = None, k: int = 4,
 
 
 def code_turn(request: str, resume_checkpoint: dict | None = None,
-              force_resume: bool = False, force_fresh: bool = False, progress_cb=None) -> dict:
+              force_resume: bool = False, force_fresh: bool = False,
+              research: str = "auto", progress_cb=None) -> dict:
     """Execute the autonomous multi-agent code development pipeline."""
     ensure_servers(["main", "writer"], progress_cb=progress_cb)
     from pipeline import run_pipeline
@@ -207,9 +208,22 @@ def code_turn(request: str, resume_checkpoint: dict | None = None,
         if active:
             cp = checkpoint_manager.prompt_resume_if_available(force_resume=force_resume, force_fresh=force_fresh)
 
-    final = run_pipeline(request or (cp.get("task") if cp else ""), resume_checkpoint=cp)
+    final = run_pipeline(
+        request or (cp.get("task") if cp else ""),
+        research=research,
+        resume_checkpoint=cp,
+        step_callback=progress_cb,
+    )
     ans = (final.get("answer") if isinstance(final, dict) else str(final)) or "[done] Pipeline finished."
-    return {"result": final, "summary": ans, "resumed": bool(cp)}
+    return {
+        "result": final,
+        "summary": ans,
+        "resumed": bool(cp),
+        "research": final.get("research", ""),
+        "research_path": final.get("research_path", ""),
+        "notes": final.get("notes", []),
+        "warnings": final.get("warnings", []),
+    }
 
 
 def research_turn(topic: str, progress_cb=None) -> dict:
@@ -304,9 +318,10 @@ def research_mode(request: str | None = None):
             return True
 
 
-def code_mode(request: str | None = None, force_resume: bool = False, force_fresh: bool = False):
+def code_mode(request: str | None = None, force_resume: bool = False, force_fresh: bool = False, research: str = "auto"):
     one_shot = request is not None
-    print("\n[code] coder pipeline (Researcher + RAG + Coder). Kya banana hai batao. `/menu` = wapas, `/exit`.")
+    print("\n[code] coder pipeline (Researcher + RAG + Coder). Kya banana hai batao.")
+    print("Tip: `/research <task>` = zabardasti Deep Web Research pehle chalao. `/menu` = wapas, `/exit`.")
     while True:
         q = request or input("\nKya banana hai> ").strip()
         request = None
@@ -314,7 +329,11 @@ def code_mode(request: str | None = None, force_resume: bool = False, force_fres
             continue
         if q in ("/menu", "/exit"):
             return q == "/exit"
-        res = code_turn(q, force_resume=force_resume, force_fresh=force_fresh)
+        mode_r = research
+        if q.startswith("/research "):
+            q = q[len("/research "):].strip()
+            mode_r = "on"
+        res = code_turn(q, force_resume=force_resume, force_fresh=force_fresh, research=mode_r)
         print("\n" + "=" * 60 + "\n" + res["summary"])
         if one_shot:
             return True
@@ -348,7 +367,9 @@ def menu(args):
             if not mode:
                 continue
         done = {"chat": chat_mode, "rag": rag_mode,
-                "code": lambda: code_mode(args.request, force_resume=getattr(args, "resume", False), force_fresh=getattr(args, "fresh", False)),
+                "code": lambda: code_mode(args.request, force_resume=getattr(args, "resume", False),
+                                          force_fresh=getattr(args, "fresh", False),
+                                          research=getattr(args, "research", "auto")),
                 "research": lambda: research_mode(args.request)}[mode]()
         if args.mode or done:
             return
@@ -358,6 +379,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--mode", choices=["chat", "rag", "code", "research"])
     ap.add_argument("--request", help="code/research mode: ek baar ka kaam")
+    ap.add_argument("--research", choices=["auto", "on", "off"], default="auto", help="research mode (auto | on | off)")
     ap.add_argument("--resume", action="store_true", help="interrupted session ko bina poochhe resume karo")
     ap.add_argument("--fresh", action="store_true", help="previous checkpoint discard karke naya run karo")
     ap.add_argument("--autostart", action="store_true", help="llama servers khud start karo")

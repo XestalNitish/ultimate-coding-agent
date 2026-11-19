@@ -10,7 +10,7 @@ Seamlessly routes user requests to 7 Autonomous Specialist Agents & 150 Tools:
 - Memory & Context Vault (memory_context)
 - AI/ML Engineering Agent (ai_ml_engineering)
 
-100% Offline, Local X-Estal-4B Inference Engine via llama-server (Port 8088).
+100% Offline, Local X-Estal-4B Inference Engine via llama-server (Port 8082).
 Zero Thinking Tags. Zero External APIs.
 """
 
@@ -47,7 +47,8 @@ def get_llm(temperature: float = 0.2):
     except Exception as e:
         logger.warning(f"Local LLM service hook: {e}")
 
-    local_base = os.getenv("LOCAL_LLM_URL", "http://127.0.0.1:8088/v1")
+    default_port = os.getenv("XESTAL_PORT", "8082")
+    local_base = os.getenv("LOCAL_LLM_URL", f"http://127.0.0.1:{default_port}/v1")
     from langchain_openai import ChatOpenAI
     return ChatOpenAI(
         base_url=local_base,

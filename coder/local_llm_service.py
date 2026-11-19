@@ -38,7 +38,7 @@ import requests
 logger = logging.getLogger("x_estal_llm_service")
 
 _ROOT = Path(__file__).resolve().parent
-DEFAULT_PORT = int(os.getenv("XESTAL_PORT", "8083"))
+DEFAULT_PORT = int(os.getenv("XESTAL_PORT", "8082"))
 DEFAULT_HOST = "127.0.0.1"
 MAX_OUTPUT_TOKENS = int(os.getenv("XESTAL_MAX_TOKENS", "14000"))
 REQUEST_TIMEOUT = int(os.getenv("XESTAL_REQUEST_TIMEOUT", "9000"))

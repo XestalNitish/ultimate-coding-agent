@@ -12,7 +12,7 @@ A production-ready LangGraph multi-stage coding agent powered by live LLMs:
   6. Technical Reviewer Node     -> Verified delivery report & production deployment ready
 
 Live LLM Support:
-  - Local Spark-X2.5-4B (llama-server on http://127.0.0.1:8088/v1)
+  - Local Spark-X2.5-4B (llama-server on http://127.0.0.1:8082/v1)
   - Groq Cloud API (Llama 3.3 70B, Qwen 2.5 Coder 32B)
   - Google Gemini API (Gemini 1.5 / 2.0 Flash)
   - OpenAI API (GPT-4o / GPT-4o-mini)
@@ -42,17 +42,19 @@ from langgraph.graph import StateGraph, START, END
 try:
     from local_llm_service import is_server_alive, start_local_server, get_local_chat_llm, strip_thinking
 except ImportError:
-    def is_server_alive(host="127.0.0.1", port=8088) -> bool:
+    _DEF_PORT = int(os.getenv("XESTAL_PORT", "8082"))
+
+    def is_server_alive(host="127.0.0.1", port=_DEF_PORT) -> bool:
         import requests
         try:
             return requests.get(f"http://{host}:{port}/health", timeout=0.25).status_code == 200
         except Exception:
             return False
 
-    def start_local_server(port=8088, wait_timeout=5) -> bool:
+    def start_local_server(port=_DEF_PORT, wait_timeout=5) -> bool:
         return False
 
-    def get_local_chat_llm(temperature=0.1, port=8088, auto_start=False):
+    def get_local_chat_llm(temperature=0.1, port=_DEF_PORT, auto_start=False):
         from langchain_openai import ChatOpenAI
         return ChatOpenAI(
             base_url=f"http://127.0.0.1:{port}/v1",
@@ -189,7 +191,8 @@ def get_dev_llm(
                 logger.warning(f"OpenAI initialization notice: {e}")
 
     # 4. Local Spark-X2.5 LLM (llama-server)
-    local_target = base_url or "http://127.0.0.1:8088/v1"
+    default_port = os.getenv("XESTAL_PORT", "8082")
+    local_target = base_url or os.getenv("CODE_DEV_LLM_URL") or f"http://127.0.0.1:{default_port}/v1"
     try:
         from langchain_openai import ChatOpenAI
         return ChatOpenAI(

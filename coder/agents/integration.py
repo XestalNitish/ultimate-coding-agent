@@ -85,8 +85,8 @@ def _init_llm():
 
     try:
         from langchain_openai import ChatOpenAI
-        llm = ChatOpenAI(base_url="http://127.0.0.1:8088/v1", api_key="local-free", model_name="Spark-X2.5-4B", temperature=0.1)
-        logger.info("LLM: Local OpenAI Compatible Server (127.0.0.1:8088)")
+        llm = ChatOpenAI(base_url="http://127.0.0.1:8082/v1", api_key="local-free", model_name="Spark-X2.5-4B", temperature=0.1)
+        logger.info("LLM: Local OpenAI Compatible Server (127.0.0.1:8082)")
         return llm
     except Exception:
         pass

@@ -24,7 +24,7 @@ def _init_db_llm():
     try:
         from langchain_openai import ChatOpenAI
         return ChatOpenAI(
-            base_url="http://127.0.0.1:8088/v1",
+            base_url="http://127.0.0.1:8082/v1",
             api_key="x-estal-local",
             model_name="X-Estal-4B",
             temperature=0.1,

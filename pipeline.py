@@ -279,7 +279,11 @@ SYS_FAIL = ("Summarize in max 80 words why the previous coding attempt failed: w
 
 _RESEARCH_HINT = re.compile(
     r"\b(latest|current|official|docs?|documentation|api|sdk|version|deprecated|migrate|integrat\w*|scrap\w*|webhook|"
-    r"oauth|payment|gemini|openai|anthropic|groq|langgraph|langchain|fastapi|streamlit|docker|kubernetes|react|next\.?js)\b",
+    r"oauth|payment|gemini|openai|anthropic|groq|langgraph|langchain|fastapi|streamlit|docker|kubernetes|react|next\.?js|"
+    r"bot|crawler|discord|telegram|github|twitter|instagram|reddit|stripe|paypal|weather|arxiv|database|agent)\b",
+    re.I)
+_RESEARCH_INTENT = re.compile(
+    r"\b(research|investigate|search|look up|dhoondo|pata karo|internet|google|duckduckgo|find out)\b",
     re.I)
 _DOC_HINT = re.compile(
     r"\b(fastapi|flask|django|streamlit|langgraph|langchain|pandas|numpy|torch|tensorflow|sqlalchemy|pydantic|"
@@ -323,13 +327,25 @@ def intake(s: S) -> dict:
 
 
 def _decide_research(task: str) -> tuple:
+    # 1. Fast heuristic: If task explicitly mentions APIs, SDKs, web scraping, bots, external services, or libraries
+    m = _RESEARCH_HINT.search(task)
+    if m:
+        return True, f"Keyword match: '{m.group(0)}' indicates external APIs/docs needed"
+
+    # 2. Check explicit user research intent
+    m_intent = _RESEARCH_INTENT.search(task)
+    if m_intent:
+        return True, f"Explicit user research request: '{m_intent.group(0)}'"
+
+    # 3. LLM Gate check for subtle requirements
     try:
         d = parse_json(llm_text(SYS_GATE, f"Task:\n{cut(task, 1500)}", retries=1))
         if "needs_research" in d:
             return to_bool(d["needs_research"]), str(d.get("reason", "llm"))[:100]
     except Exception as e:  # noqa: BLE001
-        log.info("research gate LLM failed (%s) - heuristic", e)
-    return bool(_RESEARCH_HINT.search(task)), "heuristic"
+        log.info("research gate LLM failed (%s)", e)
+
+    return False, "Self-contained logic (no external APIs or research hints detected)"
 
 
 def _extract_report(result: dict) -> tuple:
@@ -367,7 +383,9 @@ def researcher(s: S) -> dict:
     task, mode = s["user_input"], s.get("research_mode", "auto")
     if mode == "off":
         return {"notes": _add(s, "notes", "research: off")}
-    if mode == "auto":
+    if mode == "on":
+        need, why = True, "User forced research mode ON"
+    else:  # auto
         need, why = _decide_research(task)
         if not need:
             ui(f"[researcher] skipped ({why})")
@@ -377,7 +395,7 @@ def researcher(s: S) -> dict:
         w = f"research agent not importable ({_import_hint(RESEARCH_MODULES)}) - continuing without research"
         ui(f"[researcher] {w}")
         return {"warnings": _add(s, "warnings", w)}
-    ui(f"[researcher] running research agent (depth={RESEARCH_DEPTH})...")
+    ui(f"[researcher] running research agent (depth={RESEARCH_DEPTH}, reason: {why})...")
     query = (f"{cut(task, 400)}\n\n[Research focus: implementation details for developers - official docs, exact API "
              f"names/signatures, library versions, known pitfalls and best practices.]")
     try:
@@ -396,8 +414,26 @@ def researcher(s: S) -> dict:
         return {"research": report, "research_digest": digest, "research_path": saved,
                 "notes": _add(s, "notes", f"research: {len(report)} chars")}
     except Exception as e:  # noqa: BLE001
-        w = f"research failed ({type(e).__name__}: {str(e)[:120]}) - continuing without research"
+        w = f"deep research agent fallback ({type(e).__name__}: {str(e)[:100]}) - running fast live web search"
         ui(f"[researcher] {w}")
+        try:
+            import tools
+            queries = [task[:80], f"{task[:50]} documentation API python"]
+            snippets = []
+            for q in queries:
+                res = tools.web_search(q, max_results=3)
+                if isinstance(res, list):
+                    for item in res:
+                        if isinstance(item, dict):
+                            snippets.append(f"### {item.get('title', 'Result')}\nURL: {item.get('url', '')}\n{item.get('snippet', '')}\n")
+            if snippets:
+                fallback_report = f"# Research Dossier: {task[:60]}\n\n" + "\n".join(snippets)
+                digest = compress(fallback_report, DIGEST_CHARS, purpose=task)
+                ui(f"  [researcher fallback] gathered {len(fallback_report)} chars of live search data")
+                return {"research": fallback_report, "research_digest": digest, "research_path": "",
+                        "notes": _add(s, "notes", f"research: fallback live search {len(fallback_report)} chars")}
+        except Exception as fb_err:
+            log.warning("Fast search fallback failed: %s", fb_err)
         return {"warnings": _add(s, "warnings", w)}
 
 
@@ -699,7 +735,8 @@ def build_graph():
 def run_pipeline(user_input: str, language: str = "python", research: Optional[str] = None,
                  workspace: Optional[str] = None, install_deps: bool = False,
                  output_dir: Optional[str] = None, docs: Optional[str] = None,
-                 resume_checkpoint: Optional[Dict[str, Any]] = None) -> S:
+                 resume_checkpoint: Optional[Dict[str, Any]] = None,
+                 step_callback: Optional[Callable[[str, Dict[str, Any]], None]] = None) -> S:
     """research: 'auto' | 'on' | 'off' (None = env/config). docs: already-retrieved docs text (optional)."""
     resumed_pipe = (resume_checkpoint.get("pipeline_state") or {}) if resume_checkpoint else {}
     resumed_coder = (resume_checkpoint.get("coder_state") or {}) if resume_checkpoint else {}
@@ -731,6 +768,11 @@ def run_pipeline(user_input: str, language: str = "python", research: Optional[s
         for step in app.stream(init, config={"recursion_limit": 120}, stream_mode="updates"):
             for _node, upd in step.items():
                 final.update(upd or {})
+                if step_callback:
+                    try:
+                        step_callback(_node, final)
+                    except Exception as sc_err:
+                        log.debug("step_callback notice: %s", sc_err)
                 try:
                     import checkpoint_manager
                     session_id = checkpoint_manager.save_checkpoint(

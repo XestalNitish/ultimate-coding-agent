@@ -691,6 +691,27 @@ elif nav == "🚀 Autonomous Code Synthesizer":
             st.rerun()
 
     st.markdown("### 🛠️ New Autonomous Engineering Specification")
+    
+    c_opt1, c_opt2 = st.columns([2, 1])
+    with c_opt1:
+        research_mode_choice = st.selectbox(
+            "🌐 Web Research Intelligence Mode",
+            options=[
+                "⚡ Smart Auto-Detect (Auto-scans APIs, libraries, scraping, web)",
+                "🌐 Force Deep Web Research (Always investigate live web before coding)",
+                "⏩ Fast Offline Only (Skip web research)",
+            ],
+            index=0,
+            help="When enabled, the Deep Web Research Agent crawls live documentation, API endpoints, and SDK usage to ground the code synthesizer.",
+        )
+    with c_opt2:
+        research_depth_choice = st.selectbox(
+            "🔬 Research Depth",
+            options=["basic (Faster)", "advanced (Deep Dive)"],
+            index=0,
+            help="Basic performs fast targeted searches. Advanced performs full multi-query recursive research.",
+        )
+
     task_prompt = st.text_area(
         "Software Specification Prompt",
         height=130,
@@ -700,13 +721,53 @@ elif nav == "🚀 Autonomous Code Synthesizer":
     if st.button("🚀 Launch Autonomous Multi-Agent Pipeline", use_container_width=True) and task_prompt:
         auto_start_servers_ui(["main", "writer"])
         
+        mode_val = "auto"
+        if "Force Deep" in research_mode_choice:
+            mode_val = "on"
+        elif "Fast Offline" in research_mode_choice:
+            mode_val = "off"
+        
+        depth_val = "advanced" if "advanced" in research_depth_choice else "basic"
+        os.environ["PIPELINE_RESEARCH_DEPTH"] = depth_val
+
         progress_bar = st.progress(0, text="Initializing state machine...")
+        status_box = st.empty()
+        
+        def on_step_ui(node_name, state_snap):
+            node_map = {
+                "intake": ("📥 Intake: Initializing task parameters...", 10),
+                "researcher": ("🌐 Researcher: Investigating live web & API documentation...", 25),
+                "mediator": ("📚 Mediator: Evaluating technical requirements & docs...", 35),
+                "rag": ("🔍 RAG: Retrieving library knowledge...", 45),
+                "summarizer": ("📝 Summarizer: Digesting technical insights...", 55),
+                "planner": ("📐 Planner: Formulating multi-file architecture blueprint...", 65),
+                "coder": ("💻 Senior Writer: Synthesizing & testing multi-file repository...", 85),
+                "finalize": ("✅ Finalize: Packaging repository & delivery report...", 100),
+            }
+            disp, pct = node_map.get(node_name, (f"Executing {node_name}...", 50))
+            progress_bar.progress(pct, text=disp)
+            status_box.markdown(f'<div class="chip chip-cyan"><span class="pulse-dot pulse-green"></span> {disp}</div>', unsafe_allow_html=True)
+
         with st.spinner("Synthesizing multi-file codebase with dual local models..."):
             try:
-                progress_bar.progress(20, text="Node 1/6: Planner (Spark 2.5) decomposing requirements...")
-                res = main.code_turn(request=task_prompt, force_fresh=True)
+                progress_bar.progress(15, text="Node 1: Checking research & architecture requirements...")
+                res = main.code_turn(
+                    request=task_prompt,
+                    force_fresh=True,
+                    research=mode_val,
+                    progress_cb=on_step_ui,
+                )
                 progress_bar.progress(100, text="Pipeline Execution Complete!")
+                status_box.markdown('<div class="chip chip-green">✅ Autonomous Execution Complete!</div>', unsafe_allow_html=True)
                 
+                # Show research intelligence if gathered
+                if res.get("research"):
+                    with st.expander("🔍 Deep Web Research Dossier & API Intelligence Captured", expanded=False):
+                        st.markdown(f'<div class="chip chip-purple">Report Size: {len(res["research"])} chars</div>', unsafe_allow_html=True)
+                        if res.get("research_path"):
+                            st.caption(f"Saved: `{res['research_path']}`")
+                        st.markdown(res["research"])
+
                 st.markdown('<div class="clay-card">', unsafe_allow_html=True)
                 st.markdown("### 📦 Synthesized Repository Output")
                 st.markdown(res.get("summary", "Done"))
