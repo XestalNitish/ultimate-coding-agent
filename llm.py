@@ -71,6 +71,52 @@ def server_up(role: str) -> bool:
         return False
 
 
+def trim_messages(messages: list[dict], max_chars: int = 24000) -> list[dict]:
+    """Strict sliding window context guard for multi-turn messages.
+    Guarantees that total prompt characters never exceed max_chars,
+    preventing llama-server 400 exceed_context_size_error.
+    """
+    if not messages:
+        return []
+    if len(messages) == 1:
+        m = dict(messages[0])
+        m["content"] = fit(str(m.get("content", "")), max_chars)
+        return [m]
+
+    system_msg = None
+    start_idx = 0
+    if messages[0].get("role") == "system":
+        system_msg = dict(messages[0])
+        system_msg["content"] = fit(str(system_msg.get("content", "")), 2500)
+        start_idx = 1
+
+    last_user_msg = dict(messages[-1])
+    last_user_msg["content"] = fit(str(last_user_msg.get("content", "")), int(max_chars * 0.45))
+
+    used_chars = len(last_user_msg["content"]) + (len(system_msg["content"]) if system_msg else 0)
+    rem_budget = max(500, max_chars - used_chars)
+
+    included_history = []
+    history_candidates = messages[start_idx:-1]
+    for m in reversed(history_candidates):
+        c = fit(str(m.get("content", "")), 1200)
+        cost = len(c) + 20
+        if cost <= rem_budget:
+            included_history.append({"role": m.get("role", "user"), "content": c})
+            rem_budget -= cost
+        else:
+            break
+
+    included_history.reverse()
+
+    final_msgs = []
+    if system_msg:
+        final_msgs.append(system_msg)
+    final_msgs.extend(included_history)
+    final_msgs.append(last_user_msg)
+    return final_msgs
+
+
 def chat(role: str, system: str = "", user: str = "", *, messages: list[dict] | None = None,
          task: str = "", max_tokens: int | None = None, temperature: float = 0.2,
          schema: dict | None = None, stream: bool = False, on_token=None) -> str:
@@ -85,21 +131,15 @@ def chat(role: str, system: str = "", user: str = "", *, messages: list[dict] | 
             on_token(out)
         return out
 
-    # context guard: prompt + output ctx ke andar hi rahe
-    budget_chars = max(600, (cfg["ctx"] - max_tokens - approx_tokens(system) - 80) * 3)
+    # context guard: prompt + output ctx ke andar hi rahe (approx 2.5 chars per token for safety)
+    budget_chars = max(800, int((cfg["ctx"] - max_tokens - 1000) * 2.5))
 
     if messages:
-        # Build payload with true multi-turn history
-        final_msgs = []
-        for m in messages:
-            final_msgs.append({
-                "role": m.get("role", "user"),
-                "content": str(m.get("content", ""))
-            })
-        if cfg.get("no_think") and final_msgs and final_msgs[-1]["role"] == "user":
-            if not final_msgs[-1]["content"].endswith("/no_think"):
-                final_msgs[-1]["content"] += "\n/no_think"
-        payload_messages = final_msgs
+        # Enforce strict sliding window and character budgeting on multi-turn history
+        payload_messages = trim_messages(messages, max_chars=budget_chars)
+        if cfg.get("no_think") and payload_messages and payload_messages[-1]["role"] == "user":
+            if not payload_messages[-1]["content"].endswith("/no_think"):
+                payload_messages[-1]["content"] += "\n/no_think"
     else:
         user = fit(user, budget_chars)
         if cfg.get("no_think"):

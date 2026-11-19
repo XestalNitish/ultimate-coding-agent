@@ -120,26 +120,37 @@ def chat_turn(query: str, history: list[tuple[str, str]] | None = None,
                 tool_output = github_search.invoke({"query": tool_query, "max_results": 4})
             elif chosen_tool == "read":
                 from research.tools.research_web import web_reader
-                tool_output = web_reader.invoke({"url": tool_query, "max_chars": 4500})
+                raw_read = web_reader.invoke({"url": tool_query, "max_chars": 3500})
+                tool_output = fit(str(raw_read), 3500)
             else:  # 'web'
                 res, tool_err = tools.web_search(tool_query, 4)
-                tool_output = tools.format_results(res, 4000) if res else ""
+                tool_output = tools.format_results(res, 3500) if res else ""
         except Exception as e:
             tool_err = str(e)
 
-    # 2) Assemble True Multi-Turn Dialogue Memory
+    # 2) Assemble True Multi-Turn Dialogue Memory (Sliding Window: last 6 turns)
+    recent_history = history[-6:] if history else []
     messages = [{"role": "system", "content": SYS_CHAT}]
-    for speaker, text in history:
+    for speaker, text in recent_history:
         role_tag = "user" if speaker in ("User", "user", "Human") else "assistant"
-        messages.append({"role": role_tag, "content": text})
+        messages.append({"role": role_tag, "content": fit(str(text), 1200)})
 
     current_turn_prompt = query
     if tool_output:
-        current_turn_prompt = f"Live Research Tool Evidence ({chosen_tool.upper()}):\n{tool_output}\n\nUser Question: {query}"
+        current_turn_prompt = f"Live Research Tool Evidence ({chosen_tool.upper()}):\n{fit(tool_output, 3000)}\n\nUser Question: {query}"
     messages.append({"role": "user", "content": current_turn_prompt})
 
-    ans = chat("main", SYS_CHAT, messages=messages, task="chat", temperature=0.4,
-               stream=bool(on_token), on_token=on_token)
+    try:
+        ans = chat("main", SYS_CHAT, messages=messages, task="chat", temperature=0.4,
+                   stream=bool(on_token), on_token=on_token)
+    except Exception as e:
+        # Fallback to single turn if anything fails
+        if "exceed" in str(e).lower():
+            fallback_prompt = f"User Question: {fit(query, 2000)}"
+            ans = chat("main", SYS_CHAT, fallback_prompt, task="chat_fallback", temperature=0.4,
+                       stream=bool(on_token), on_token=on_token)
+        else:
+            raise e
     return {
         "answer": ans,
         "search_query": tool_query,

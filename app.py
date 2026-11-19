@@ -984,7 +984,7 @@ elif nav == "📖 Technical Case Study":
     st.markdown("""
     - **GitHub Engineering Portfolio:** [https://github.com/XestalNitish](https://github.com/XestalNitish)
     - **Live Deployed Prototype:** [X-Estal Code Dev Agent on Streamlit Cloud](https://code-dev-agent-by-x-estal-nitish.streamlit.app/)
-    - **LinkedIn Developer Profile:** [Nitish Kumar on LinkedIn](https://www.linkedin.com/in/nitish-kumar-33714642b)
+    - **LinkedIn Developer Profile:** [Nitish Kumar on LinkedIn](https://www.linkedin.com/in/nitish-kumar-ai)
     """)
 
 
