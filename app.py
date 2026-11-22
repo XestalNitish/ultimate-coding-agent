@@ -42,16 +42,18 @@ except Exception as e:
     st.error(f"Initialization error: {e}")
 
 # ============================================================================
-# COMPREHENSIVE REFINED SAAS THEME (HUMAN-CENTERED DEVELOPER WORKBENCH)
+# COMPREHENSIVE GLASS-CLAY DESIGN SYSTEM (TACTILE PHYSICAL DEPTH + TRANSLUCENT FROSTED GLASS)
 # ============================================================================
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-    /* Global Typography & Deep Obsidian Canvas */
+    /* Global Typography & Deep Obsidian Glass Canvas */
     html, body, [class*="css"], .stApp {
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
-        background: radial-gradient(ellipse 70% 40% at 50% 0%, rgba(56, 189, 248, 0.07), transparent 60%), #080c14 !important;
+        background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(56, 189, 248, 0.08), transparent 70%), 
+                    radial-gradient(circle 600px at 100% 100%, rgba(99, 102, 241, 0.04), transparent),
+                    #080c14 !important;
         color: #f1f5f9 !important;
     }
 
@@ -59,20 +61,30 @@ st.markdown("""
         font-family: 'JetBrains Mono', monospace !important;
     }
 
-    /* Force Clean Dark Theme on Sidebar */
+    /* Force Clean Glass-Clay Dark Theme on Sidebar */
     [data-testid="stSidebar"], section[data-testid="stSidebar"] > div {
-        background: #0b0f19 !important;
-        border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
+        background: rgba(11, 15, 25, 0.85) !important;
+        backdrop-filter: blur(20px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
         color: #f1f5f9 !important;
     }
 
-    /* Brand Header Box in Sidebar */
+    /* Brand Header Box in Sidebar: Glass-Clay */
     .brand-box {
-        background: rgba(255, 255, 255, 0.02);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 10px;
-        padding: 14px 16px;
-        margin-bottom: 16px;
+        background: rgba(15, 23, 42, 0.65);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-radius: 14px;
+        border-top: 1px solid rgba(255, 255, 255, 0.14);
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        border-right: 1px solid rgba(255, 255, 255, 0.04);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.45),
+                    inset 1px 1px 1px 0 rgba(255, 255, 255, 0.10),
+                    inset -1px -1px 2px 0 rgba(0, 0, 0, 0.35);
+        padding: 16px 18px;
+        margin-bottom: 18px;
     }
     .brand-title {
         font-size: 15px;
@@ -89,20 +101,27 @@ st.markdown("""
         letter-spacing: 0.05em;
     }
     .brand-badge {
-        display: inline-block;
-        padding: 2px 7px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 3px 8px;
         background: rgba(56, 189, 248, 0.08);
-        border: 1px solid rgba(56, 189, 248, 0.2);
-        border-radius: 4px;
+        border-top: 1px solid rgba(56, 189, 248, 0.25);
+        border-left: 1px solid rgba(56, 189, 248, 0.15);
+        border-right: 1px solid rgba(56, 189, 248, 0.08);
+        border-bottom: 1px solid rgba(56, 189, 248, 0.04);
+        box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.3),
+                    inset 1px 1px 1px rgba(255, 255, 255, 0.15);
+        border-radius: 6px;
         color: #38bdf8;
         font-size: 10px;
         font-weight: 600;
         margin-top: 8px;
     }
 
-    /* Sleek Navigation Radio - Transform into Linear/Raycast Menu Items */
+    /* Glass-Clay Navigation Radio (Sidebar Menu Items) */
     [data-testid="stRadio"] > div {
-        gap: 2px !important;
+        gap: 3px !important;
     }
     [data-testid="stRadio"] div[role="radiogroup"] > label div:first-child {
         display: none !important;
@@ -110,118 +129,170 @@ st.markdown("""
     [data-testid="stRadio"] div[role="radiogroup"] > label {
         background: transparent !important;
         border: 1px solid transparent !important;
-        border-radius: 8px !important;
-        padding: 8px 12px !important;
+        border-radius: 10px !important;
+        padding: 9px 12px !important;
         color: #94a3b8 !important;
         font-size: 13px !important;
         font-weight: 500 !important;
-        transition: all 0.15s ease !important;
+        transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
         cursor: pointer !important;
         display: flex !important;
         align-items: center !important;
-        margin-bottom: 2px !important;
+        margin-bottom: 3px !important;
     }
     [data-testid="stRadio"] div[role="radiogroup"] > label:hover {
         background: rgba(255, 255, 255, 0.04) !important;
         color: #f1f5f9 !important;
-        transform: none !important;
+        transform: translateX(2px) !important;
     }
     [data-testid="stRadio"] div[role="radiogroup"] > label:has(input:checked) {
-        background: rgba(56, 189, 248, 0.08) !important;
+        background: linear-gradient(135deg, rgba(30, 41, 59, 0.75) 0%, rgba(15, 23, 42, 0.90) 100%) !important;
+        backdrop-filter: blur(12px) !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.16) !important;
         border-left: 3px solid #38bdf8 !important;
-        border-top: 1px solid rgba(56, 189, 248, 0.15) !important;
-        border-right: 1px solid rgba(56, 189, 248, 0.15) !important;
-        border-bottom: 1px solid rgba(56, 189, 248, 0.15) !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.02) !important;
+        box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.5),
+                    inset 1px 1px 1px 0 rgba(255, 255, 255, 0.12),
+                    inset -1px -1px 2px 0 rgba(0, 0, 0, 0.35) !important;
         color: #38bdf8 !important;
         font-weight: 600 !important;
-        box-shadow: none !important;
     }
 
-    /* Top Navigation Bar */
+    /* Top Brand Navigation Bar: Glass-Clay Bar */
     .top-bar {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: rgba(15, 23, 42, 0.5);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 10px;
-        padding: 10px 18px;
+        background: rgba(15, 23, 42, 0.65);
+        backdrop-filter: blur(18px) saturate(180%);
+        -webkit-backdrop-filter: blur(18px);
+        border-top: 1px solid rgba(255, 255, 255, 0.14);
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        border-right: 1px solid rgba(255, 255, 255, 0.04);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.5),
+                    inset 1px 1px 1px 0 rgba(255, 255, 255, 0.10),
+                    inset -1px -1px 2px 0 rgba(0, 0, 0, 0.35);
+        border-radius: 14px;
+        padding: 12px 20px;
         margin-bottom: 24px;
-        backdrop-filter: blur(12px);
     }
     .top-bar-left {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
     }
     .top-bar-brand {
         font-weight: 700;
-        font-size: 14px;
+        font-size: 14.5px;
         color: #f8fafc;
         letter-spacing: -0.01em;
     }
     .top-bar-brand span {
         color: #64748b;
-        margin: 0 4px;
+        margin: 0 5px;
     }
     .top-chips {
         display: flex;
         gap: 8px;
     }
+
+    /* Tactile Glass-Clay Chips */
     .chip {
-        padding: 3px 9px;
-        border-radius: 6px;
+        padding: 4px 10px;
+        border-radius: 8px;
         font-size: 11px;
         font-weight: 600;
         display: inline-flex;
         align-items: center;
         gap: 6px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.3),
+                    inset 1px 1px 1px rgba(255, 255, 255, 0.12),
+                    inset -1px -1px 1px rgba(0, 0, 0, 0.25);
     }
     .chip-cyan {
-        background: rgba(56, 189, 248, 0.08);
-        border: 1px solid rgba(56, 189, 248, 0.2);
+        background: rgba(56, 189, 248, 0.09);
+        border-top: 1px solid rgba(56, 189, 248, 0.25);
+        border-left: 1px solid rgba(56, 189, 248, 0.15);
+        border-right: 1px solid rgba(56, 189, 248, 0.08);
+        border-bottom: 1px solid rgba(56, 189, 248, 0.04);
         color: #38bdf8;
     }
     .chip-purple {
-        background: rgba(168, 85, 247, 0.08);
-        border: 1px solid rgba(168, 85, 247, 0.2);
+        background: rgba(168, 85, 247, 0.09);
+        border-top: 1px solid rgba(168, 85, 247, 0.25);
+        border-left: 1px solid rgba(168, 85, 247, 0.15);
+        border-right: 1px solid rgba(168, 85, 247, 0.08);
+        border-bottom: 1px solid rgba(168, 85, 247, 0.04);
         color: #c084fc;
     }
     .chip-green {
-        background: rgba(34, 197, 94, 0.08);
-        border: 1px solid rgba(34, 197, 94, 0.2);
+        background: rgba(34, 197, 94, 0.09);
+        border-top: 1px solid rgba(34, 197, 94, 0.25);
+        border-left: 1px solid rgba(34, 197, 94, 0.15);
+        border-right: 1px solid rgba(34, 197, 94, 0.08);
+        border-bottom: 1px solid rgba(34, 197, 94, 0.04);
         color: #4ade80;
     }
     .chip-amber {
-        background: rgba(245, 158, 11, 0.08);
-        border: 1px solid rgba(245, 158, 11, 0.2);
+        background: rgba(245, 158, 11, 0.09);
+        border-top: 1px solid rgba(245, 158, 11, 0.25);
+        border-left: 1px solid rgba(245, 158, 11, 0.15);
+        border-right: 1px solid rgba(245, 158, 11, 0.08);
+        border-bottom: 1px solid rgba(245, 158, 11, 0.04);
         color: #fbbf24;
     }
 
-    /* Refined Developer Card */
+    /* Core Professional Glass-Clay Card */
     .clay-card {
-        background: rgba(15, 23, 42, 0.65);
-        border-radius: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        padding: 22px;
-        backdrop-filter: blur(12px);
-        box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.4);
-        margin-bottom: 20px;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        background: rgba(15, 23, 42, 0.68);
+        backdrop-filter: blur(18px) saturate(180%);
+        -webkit-backdrop-filter: blur(18px);
+        border-radius: 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.14);
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        border-right: 1px solid rgba(255, 255, 255, 0.04);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        box-shadow: 0 14px 34px -6px rgba(0, 0, 0, 0.55),
+                    0 4px 12px -2px rgba(0, 0, 0, 0.35),
+                    inset 1px 1px 1.5px 0 rgba(255, 255, 255, 0.12),
+                    inset -1px -1px 2px 0 rgba(0, 0, 0, 0.40);
+        padding: 24px;
+        margin-bottom: 22px;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .clay-card:hover {
-        border-color: rgba(56, 189, 248, 0.25);
-        box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.6);
-        transform: translateY(-1px);
+        border-top-color: rgba(56, 189, 248, 0.35);
+        box-shadow: 0 18px 42px -6px rgba(0, 0, 0, 0.65),
+                    0 6px 16px -2px rgba(0, 0, 0, 0.45),
+                    inset 1px 1px 1.5px 0 rgba(255, 255, 255, 0.20),
+                    inset -1px -1px 2px 0 rgba(0, 0, 0, 0.35);
+        transform: translateY(-2px);
     }
 
-    /* Refined Metric Card */
+    /* Tactile Glass-Clay Metric Tile */
     .clay-metric {
-        background: rgba(15, 23, 42, 0.6);
-        border-radius: 10px;
-        padding: 16px 18px;
-        border: 1px solid rgba(255, 255, 255, 0.07);
-        margin-bottom: 14px;
+        background: rgba(15, 23, 42, 0.62);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-radius: 14px;
+        padding: 18px 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.13);
+        border-left: 1px solid rgba(255, 255, 255, 0.07);
+        border-right: 1px solid rgba(255, 255, 255, 0.03);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        box-shadow: 0 8px 22px -4px rgba(0, 0, 0, 0.45),
+                    inset 1px 1px 1px 0 rgba(255, 255, 255, 0.10),
+                    inset -1px -1px 2px 0 rgba(0, 0, 0, 0.35);
+        margin-bottom: 16px;
+        transition: all 0.2s ease;
+    }
+    .clay-metric:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 26px -4px rgba(0, 0, 0, 0.55),
+                    inset 1px 1px 1px 0 rgba(255, 255, 255, 0.15);
     }
     .clay-metric .label {
         font-size: 11px;
@@ -254,27 +325,31 @@ st.markdown("""
     }
     .pulse-green {
         background-color: #10b981;
-        box-shadow: 0 0 6px rgba(16, 185, 129, 0.7);
+        box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
     }
     .pulse-red {
         background-color: #ef4444;
-        box-shadow: 0 0 6px rgba(239, 68, 68, 0.7);
+        box-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
     }
 
-    /* Terminal Console */
+    /* Glass-Clay Terminal Console */
     .neural-console {
-        background: #080c14;
+        background: rgba(8, 12, 20, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
         border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 8px;
-        padding: 14px 18px;
+        border-radius: 12px;
+        padding: 16px 20px;
         color: #94a3b8;
         font-family: 'JetBrains Mono', monospace;
         font-size: 12.5px;
         line-height: 1.6;
+        box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.7),
+                    0 4px 16px -2px rgba(0, 0, 0, 0.4);
         overflow-x: auto;
     }
 
-    /* Headers */
+    /* Page Hero Titles */
     .hero-title {
         font-size: 26px;
         font-weight: 700;
@@ -289,37 +364,81 @@ st.markdown("""
         margin-bottom: 22px;
     }
 
-    /* Tactile SaaS Buttons */
+    /* Tactile Glass-Clay SaaS Buttons */
     div.stButton > button {
-        background: #1e293b !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-        border-radius: 8px !important;
+        background: linear-gradient(180deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%) !important;
+        backdrop-filter: blur(12px) !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.18) !important;
+        border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.04) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.02) !important;
+        border-radius: 10px !important;
         color: #f8fafc !important;
         font-size: 13px !important;
-        font-weight: 500 !important;
-        padding: 8px 16px !important;
-        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25) !important;
-        transition: all 0.15s ease !important;
+        font-weight: 600 !important;
+        padding: 9px 18px !important;
+        box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.5),
+                    inset 1px 1px 1px 0 rgba(255, 255, 255, 0.12),
+                    inset -1px -1px 2px 0 rgba(0, 0, 0, 0.35) !important;
+        transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
     div.stButton > button:hover {
-        background: #334155 !important;
-        border-color: rgba(255, 255, 255, 0.2) !important;
+        background: linear-gradient(180deg, rgba(51, 65, 85, 0.9) 0%, rgba(30, 41, 59, 0.95) 100%) !important;
+        border-top-color: rgba(255, 255, 255, 0.28) !important;
         color: #ffffff !important;
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3) !important;
-        transform: none !important;
+        box-shadow: 0 6px 20px -2px rgba(0, 0, 0, 0.6),
+                    inset 1px 1px 1px 0 rgba(255, 255, 255, 0.20),
+                    inset -1px -1px 2px 0 rgba(0, 0, 0, 0.30) !important;
+        transform: translateY(-1px) !important;
+    }
+    div.stButton > button:active {
+        box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.75),
+                    inset -1px -1px 1px rgba(255, 255, 255, 0.06) !important;
+        transform: translateY(1px) !important;
     }
 
-    /* Inputs & Selectboxes */
+    /* Glass-Clay Form Inputs & Selectboxes */
     .stTextInput > div > div, .stTextArea > div > div, .stSelectbox > div > div {
-        background-color: rgba(15, 23, 42, 0.6) !important;
+        background-color: rgba(15, 23, 42, 0.65) !important;
+        backdrop-filter: blur(14px) !important;
+        border-radius: 10px !important;
         border: 1px solid rgba(255, 255, 255, 0.09) !important;
-        border-radius: 8px !important;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4),
+                    0 2px 6px rgba(0, 0, 0, 0.2) !important;
         color: #f8fafc !important;
+        transition: all 0.18s ease !important;
     }
     .stTextInput > div > div:focus-within, .stTextArea > div > div:focus-within {
         border-color: #38bdf8 !important;
-        box-shadow: 0 0 0 1px #38bdf8 !important;
+        box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25),
+                    inset 0 2px 4px rgba(0, 0, 0, 0.4) !important;
     }
+
+    /* Native Streamlit Chat Message & Expander Glass-Clay Refinements */
+    [data-testid="stChatMessage"] {
+        background: rgba(15, 23, 42, 0.65) !important;
+        backdrop-filter: blur(16px) !important;
+        border-radius: 14px !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+        border-left: 1px solid rgba(255, 255, 255, 0.07) !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.03) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.02) !important;
+        box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.45),
+                    inset 1px 1px 1px 0 rgba(255, 255, 255, 0.08) !important;
+        margin-bottom: 12px !important;
+    }
+    [data-testid="stExpander"] {
+        background: rgba(15, 23, 42, 0.5) !important;
+        backdrop-filter: blur(14px) !important;
+        border-radius: 12px !important;
+        border: 1px solid rgba(255, 255, 255, 0.07) !important;
+        box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.35) !important;
+        margin-bottom: 12px !important;
+    }
+    [data-testid="stExpander"] details {
+        border: none !important;
+    }
+</style>
 </style>
 """, unsafe_allow_html=True)
 
@@ -1121,7 +1240,7 @@ elif nav == "📖 Technical Case Study":
         <p style="color:#38bdf8; font-size:13px; font-weight:600;">
             Iterative debugging loops drive P99 tail latency while single-pass builds keep P50 latency low
         </p>
-        <div style="background:#090e18; border:1px solid rgba(0, 240, 255, 0.2); border-radius:12px; padding:16px; margin:14px 0; font-family:'JetBrains Mono', monospace; font-size:13px; color:#38bdf8; line-height:1.8;">
+        <div style="background:rgba(8, 12, 20, 0.85); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid rgba(255, 255, 255, 0.08); box-shadow:inset 0 3px 8px rgba(0, 0, 0, 0.7), 0 4px 16px -2px rgba(0, 0, 0, 0.4); border-radius:12px; padding:18px; margin:14px 0; font-family:'JetBrains Mono', monospace; font-size:13px; color:#38bdf8; line-height:1.8;">
             <div>[P50 Fast Path (Attempt 1)]  0 retries  · Exit == 0  ➔  5 nodes (1x baseline latency)</div>
             <div>[Single-Heal Path (1 Retry)] 1 debug loop · Fix try 2  ➔  8 nodes (~1.8x latency)</div>
             <div>[Deep-Heal Path (2 Retries)] 2 debug loops · Fix try 3 ➔ 11 nodes (~2.6x latency)</div>
@@ -1200,7 +1319,7 @@ elif nav == "📖 Technical Case Study":
             Explore the deployed interactive applications engineered by <b>Nitish Kumar (X-ESTAL NITISH)</b>:
         </p>
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
-            <div style="background:rgba(15, 23, 42, 0.7); border:1px solid rgba(255, 255, 255, 0.08); border-radius:12px; padding:18px;">
+            <div style="background:rgba(15, 23, 42, 0.65); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-top:1px solid rgba(255, 255, 255, 0.14); border-left:1px solid rgba(255, 255, 255, 0.08); border-right:1px solid rgba(255, 255, 255, 0.04); border-bottom:1px solid rgba(255, 255, 255, 0.02); box-shadow:0 8px 20px -4px rgba(0, 0, 0, 0.45), inset 1px 1px 1px rgba(255, 255, 255, 0.1), inset -1px -1px 2px rgba(0, 0, 0, 0.35); border-radius:14px; padding:18px;">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <h4 style="margin:0; color:#f8fafc;">🚀 Ultimate Coding Agent</h4>
                     <span class="chip chip-cyan">LIVE APP</span>
@@ -1208,7 +1327,7 @@ elif nav == "📖 Technical Case Study":
                 <p style="color:#94a3b8; font-size:12px; margin:8px 0 12px 0;">Self-healing multi-file software synthesizer powered by dual 4B local LLMs and LangGraph.</p>
                 <a href="https://ultimate-coding-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#38bdf8; font-weight:600; font-size:13px; text-decoration:none;">Open App ↗</a>
             </div>
-            <div style="background:rgba(15, 23, 42, 0.7); border:1px solid rgba(255, 255, 255, 0.08); border-radius:12px; padding:18px;">
+            <div style="background:rgba(15, 23, 42, 0.65); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-top:1px solid rgba(255, 255, 255, 0.14); border-left:1px solid rgba(255, 255, 255, 0.08); border-right:1px solid rgba(255, 255, 255, 0.04); border-bottom:1px solid rgba(255, 255, 255, 0.02); box-shadow:0 8px 20px -4px rgba(0, 0, 0, 0.45), inset 1px 1px 1px rgba(255, 255, 255, 0.1), inset -1px -1px 2px rgba(0, 0, 0, 0.35); border-radius:14px; padding:18px;">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <h4 style="margin:0; color:#f8fafc;">📚 X-Estal Enterprise RAG</h4>
                     <span class="chip chip-purple">LIVE APP</span>
@@ -1216,7 +1335,7 @@ elif nav == "📖 Technical Case Study":
                 <p style="color:#94a3b8; font-size:12px; margin:8px 0 12px 0;">Dense vector (ChromaDB + BGE) + BM25 hybrid documentation engine with LLM synthesis.</p>
                 <a href="https://xestal-enterprise-rag-engine-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#c084fc; font-weight:600; font-size:13px; text-decoration:none;">Open App ↗</a>
             </div>
-            <div style="background:rgba(15, 23, 42, 0.7); border:1px solid rgba(255, 255, 255, 0.08); border-radius:12px; padding:18px;">
+            <div style="background:rgba(15, 23, 42, 0.65); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-top:1px solid rgba(255, 255, 255, 0.14); border-left:1px solid rgba(255, 255, 255, 0.08); border-right:1px solid rgba(255, 255, 255, 0.04); border-bottom:1px solid rgba(255, 255, 255, 0.02); box-shadow:0 8px 20px -4px rgba(0, 0, 0, 0.45), inset 1px 1px 1px rgba(255, 255, 255, 0.1), inset -1px -1px 2px rgba(0, 0, 0, 0.35); border-radius:14px; padding:18px;">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <h4 style="margin:0; color:#f8fafc;">🌐 X-Estal Deep Research</h4>
                     <span class="chip chip-green">LIVE APP</span>
@@ -1224,7 +1343,7 @@ elif nav == "📖 Technical Case Study":
                 <p style="color:#94a3b8; font-size:12px; margin:8px 0 12px 0;">Autonomous web intelligence, fact-checking, and technical whitepaper compiler.</p>
                 <a href="https://xestal-research-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#4ade80; font-weight:600; font-size:13px; text-decoration:none;">Open App ↗</a>
             </div>
-            <div style="background:rgba(15, 23, 42, 0.7); border:1px solid rgba(255, 255, 255, 0.08); border-radius:12px; padding:18px;">
+            <div style="background:rgba(15, 23, 42, 0.65); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-top:1px solid rgba(255, 255, 255, 0.14); border-left:1px solid rgba(255, 255, 255, 0.08); border-right:1px solid rgba(255, 255, 255, 0.04); border-bottom:1px solid rgba(255, 255, 255, 0.02); box-shadow:0 8px 20px -4px rgba(0, 0, 0, 0.45), inset 1px 1px 1px rgba(255, 255, 255, 0.1), inset -1px -1px 2px rgba(0, 0, 0, 0.35); border-radius:14px; padding:18px;">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <h4 style="margin:0; color:#f8fafc;">📑 Invoice Audit Agent</h4>
                     <span class="chip chip-purple">LIVE APP</span>
@@ -1232,7 +1351,7 @@ elif nav == "📖 Technical Case Study":
                 <p style="color:#94a3b8; font-size:12px; margin:8px 0 12px 0;">Autonomous B2B invoice extraction, 3-way PO matching, and fraud variance detection.</p>
                 <a href="https://invoice-processing-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#fbbf24; font-weight:600; font-size:13px; text-decoration:none;">Open App ↗</a>
             </div>
-            <div style="background:rgba(15, 23, 42, 0.7); border:1px solid rgba(255, 255, 255, 0.08); border-radius:12px; padding:18px;">
+            <div style="background:rgba(15, 23, 42, 0.65); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-top:1px solid rgba(255, 255, 255, 0.14); border-left:1px solid rgba(255, 255, 255, 0.08); border-right:1px solid rgba(255, 255, 255, 0.04); border-bottom:1px solid rgba(255, 255, 255, 0.02); box-shadow:0 8px 20px -4px rgba(0, 0, 0, 0.45), inset 1px 1px 1px rgba(255, 255, 255, 0.1), inset -1px -1px 2px rgba(0, 0, 0, 0.35); border-radius:14px; padding:18px;">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <h4 style="margin:0; color:#f8fafc;">🛠️ X-Estal Code Dev Agent</h4>
                     <span class="chip chip-cyan">LIVE APP</span>
@@ -1335,7 +1454,7 @@ elif nav == "🌐 Deployed AI Projects & Ecosystem":
         </div>
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
             <span style="color:#94a3b8; font-size:12px;">URL: <code style="color:#38bdf8;">https://ultimate-coding-agent-by-x-estal-nitish.streamlit.app/</code></span>
-            <a href="https://ultimate-coding-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:#0284c7; color:#ffffff; padding:7px 16px; border-radius:6px; font-weight:600; font-size:13px; text-decoration:none; display:inline-flex; align-items:center; border:1px solid rgba(255, 255, 255, 0.12);">Launch Application ↗</a>
+            <a href="https://ultimate-coding-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:linear-gradient(180deg, rgba(2, 132, 199, 0.9) 0%, rgba(3, 105, 161, 0.95) 100%); backdrop-filter:blur(10px); color:#ffffff; padding:9px 18px; border-radius:8px; font-weight:600; font-size:13px; text-decoration:none; display:inline-flex; align-items:center; border-top:1px solid rgba(255, 255, 255, 0.25); border-left:1px solid rgba(255, 255, 255, 0.12); border-right:1px solid rgba(255, 255, 255, 0.05); border-bottom:1px solid rgba(255, 255, 255, 0.02); box-shadow:0 4px 14px -2px rgba(2, 132, 199, 0.4), inset 1px 1px 1px rgba(255, 255, 255, 0.2), inset -1px -1px 2px rgba(0, 0, 0, 0.3);">Launch Application ↗</a>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -1365,7 +1484,7 @@ elif nav == "🌐 Deployed AI Projects & Ecosystem":
         </div>
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
             <span style="color:#94a3b8; font-size:12px;">URL: <code style="color:#c084fc;">https://xestal-enterprise-rag-engine-by-x-estal-nitish.streamlit.app/</code></span>
-            <a href="https://xestal-enterprise-rag-engine-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:#7c3aed; color:#ffffff; padding:7px 16px; border-radius:6px; font-weight:600; font-size:13px; text-decoration:none; display:inline-flex; align-items:center; border:1px solid rgba(255, 255, 255, 0.12);">Launch Application ↗</a>
+            <a href="https://xestal-enterprise-rag-engine-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:linear-gradient(180deg, rgba(124, 58, 237, 0.9) 0%, rgba(109, 40, 217, 0.95) 100%); backdrop-filter:blur(10px); color:#ffffff; padding:9px 18px; border-radius:8px; font-weight:600; font-size:13px; text-decoration:none; display:inline-flex; align-items:center; border-top:1px solid rgba(255, 255, 255, 0.25); border-left:1px solid rgba(255, 255, 255, 0.12); border-right:1px solid rgba(255, 255, 255, 0.05); border-bottom:1px solid rgba(255, 255, 255, 0.02); box-shadow:0 4px 14px -2px rgba(124, 58, 237, 0.4), inset 1px 1px 1px rgba(255, 255, 255, 0.2), inset -1px -1px 2px rgba(0, 0, 0, 0.3);">Launch Application ↗</a>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -1395,7 +1514,7 @@ elif nav == "🌐 Deployed AI Projects & Ecosystem":
         </div>
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
             <span style="color:#94a3b8; font-size:12px;">URL: <code style="color:#4ade80;">https://xestal-research-agent-by-x-estal-nitish.streamlit.app/</code></span>
-            <a href="https://xestal-research-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:#16a34a; color:#ffffff; padding:7px 16px; border-radius:6px; font-weight:600; font-size:13px; text-decoration:none; display:inline-flex; align-items:center; border:1px solid rgba(255, 255, 255, 0.12);">Launch Application ↗</a>
+            <a href="https://xestal-research-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:linear-gradient(180deg, rgba(22, 163, 74, 0.9) 0%, rgba(21, 128, 61, 0.95) 100%); backdrop-filter:blur(10px); color:#ffffff; padding:9px 18px; border-radius:8px; font-weight:600; font-size:13px; text-decoration:none; display:inline-flex; align-items:center; border-top:1px solid rgba(255, 255, 255, 0.25); border-left:1px solid rgba(255, 255, 255, 0.12); border-right:1px solid rgba(255, 255, 255, 0.05); border-bottom:1px solid rgba(255, 255, 255, 0.02); box-shadow:0 4px 14px -2px rgba(22, 163, 74, 0.4), inset 1px 1px 1px rgba(255, 255, 255, 0.2), inset -1px -1px 2px rgba(0, 0, 0, 0.3);">Launch Application ↗</a>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -1425,7 +1544,7 @@ elif nav == "🌐 Deployed AI Projects & Ecosystem":
         </div>
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
             <span style="color:#94a3b8; font-size:12px;">URL: <code style="color:#fbbf24;">https://invoice-processing-agent-by-x-estal-nitish.streamlit.app/</code></span>
-            <a href="https://invoice-processing-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:#d97706; color:#ffffff; padding:7px 16px; border-radius:6px; font-weight:600; font-size:13px; text-decoration:none; display:inline-flex; align-items:center; border:1px solid rgba(255, 255, 255, 0.12);">Launch Application ↗</a>
+            <a href="https://invoice-processing-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:linear-gradient(180deg, rgba(217, 119, 6, 0.9) 0%, rgba(180, 83, 9, 0.95) 100%); backdrop-filter:blur(10px); color:#ffffff; padding:9px 18px; border-radius:8px; font-weight:600; font-size:13px; text-decoration:none; display:inline-flex; align-items:center; border-top:1px solid rgba(255, 255, 255, 0.25); border-left:1px solid rgba(255, 255, 255, 0.12); border-right:1px solid rgba(255, 255, 255, 0.05); border-bottom:1px solid rgba(255, 255, 255, 0.02); box-shadow:0 4px 14px -2px rgba(217, 119, 6, 0.4), inset 1px 1px 1px rgba(255, 255, 255, 0.2), inset -1px -1px 2px rgba(0, 0, 0, 0.3);">Launch Application ↗</a>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -1454,7 +1573,7 @@ elif nav == "🌐 Deployed AI Projects & Ecosystem":
         </div>
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
             <span style="color:#94a3b8; font-size:12px;">URL: <code style="color:#38bdf8;">https://code-dev-agent-by-x-estal-nitish.streamlit.app/</code></span>
-            <a href="https://code-dev-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:#0284c7; color:#ffffff; padding:7px 16px; border-radius:6px; font-weight:600; font-size:13px; text-decoration:none; display:inline-flex; align-items:center; border:1px solid rgba(255, 255, 255, 0.12);">Launch Application ↗</a>
+            <a href="https://code-dev-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:linear-gradient(180deg, rgba(2, 132, 199, 0.9) 0%, rgba(3, 105, 161, 0.95) 100%); backdrop-filter:blur(10px); color:#ffffff; padding:9px 18px; border-radius:8px; font-weight:600; font-size:13px; text-decoration:none; display:inline-flex; align-items:center; border-top:1px solid rgba(255, 255, 255, 0.25); border-left:1px solid rgba(255, 255, 255, 0.12); border-right:1px solid rgba(255, 255, 255, 0.05); border-bottom:1px solid rgba(255, 255, 255, 0.02); box-shadow:0 4px 14px -2px rgba(2, 132, 199, 0.4), inset 1px 1px 1px rgba(255, 255, 255, 0.2), inset -1px -1px 2px rgba(0, 0, 0, 0.3);">Launch Application ↗</a>
         </div>
     </div>
     """, unsafe_allow_html=True)
