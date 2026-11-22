@@ -42,19 +42,16 @@ except Exception as e:
     st.error(f"Initialization error: {e}")
 
 # ============================================================================
-# COMPREHENSIVE CYBER / CLAYMORPHIC / GLASSMORPHIC THEME OVERRIDE
+# COMPREHENSIVE REFINED SAAS THEME (HUMAN-CENTERED DEVELOPER WORKBENCH)
 # ============================================================================
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-    /* Global Typography & Deep Dark Background */
+    /* Global Typography & Deep Obsidian Canvas */
     html, body, [class*="css"], .stApp {
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
-        background: radial-gradient(circle at 10% 10%, rgba(0, 240, 255, 0.05) 0%, transparent 45%),
-                    radial-gradient(circle at 90% 15%, rgba(139, 92, 246, 0.07) 0%, transparent 45%),
-                    radial-gradient(circle at 50% 90%, rgba(16, 185, 129, 0.04) 0%, transparent 50%),
-                    #070a13 !important;
+        background: radial-gradient(ellipse 70% 40% at 50% 0%, rgba(56, 189, 248, 0.07), transparent 60%), #080c14 !important;
         color: #f1f5f9 !important;
     }
 
@@ -62,83 +59,82 @@ st.markdown("""
         font-family: 'JetBrains Mono', monospace !important;
     }
 
-    /* Force Dark Theme on Sidebar */
+    /* Force Clean Dark Theme on Sidebar */
     [data-testid="stSidebar"], section[data-testid="stSidebar"] > div {
-        background: linear-gradient(180deg, #090e1b 0%, #060913 100%) !important;
-        border-right: 1px solid rgba(0, 240, 255, 0.12) !important;
+        background: #0b0f19 !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
         color: #f1f5f9 !important;
     }
 
     /* Brand Header Box in Sidebar */
     .brand-box {
-        background: linear-gradient(135deg, rgba(20, 32, 54, 0.7), rgba(10, 16, 30, 0.9));
-        border: 1px solid rgba(0, 240, 255, 0.2);
-        border-radius: 16px;
-        padding: 16px;
-        margin-bottom: 20px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+        padding: 14px 16px;
+        margin-bottom: 16px;
     }
     .brand-title {
-        font-size: 16px;
-        font-weight: 800;
-        letter-spacing: 0.05em;
-        background: linear-gradient(135deg, #00f0ff 0%, #a855f7 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        font-size: 15px;
+        font-weight: 700;
+        color: #f8fafc;
+        letter-spacing: -0.01em;
         margin-bottom: 2px;
     }
     .brand-subtitle {
         font-size: 11px;
-        color: #94a3b8;
+        color: #64748b;
         font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.06em;
+        letter-spacing: 0.05em;
     }
     .brand-badge {
         display: inline-block;
-        padding: 3px 8px;
-        background: rgba(0, 240, 255, 0.12);
-        border: 1px solid rgba(0, 240, 255, 0.3);
-        border-radius: 6px;
-        color: #00f0ff;
+        padding: 2px 7px;
+        background: rgba(56, 189, 248, 0.08);
+        border: 1px solid rgba(56, 189, 248, 0.2);
+        border-radius: 4px;
+        color: #38bdf8;
         font-size: 10px;
-        font-weight: 700;
+        font-weight: 600;
         margin-top: 8px;
     }
 
-    /* Sleek Navigation Radio - Transform into SaaS Menu Pills */
+    /* Sleek Navigation Radio - Transform into Linear/Raycast Menu Items */
     [data-testid="stRadio"] > div {
-        gap: 6px !important;
+        gap: 2px !important;
     }
     [data-testid="stRadio"] div[role="radiogroup"] > label div:first-child {
         display: none !important;
     }
     [data-testid="stRadio"] div[role="radiogroup"] > label {
-        background: rgba(15, 23, 42, 0.65) !important;
-        border: 1px solid rgba(255, 255, 255, 0.06) !important;
-        border-radius: 12px !important;
-        padding: 10px 14px !important;
+        background: transparent !important;
+        border: 1px solid transparent !important;
+        border-radius: 8px !important;
+        padding: 8px 12px !important;
         color: #94a3b8 !important;
         font-size: 13px !important;
         font-weight: 500 !important;
-        transition: all 0.2s ease !important;
+        transition: all 0.15s ease !important;
         cursor: pointer !important;
         display: flex !important;
         align-items: center !important;
-        margin-bottom: 4px !important;
+        margin-bottom: 2px !important;
     }
     [data-testid="stRadio"] div[role="radiogroup"] > label:hover {
-        background: rgba(26, 38, 64, 0.8) !important;
-        border-color: rgba(0, 240, 255, 0.3) !important;
-        color: #f8fafc !important;
-        transform: translateX(3px) !important;
+        background: rgba(255, 255, 255, 0.04) !important;
+        color: #f1f5f9 !important;
+        transform: none !important;
     }
     [data-testid="stRadio"] div[role="radiogroup"] > label:has(input:checked) {
-        background: linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(168, 85, 247, 0.15)) !important;
-        border: 1px solid #00f0ff !important;
-        color: #00f0ff !important;
-        font-weight: 700 !important;
-        box-shadow: 0 0 16px rgba(0, 240, 255, 0.25) !important;
+        background: rgba(56, 189, 248, 0.08) !important;
+        border-left: 3px solid #38bdf8 !important;
+        border-top: 1px solid rgba(56, 189, 248, 0.15) !important;
+        border-right: 1px solid rgba(56, 189, 248, 0.15) !important;
+        border-bottom: 1px solid rgba(56, 189, 248, 0.15) !important;
+        color: #38bdf8 !important;
+        font-weight: 600 !important;
+        box-shadow: none !important;
     }
 
     /* Top Navigation Bar */
@@ -146,187 +142,183 @@ st.markdown("""
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: rgba(13, 20, 36, 0.7);
-        border: 1px solid rgba(0, 240, 255, 0.15);
-        border-radius: 16px;
-        padding: 14px 20px;
+        background: rgba(15, 23, 42, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+        padding: 10px 18px;
         margin-bottom: 24px;
-        backdrop-filter: blur(16px);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(12px);
     }
     .top-bar-left {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
     }
     .top-bar-brand {
-        font-weight: 800;
-        font-size: 16px;
+        font-weight: 700;
+        font-size: 14px;
         color: #f8fafc;
         letter-spacing: -0.01em;
     }
     .top-bar-brand span {
-        color: #00f0ff;
+        color: #64748b;
+        margin: 0 4px;
     }
     .top-chips {
         display: flex;
         gap: 8px;
     }
     .chip {
-        padding: 4px 10px;
-        border-radius: 20px;
+        padding: 3px 9px;
+        border-radius: 6px;
         font-size: 11px;
         font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
     }
     .chip-cyan {
-        background: rgba(0, 240, 255, 0.1);
-        border: 1px solid rgba(0, 240, 255, 0.3);
+        background: rgba(56, 189, 248, 0.08);
+        border: 1px solid rgba(56, 189, 248, 0.2);
         color: #38bdf8;
     }
     .chip-purple {
-        background: rgba(168, 85, 247, 0.1);
-        border: 1px solid rgba(168, 85, 247, 0.3);
+        background: rgba(168, 85, 247, 0.08);
+        border: 1px solid rgba(168, 85, 247, 0.2);
         color: #c084fc;
     }
     .chip-green {
-        background: rgba(34, 197, 94, 0.1);
-        border: 1px solid rgba(34, 197, 94, 0.3);
+        background: rgba(34, 197, 94, 0.08);
+        border: 1px solid rgba(34, 197, 94, 0.2);
         color: #4ade80;
     }
+    .chip-amber {
+        background: rgba(245, 158, 11, 0.08);
+        border: 1px solid rgba(245, 158, 11, 0.2);
+        color: #fbbf24;
+    }
 
-    /* Claymorphic Card */
+    /* Refined Developer Card */
     .clay-card {
-        background: linear-gradient(135deg, rgba(20, 30, 50, 0.8), rgba(10, 16, 30, 0.95));
-        border-radius: 20px;
-        box-shadow: 8px 8px 24px rgba(0, 0, 0, 0.65),
-                    -4px -4px 16px rgba(255, 255, 255, 0.03),
-                    inset 1px 1px 2px rgba(255, 255, 255, 0.08),
-                    inset -2px -2px 6px rgba(0, 0, 0, 0.45);
-        border: 1px solid rgba(0, 240, 255, 0.14);
-        padding: 24px;
-        backdrop-filter: blur(20px) saturate(180%);
-        margin-bottom: 22px;
-        transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        background: rgba(15, 23, 42, 0.65);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 22px;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.4);
+        margin-bottom: 20px;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
     }
     .clay-card:hover {
-        border-color: rgba(0, 240, 255, 0.35);
-        box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.75),
-                    -5px -5px 20px rgba(0, 240, 255, 0.08);
-        transform: translateY(-2px);
+        border-color: rgba(56, 189, 248, 0.25);
+        box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.6);
+        transform: translateY(-1px);
     }
 
-    /* Clay Metric Card */
+    /* Refined Metric Card */
     .clay-metric {
-        background: linear-gradient(145deg, rgba(24, 35, 60, 0.85), rgba(12, 18, 34, 0.95));
-        border-radius: 18px;
-        padding: 18px 22px;
-        box-shadow: 6px 6px 18px rgba(0, 0, 0, 0.6),
-                    -3px -3px 12px rgba(255, 255, 255, 0.035),
-                    inset 1px 1px 2px rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(0, 240, 255, 0.15);
-        margin-bottom: 16px;
+        background: rgba(15, 23, 42, 0.6);
+        border-radius: 10px;
+        padding: 16px 18px;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        margin-bottom: 14px;
     }
     .clay-metric .label {
         font-size: 11px;
-        font-weight: 700;
+        font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: #94a3b8;
-        margin-bottom: 6px;
+        letter-spacing: 0.06em;
+        color: #64748b;
+        margin-bottom: 4px;
     }
     .clay-metric .value {
-        font-size: 28px;
-        font-weight: 800;
+        font-size: 26px;
+        font-weight: 700;
         color: #f8fafc;
+        letter-spacing: -0.02em;
         line-height: 1.1;
     }
     .clay-metric .sub {
         font-size: 12px;
         font-weight: 500;
-        color: #00f0ff;
+        color: #94a3b8;
         margin-top: 4px;
     }
 
     /* Live Pulse Indicator */
     .pulse-dot {
-        width: 8px;
-        height: 8px;
+        width: 7px;
+        height: 7px;
         border-radius: 50%;
         display: inline-block;
     }
     .pulse-green {
         background-color: #10b981;
-        box-shadow: 0 0 10px #10b981;
-        animation: pulse-green-anim 2s infinite;
-    }
-    @keyframes pulse-green-anim {
-        0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.8); }
-        70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        box-shadow: 0 0 6px rgba(16, 185, 129, 0.7);
     }
     .pulse-red {
         background-color: #ef4444;
-        box-shadow: 0 0 8px rgba(239, 68, 68, 0.7);
+        box-shadow: 0 0 6px rgba(239, 68, 68, 0.7);
     }
 
     /* Terminal Console */
     .neural-console {
-        background: #090e18;
-        border: 1px solid rgba(0, 240, 255, 0.2);
-        border-radius: 14px;
-        padding: 16px 20px;
-        color: #38bdf8;
+        background: #080c14;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 8px;
+        padding: 14px 18px;
+        color: #94a3b8;
         font-family: 'JetBrains Mono', monospace;
-        font-size: 13px;
+        font-size: 12.5px;
         line-height: 1.6;
-        box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
         overflow-x: auto;
     }
 
-    /* Gradient Headers */
+    /* Headers */
     .hero-title {
-        font-size: 28px;
-        font-weight: 800;
+        font-size: 26px;
+        font-weight: 700;
         letter-spacing: -0.02em;
-        background: linear-gradient(135deg, #ffffff 10%, #00f0ff 60%, #c084fc 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 6px;
+        color: #f8fafc;
+        margin-bottom: 4px;
     }
     .hero-subtitle {
         color: #94a3b8;
         font-size: 14px;
-        margin-bottom: 20px;
+        line-height: 1.5;
+        margin-bottom: 22px;
     }
 
-    /* Buttons override */
+    /* Tactile SaaS Buttons */
     div.stButton > button {
-        background: linear-gradient(135deg, #16243d 0%, #0c1527 100%) !important;
-        border: 1px solid rgba(0, 240, 255, 0.25) !important;
-        border-radius: 12px !important;
-        color: #f1f5f9 !important;
-        font-weight: 600 !important;
-        box-shadow: 4px 4px 12px rgba(0,0,0,0.5), -2px -2px 8px rgba(255,255,255,0.03), inset 1px 1px 2px rgba(255,255,255,0.08) !important;
-        padding: 8px 18px !important;
-        transition: all 0.2s ease !important;
+        background: #1e293b !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-radius: 8px !important;
+        color: #f8fafc !important;
+        font-size: 13px !important;
+        font-weight: 500 !important;
+        padding: 8px 16px !important;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25) !important;
+        transition: all 0.15s ease !important;
     }
     div.stButton > button:hover {
-        border-color: #00f0ff !important;
-        color: #00f0ff !important;
-        box-shadow: 0 0 18px rgba(0, 240, 255, 0.4) !important;
-        transform: translateY(-2px) !important;
+        background: #334155 !important;
+        border-color: rgba(255, 255, 255, 0.2) !important;
+        color: #ffffff !important;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3) !important;
+        transform: none !important;
     }
 
     /* Inputs & Selectboxes */
     .stTextInput > div > div, .stTextArea > div > div, .stSelectbox > div > div {
-        background-color: rgba(14, 21, 37, 0.75) !important;
-        border: 1px solid rgba(0, 240, 255, 0.18) !important;
-        border-radius: 12px !important;
-        color: #f1f5f9 !important;
+        background-color: rgba(15, 23, 42, 0.6) !important;
+        border: 1px solid rgba(255, 255, 255, 0.09) !important;
+        border-radius: 8px !important;
+        color: #f8fafc !important;
     }
     .stTextInput > div > div:focus-within, .stTextArea > div > div:focus-within {
-        border-color: #00f0ff !important;
-        box-shadow: 0 0 12px rgba(0, 240, 255, 0.3) !important;
+        border-color: #38bdf8 !important;
+        box-shadow: 0 0 0 1px #38bdf8 !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -431,7 +423,7 @@ with st.sidebar:
     st.markdown("#### 🌐 Live Deployed AI Apps")
     st.markdown("""
     <div style="font-size:12px; line-height:2.0;">
-        <div>🚀 <a href="https://ultimate-coding-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#00f0ff; text-decoration:none; font-weight:600;">Ultimate Coding Agent ↗</a></div>
+        <div>🚀 <a href="https://ultimate-coding-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#38bdf8; text-decoration:none; font-weight:600;">Ultimate Coding Agent ↗</a></div>
         <div>📚 <a href="https://xestal-enterprise-rag-engine-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#c084fc; text-decoration:none; font-weight:600;">Enterprise RAG Engine ↗</a></div>
         <div>🌐 <a href="https://xestal-research-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#4ade80; text-decoration:none; font-weight:600;">Deep Research Agent ↗</a></div>
         <div>📑 <a href="https://invoice-processing-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#fbbf24; text-decoration:none; font-weight:600;">Invoice Audit Agent ↗</a></div>
@@ -510,12 +502,12 @@ if nav == "💬 Neural Chat (AI + Live Web)":
     # Welcome Card if conversation is empty
     if len(st.session_state.chat_history) == 0:
         st.markdown("""
-        <div class="clay-card" style="border-color: rgba(0, 240, 255, 0.25);">
-            <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+        <div class="clay-card" style="border-left: 3px solid #38bdf8;">
+            <div style="display:flex; align-items:center; gap:12px;">
                 <span style="font-size:24px;">⚡</span>
                 <div>
-                    <h3 style="margin:0; font-size:18px; color:#f8fafc;">Welcome to X-ESTAL AI Workspace</h3>
-                    <p style="margin:0; font-size:13px; color:#94a3b8;">
+                    <h3 style="margin:0; font-size:17px; color:#f8fafc; font-weight:600;">Welcome to X-ESTAL AI Workspace</h3>
+                    <p style="margin:4px 0 0 0; font-size:13px; color:#94a3b8; line-height:1.5;">
                         Ask architecture questions, debug code, or request live web/news/GitHub research.
                         Communicates in fluent English or natural Hinglish with persistent conversational memory.
                     </p>
@@ -863,7 +855,7 @@ elif nav == "🤖 Enterprise 5-Agent Suite":
         <span class="chip chip-purple">ENTERPRISE SYSTEM ARCHITECTURE</span>
         <h3 style="color:#f8fafc; margin-top:8px;">{agent_info[0]}</h3>
         <p style="color:#94a3b8;">{agent_info[2]}</p>
-        <span style="font-size:12px; color:#00f0ff;">File: <code>{agent_info[1]}</code></span>
+        <span style="font-size:12px; color:#94a3b8;">File: <code style="color:#38bdf8;">{agent_info[1]}</code></span>
     </div>
     """, unsafe_allow_html=True)
 
@@ -929,7 +921,7 @@ elif nav == "📊 LangSmith Production Observability":
         st.markdown("""
         <div class="clay-metric">
             <div class="label">Total Cloud Cost</div>
-            <div class="value" style="color:#00f0ff;">$0.00</div>
+            <div class="value" style="color:#38bdf8;">$0.00</div>
             <div class="sub">100% Local Inference</div>
         </div>
         """, unsafe_allow_html=True)
@@ -945,10 +937,10 @@ elif nav == "📊 LangSmith Production Observability":
             <div style="margin-top:14px;">
                 <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
                     <span style="font-weight:600;">X-Estal-4B Dual Topology</span>
-                    <span style="color:#00f0ff; font-weight:700;">197 calls (100%)</span>
+                    <span style="color:#38bdf8; font-weight:700;">197 calls (100%)</span>
                 </div>
                 <div style="background:#1e293b; border-radius:10px; height:8px; overflow:hidden;">
-                    <div style="background:linear-gradient(90deg, #00f0ff, #a855f7); width:100%; height:100%;"></div>
+                    <div style="background:linear-gradient(90deg, #0284c7, #38bdf8); width:100%; height:100%;"></div>
                 </div>
             </div>
         </div>
@@ -960,19 +952,19 @@ elif nav == "📊 LangSmith Production Observability":
             <h4>🛠️ Tool Invocations Breakdown</h4>
             <div style="font-size:13px; line-height:2;">
                 <div style="display:flex; justify-content:space-between;">
-                    <span>🌐 <code>web_search</code></span><span style="font-weight:700; color:#00f0ff;">36 calls (40%)</span>
+                    <span>🌐 <code>web_search</code></span><span style="font-weight:700; color:#38bdf8;">36 calls (40%)</span>
                 </div>
                 <div style="display:flex; justify-content:space-between;">
-                    <span>📄 <code>web_reader</code></span><span style="font-weight:700; color:#00f0ff;">21 calls (23%)</span>
+                    <span>📄 <code>web_reader</code></span><span style="font-weight:700; color:#38bdf8;">21 calls (23%)</span>
                 </div>
                 <div style="display:flex; justify-content:space-between;">
-                    <span>📑 <code>pdf_reader</code></span><span style="font-weight:700; color:#00f0ff;">12 calls (13%)</span>
+                    <span>📑 <code>pdf_reader</code></span><span style="font-weight:700; color:#38bdf8;">12 calls (13%)</span>
                 </div>
                 <div style="display:flex; justify-content:space-between;">
-                    <span>🧩 <code>smart_chunk_document</code></span><span style="font-weight:700; color:#00f0ff;">12 calls (13%)</span>
+                    <span>🧩 <code>smart_chunk_document</code></span><span style="font-weight:700; color:#38bdf8;">12 calls (13%)</span>
                 </div>
                 <div style="display:flex; justify-content:space-between;">
-                    <span>💾 <code>chroma_store</code></span><span style="font-weight:700; color:#00f0ff;">10 calls (11%)</span>
+                    <span>💾 <code>chroma_store</code></span><span style="font-weight:700; color:#38bdf8;">10 calls (11%)</span>
                 </div>
             </div>
         </div>
@@ -1006,10 +998,10 @@ elif nav == "📖 Technical Case Study":
     st.markdown("""
     <div class="clay-card">
         <p style="font-size:15px; color:#f8fafc; line-height:1.7;">
-            Engineered by <b><a href="https://github.com/XestalNitish" style="color:#00f0ff; text-decoration:none;">Nitish Kumar</a></b> in November 2026 to eliminate student paralysis during college software assignments, this six-node stateful LangGraph pipeline orchestrates dual local 4B models (<code>Spark 2.5</code> and <code>Spark 2.6</code>) to autonomously plan, synthesize, audit, execute, and debug complete repositories on consumer hardware.
+            Engineered by <b><a href="https://github.com/XestalNitish" style="color:#38bdf8; text-decoration:none;">Nitish Kumar</a></b> in November 2026 to eliminate student paralysis during college software assignments, this six-node stateful LangGraph pipeline orchestrates dual local 4B models (<code>Spark 2.5</code> and <code>Spark 2.6</code>) to autonomously plan, synthesize, audit, execute, and debug complete repositories on consumer hardware.
         </p>
-        <div style="background:rgba(0, 240, 255, 0.08); border-left:4px solid #00f0ff; padding:14px 18px; border-radius:8px; margin-top:14px;">
-            <b style="color:#00f0ff;">Engineering Verdict:</b>
+        <div style="background:rgba(56, 189, 248, 0.05); border:1px solid rgba(56, 189, 248, 0.15); border-left:3px solid #38bdf8; padding:14px 18px; border-radius:8px; margin-top:14px;">
+            <b style="color:#38bdf8;">Engineering Verdict:</b>
             <span style="color:#cbd5e1; font-size:14px; line-height:1.6;">
                 Across 90–100 end-to-end LangSmith evaluation runs, the pipeline achieved a 90–95% pass rate (only 5 failures) with zero cloud API cost. By decoupling architectural reasoning (<code>Spark 2.5 4B</code>) from code generation (<code>Spark 2.6 4B</code>) and enforcing an isolated subprocess execution loop (up to 3 self-healing retries), the system keeps median (<code>P50</code>) latency low on first-pass builds while absorbing complex debugging into tail (<code>P99</code>) latency.
             </span>
@@ -1047,11 +1039,11 @@ elif nav == "📖 Technical Case Study":
             Standard single-shot chat LLMs only partially solve this problem. When a student pastes a project topic into a chat window, the model typically returns an unverified single-file snippet that breaks on missing imports, unguarded edge cases, or subtle syntax errors. Instead of learning architecture, students get trapped manually copying tracebacks back and forth.
         </p>
         <p style="color:#cbd5e1; line-height:1.7;">
-            To solve this end-to-end bottleneck, <b><a href="https://www.linkedin.com/in/nitish-kumar-ai" style="color:#00f0ff; text-decoration:none;">Nitish Kumar</a></b> designed the Ultimate Coding Agent (with an early interactive prototype showcased via the <a href="https://code-dev-agent-by-x-estal-nitish.streamlit.app/" style="color:#c084fc; text-decoration:none;">X-Estal Code Dev Agent</a>). The design premise is strict: a user supplies only the core problem prompt in a <code>test</code> specification, and the pipeline autonomously handles requirement refinement, multi-file synthesis, static security verification, runtime validation, and iterative self-repair into a clean <code>output</code> directory.
+            To solve this end-to-end bottleneck, <b><a href="https://www.linkedin.com/in/nitish-kumar-ai" style="color:#38bdf8; text-decoration:none;">Nitish Kumar</a></b> designed the Ultimate Coding Agent (with an early interactive prototype showcased via the <a href="https://code-dev-agent-by-x-estal-nitish.streamlit.app/" style="color:#c084fc; text-decoration:none;">X-Estal Code Dev Agent</a>). The design premise is strict: a user supplies only the core problem prompt in a <code>test</code> specification, and the pipeline autonomously handles requirement refinement, multi-file synthesis, static security verification, runtime validation, and iterative self-repair into a clean <code>output</code> directory.
         </p>
-        <blockquote style="font-size:16px; font-style:italic; color:#00f0ff; border-left:4px solid #00f0ff; padding-left:16px; margin:16px 0 0 0;">
+        <blockquote style="font-size:15px; font-style:italic; color:#cbd5e1; border-left:3px solid #38bdf8; padding:12px 18px; margin:16px 0 0 0; background:rgba(255, 255, 255, 0.02); border-radius:0 8px 8px 0;">
             "Everyone in class was confused about how to analyze the topic, structure the requirements, and build the project—so I built an autonomous pipeline where you give only your core problem prompt, and it handles requirements, multi-file coding, and self-debugging from start to finish."
-            <br><span style="font-size:13px; font-weight:700; color:#f8fafc; font-style:normal;">— Nitish Kumar, Creator of the Ultimate Coding Agent</span>
+            <br><span style="font-size:13px; font-weight:600; color:#f8fafc; font-style:normal;">— Nitish Kumar, Creator of the Ultimate Coding Agent</span>
         </blockquote>
     </div>
     """, unsafe_allow_html=True)
@@ -1195,7 +1187,7 @@ elif nav == "📖 Technical Case Study":
         <ul style="color:#cbd5e1; line-height:1.8; font-size:14px;">
             <li><b>Build the Dual-Mode Streamlit / FastAPI Interface:</b> Connect a clean frontend directly to the local <code>StateGraph</code> stream (<code>app.stream()</code>) for live local execution, while bundling cached <code>test</code> → <code>output</code> telemetry traces so cloud visitors can interactively explore real multi-file builds and self-healing traceback repairs.</li>
             <li><b>Export LangSmith P50 vs. P99 Latency Snapshots:</b> Capture the LangSmith dashboard view showing the 90–100 test suite pass rate (only 5 fails) alongside a multi-step trace of a 2-retry self-healing run to embed directly in the repository <code>README.md</code>.</li>
-            <li><b>Publish the Technical Case Study Across LinkedIn & GitHub:</b> Frame the launch around the classroom origin story and the engineering tradeoff between <code>P50</code> speed and <code>P99</code> self-healing reliability on 4B local models, linking directly to the <a href="https://github.com/XestalNitish" style="color:#00f0ff;">XestalNitish GitHub repository</a> and live demo.</li>
+            <li><b>Publish the Technical Case Study Across LinkedIn & GitHub:</b> Frame the launch around the classroom origin story and the engineering tradeoff between <code>P50</code> speed and <code>P99</code> self-healing reliability on 4B local models, linking directly to the <a href="https://github.com/XestalNitish" style="color:#38bdf8;">XestalNitish GitHub repository</a> and live demo.</li>
         </ul>
     </div>
     """, unsafe_allow_html=True)
@@ -1208,45 +1200,45 @@ elif nav == "📖 Technical Case Study":
             Explore the deployed interactive applications engineered by <b>Nitish Kumar (X-ESTAL NITISH)</b>:
         </p>
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
-            <div style="background:rgba(15, 23, 42, 0.7); border:1px solid rgba(0, 240, 255, 0.25); border-radius:14px; padding:18px;">
+            <div style="background:rgba(15, 23, 42, 0.7); border:1px solid rgba(255, 255, 255, 0.08); border-radius:12px; padding:18px;">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <h4 style="margin:0; color:#f8fafc;">🚀 Ultimate Coding Agent</h4>
                     <span class="chip chip-cyan">LIVE APP</span>
                 </div>
                 <p style="color:#94a3b8; font-size:12px; margin:8px 0 12px 0;">Self-healing multi-file software synthesizer powered by dual 4B local LLMs and LangGraph.</p>
-                <a href="https://ultimate-coding-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#00f0ff; font-weight:700; font-size:13px; text-decoration:none;">Open App ↗</a>
+                <a href="https://ultimate-coding-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#38bdf8; font-weight:600; font-size:13px; text-decoration:none;">Open App ↗</a>
             </div>
-            <div style="background:rgba(15, 23, 42, 0.7); border:1px solid rgba(168, 85, 247, 0.25); border-radius:14px; padding:18px;">
+            <div style="background:rgba(15, 23, 42, 0.7); border:1px solid rgba(255, 255, 255, 0.08); border-radius:12px; padding:18px;">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <h4 style="margin:0; color:#f8fafc;">📚 X-Estal Enterprise RAG</h4>
                     <span class="chip chip-purple">LIVE APP</span>
                 </div>
                 <p style="color:#94a3b8; font-size:12px; margin:8px 0 12px 0;">Dense vector (ChromaDB + BGE) + BM25 hybrid documentation engine with LLM synthesis.</p>
-                <a href="https://xestal-enterprise-rag-engine-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#c084fc; font-weight:700; font-size:13px; text-decoration:none;">Open App ↗</a>
+                <a href="https://xestal-enterprise-rag-engine-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#c084fc; font-weight:600; font-size:13px; text-decoration:none;">Open App ↗</a>
             </div>
-            <div style="background:rgba(15, 23, 42, 0.7); border:1px solid rgba(34, 197, 94, 0.25); border-radius:14px; padding:18px;">
+            <div style="background:rgba(15, 23, 42, 0.7); border:1px solid rgba(255, 255, 255, 0.08); border-radius:12px; padding:18px;">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <h4 style="margin:0; color:#f8fafc;">🌐 X-Estal Deep Research</h4>
                     <span class="chip chip-green">LIVE APP</span>
                 </div>
                 <p style="color:#94a3b8; font-size:12px; margin:8px 0 12px 0;">Autonomous web intelligence, fact-checking, and technical whitepaper compiler.</p>
-                <a href="https://xestal-research-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#4ade80; font-weight:700; font-size:13px; text-decoration:none;">Open App ↗</a>
+                <a href="https://xestal-research-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#4ade80; font-weight:600; font-size:13px; text-decoration:none;">Open App ↗</a>
             </div>
-            <div style="background:rgba(15, 23, 42, 0.7); border:1px solid rgba(245, 158, 11, 0.25); border-radius:14px; padding:18px;">
+            <div style="background:rgba(15, 23, 42, 0.7); border:1px solid rgba(255, 255, 255, 0.08); border-radius:12px; padding:18px;">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <h4 style="margin:0; color:#f8fafc;">📑 Invoice Audit Agent</h4>
                     <span class="chip chip-purple">LIVE APP</span>
                 </div>
                 <p style="color:#94a3b8; font-size:12px; margin:8px 0 12px 0;">Autonomous B2B invoice extraction, 3-way PO matching, and fraud variance detection.</p>
-                <a href="https://invoice-processing-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#fbbf24; font-weight:700; font-size:13px; text-decoration:none;">Open App ↗</a>
+                <a href="https://invoice-processing-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#fbbf24; font-weight:600; font-size:13px; text-decoration:none;">Open App ↗</a>
             </div>
-            <div style="background:rgba(15, 23, 42, 0.7); border:1px solid rgba(0, 240, 255, 0.25); border-radius:14px; padding:18px;">
+            <div style="background:rgba(15, 23, 42, 0.7); border:1px solid rgba(255, 255, 255, 0.08); border-radius:12px; padding:18px;">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <h4 style="margin:0; color:#f8fafc;">🛠️ X-Estal Code Dev Agent</h4>
                     <span class="chip chip-cyan">LIVE APP</span>
                 </div>
                 <p style="color:#94a3b8; font-size:12px; margin:8px 0 12px 0;">Interactive early prototype showcased on Streamlit Cloud for prompt-to-production testing.</p>
-                <a href="https://code-dev-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#00f0ff; font-weight:700; font-size:13px; text-decoration:none;">Open App ↗</a>
+                <a href="https://code-dev-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#38bdf8; font-weight:600; font-size:13px; text-decoration:none;">Open App ↗</a>
             </div>
         </div>
     </div>
@@ -1257,13 +1249,13 @@ elif nav == "📖 Technical Case Study":
     st.markdown("""
     <div class="clay-card">
         <ul style="color:#cbd5e1; font-size:14px; line-height:2;">
-            <li>🐙 <b>GitHub Engineering Portfolio:</b> <a href="https://github.com/XestalNitish" target="_blank" style="color:#00f0ff;">https://github.com/XestalNitish</a></li>
-            <li>💼 <b>LinkedIn Developer Profile:</b> <a href="https://www.linkedin.com/in/nitish-kumar-ai" target="_blank" style="color:#00f0ff;">https://www.linkedin.com/in/nitish-kumar-ai</a></li>
-            <li>🚀 <b>Ultimate Coding Agent (Live):</b> <a href="https://ultimate-coding-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#00f0ff;">https://ultimate-coding-agent-by-x-estal-nitish.streamlit.app/</a></li>
+            <li>🐙 <b>GitHub Engineering Portfolio:</b> <a href="https://github.com/XestalNitish" target="_blank" style="color:#38bdf8;">https://github.com/XestalNitish</a></li>
+            <li>💼 <b>LinkedIn Developer Profile:</b> <a href="https://www.linkedin.com/in/nitish-kumar-ai" target="_blank" style="color:#38bdf8;">https://www.linkedin.com/in/nitish-kumar-ai</a></li>
+            <li>🚀 <b>Ultimate Coding Agent (Live):</b> <a href="https://ultimate-coding-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#38bdf8;">https://ultimate-coding-agent-by-x-estal-nitish.streamlit.app/</a></li>
             <li>📚 <b>X-Estal Enterprise RAG Engine (Live):</b> <a href="https://xestal-enterprise-rag-engine-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#c084fc;">https://xestal-enterprise-rag-engine-by-x-estal-nitish.streamlit.app/</a></li>
             <li>🌐 <b>X-Estal Deep Research Agent (Live):</b> <a href="https://xestal-research-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#4ade80;">https://xestal-research-agent-by-x-estal-nitish.streamlit.app/</a></li>
             <li>📑 <b>Invoice Processing & Audit Agent (Live):</b> <a href="https://invoice-processing-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#fbbf24;">https://invoice-processing-agent-by-x-estal-nitish.streamlit.app/</a></li>
-            <li>🛠️ <b>X-Estal Code Dev Agent (Live):</b> <a href="https://code-dev-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#00f0ff;">https://code-dev-agent-by-x-estal-nitish.streamlit.app/</a></li>
+            <li>🛠️ <b>X-Estal Code Dev Agent (Live):</b> <a href="https://code-dev-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="color:#38bdf8;">https://code-dev-agent-by-x-estal-nitish.streamlit.app/</a></li>
         </ul>
     </div>
     """, unsafe_allow_html=True)
@@ -1300,7 +1292,7 @@ elif nav == "🌐 Deployed AI Projects & Ecosystem":
         st.markdown("""
         <div class="clay-metric">
             <div class="label">Hardware Footprint</div>
-            <div class="value" style="color:#00f0ff;">16GB RAM</div>
+            <div class="value" style="color:#38bdf8;">16GB RAM</div>
             <div class="sub">Zero Cloud API Costs</div>
         </div>
         """, unsafe_allow_html=True)
@@ -1342,8 +1334,8 @@ elif nav == "🌐 Deployed AI Projects & Ecosystem":
             <span class="chip chip-purple">Subprocess Sandbox</span>
         </div>
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-            <span style="color:#94a3b8; font-size:12px;">URL: <code style="color:#00f0ff;">https://ultimate-coding-agent-by-x-estal-nitish.streamlit.app/</code></span>
-            <a href="https://ultimate-coding-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:linear-gradient(135deg, #00f0ff 0%, #0284c7 100%); color:#030712; padding:8px 18px; border-radius:10px; font-weight:700; font-size:13px; text-decoration:none; box-shadow:0 4px 15px rgba(0, 240, 255, 0.4);">Launch Application ↗</a>
+            <span style="color:#94a3b8; font-size:12px;">URL: <code style="color:#38bdf8;">https://ultimate-coding-agent-by-x-estal-nitish.streamlit.app/</code></span>
+            <a href="https://ultimate-coding-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:#0284c7; color:#ffffff; padding:7px 16px; border-radius:6px; font-weight:600; font-size:13px; text-decoration:none; display:inline-flex; align-items:center; border:1px solid rgba(255, 255, 255, 0.12);">Launch Application ↗</a>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -1373,7 +1365,7 @@ elif nav == "🌐 Deployed AI Projects & Ecosystem":
         </div>
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
             <span style="color:#94a3b8; font-size:12px;">URL: <code style="color:#c084fc;">https://xestal-enterprise-rag-engine-by-x-estal-nitish.streamlit.app/</code></span>
-            <a href="https://xestal-enterprise-rag-engine-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:linear-gradient(135deg, #a855f7 0%, #7c3aed 100%); color:#ffffff; padding:8px 18px; border-radius:10px; font-weight:700; font-size:13px; text-decoration:none; box-shadow:0 4px 15px rgba(168, 85, 247, 0.4);">Launch Application ↗</a>
+            <a href="https://xestal-enterprise-rag-engine-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:#7c3aed; color:#ffffff; padding:7px 16px; border-radius:6px; font-weight:600; font-size:13px; text-decoration:none; display:inline-flex; align-items:center; border:1px solid rgba(255, 255, 255, 0.12);">Launch Application ↗</a>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -1403,7 +1395,7 @@ elif nav == "🌐 Deployed AI Projects & Ecosystem":
         </div>
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
             <span style="color:#94a3b8; font-size:12px;">URL: <code style="color:#4ade80;">https://xestal-research-agent-by-x-estal-nitish.streamlit.app/</code></span>
-            <a href="https://xestal-research-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color:#030712; padding:8px 18px; border-radius:10px; font-weight:700; font-size:13px; text-decoration:none; box-shadow:0 4px 15px rgba(34, 197, 94, 0.4);">Launch Application ↗</a>
+            <a href="https://xestal-research-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:#16a34a; color:#ffffff; padding:7px 16px; border-radius:6px; font-weight:600; font-size:13px; text-decoration:none; display:inline-flex; align-items:center; border:1px solid rgba(255, 255, 255, 0.12);">Launch Application ↗</a>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -1433,7 +1425,7 @@ elif nav == "🌐 Deployed AI Projects & Ecosystem":
         </div>
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
             <span style="color:#94a3b8; font-size:12px;">URL: <code style="color:#fbbf24;">https://invoice-processing-agent-by-x-estal-nitish.streamlit.app/</code></span>
-            <a href="https://invoice-processing-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color:#030712; padding:8px 18px; border-radius:10px; font-weight:700; font-size:13px; text-decoration:none; box-shadow:0 4px 15px rgba(245, 158, 11, 0.4);">Launch Application ↗</a>
+            <a href="https://invoice-processing-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:#d97706; color:#ffffff; padding:7px 16px; border-radius:6px; font-weight:600; font-size:13px; text-decoration:none; display:inline-flex; align-items:center; border:1px solid rgba(255, 255, 255, 0.12);">Launch Application ↗</a>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -1462,7 +1454,7 @@ elif nav == "🌐 Deployed AI Projects & Ecosystem":
         </div>
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
             <span style="color:#94a3b8; font-size:12px;">URL: <code style="color:#38bdf8;">https://code-dev-agent-by-x-estal-nitish.streamlit.app/</code></span>
-            <a href="https://code-dev-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:linear-gradient(135deg, #38bdf8 0%, #0284c7 100%); color:#030712; padding:8px 18px; border-radius:10px; font-weight:700; font-size:13px; text-decoration:none; box-shadow:0 4px 15px rgba(56, 189, 248, 0.4);">Launch Application ↗</a>
+            <a href="https://code-dev-agent-by-x-estal-nitish.streamlit.app/" target="_blank" style="background:#0284c7; color:#ffffff; padding:7px 16px; border-radius:6px; font-weight:600; font-size:13px; text-decoration:none; display:inline-flex; align-items:center; border:1px solid rgba(255, 255, 255, 0.12);">Launch Application ↗</a>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -1473,7 +1465,7 @@ elif nav == "🌐 Deployed AI Projects & Ecosystem":
     <div class="clay-card">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
             <div>
-                <h4 style="margin:0; color:#00f0ff;">Nitish Kumar (X-ESTAL NITISH)</h4>
+                <h4 style="margin:0; color:#f8fafc; font-weight:700;">Nitish Kumar <span style="color:#38bdf8; font-weight:500;">(X-ESTAL NITISH)</span></h4>
                 <p style="color:#94a3b8; font-size:13px; margin:4px 0 0 0;">Creator & AI Systems Architect · C.M. Science College, Darbhanga</p>
             </div>
             <div style="display:flex; gap:10px; flex-wrap:wrap;">
@@ -1503,7 +1495,7 @@ elif nav == "⚡ System & Server Mission Control":
             <span class="chip {color}"><span class="pulse-dot {p_class}"></span> PORT 8082: {'ONLINE' if s1 else 'OFFLINE'}</span>
             <h3 style="margin-top:10px;">Server 1: Spark 2.5 (4B)</h3>
             <p style="color:#94a3b8; font-size:13px;">Analytical Core: Orchestrator, Planner, Security AST Checker, Debugger, Reviewer, Chat, RAG</p>
-            <span style="font-size:12px; color:#00f0ff;">Endpoint: <code>http://127.0.0.1:8082/health</code></span>
+            <span style="font-size:12px; color:#94a3b8;">Endpoint: <code style="color:#38bdf8;">http://127.0.0.1:8082/health</code></span>
         </div>
         """, unsafe_allow_html=True)
     
@@ -1516,7 +1508,7 @@ elif nav == "⚡ System & Server Mission Control":
             <span class="chip {color}"><span class="pulse-dot {p_class}"></span> PORT 8084: {'ONLINE' if s2 else 'OFFLINE'}</span>
             <h3 style="margin-top:10px;">Server 2: Spark 2.6 (4B)</h3>
             <p style="color:#94a3b8; font-size:13px;">Synthesis Core: Senior Code Writer Node</p>
-            <span style="font-size:12px; color:#00f0ff;">Endpoint: <code>http://127.0.0.1:8084/health</code></span>
+            <span style="font-size:12px; color:#94a3b8;">Endpoint: <code style="color:#38bdf8;">http://127.0.0.1:8084/health</code></span>
         </div>
         """, unsafe_allow_html=True)
 
